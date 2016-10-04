@@ -20,4 +20,9 @@ function get_children_status($children_status)
 			break;
 	}
 }
+
+function pr($data)
+{
+	echo '<pre>'; print_r($data);exit;
+}
 ?>

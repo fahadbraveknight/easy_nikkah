@@ -9,7 +9,7 @@ class Bride extends CI_Controller {
     }
 
 
-	public function edit_bride($id=0)
+	public function edit_profile($id=0)
 	{
 		$bride = $this->Bride_model->get_bride_by_id($id);
 		if(isset($bride['id']))

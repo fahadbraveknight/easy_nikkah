@@ -60,8 +60,15 @@
                    <div class="select-block1">
                     <select name="age-year">
 	                    <option value="">Year</option>
-	                    <option value="1980">1980</option>
-	                    <option value="1981">1981</option>
+	                     <?php
+	                    	$current_year = date('Y',time());
+	                    	$year = 1980;
+	                     	while($year != $current_year)
+	                     	{
+	                     		if($user_age[2]==$year){$selected="selected";}
+	                     		echo '<option '.$selected.' value="'.$year.'">'.$year.'</option>';
+	                     		$year++;
+	                     	} ?>
                     </select>
                    </div>
                   </div>

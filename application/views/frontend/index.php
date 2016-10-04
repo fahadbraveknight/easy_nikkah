@@ -1,7 +1,7 @@
 <div class="banner">
   <div class="container">
     <div class="banner_info">
-      <h3>Millions of verified Members</h3>
+      <h3>Coming Soon!!!</h3>
       <a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a>
     </div>
   </div>

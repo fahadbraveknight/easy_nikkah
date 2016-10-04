@@ -3524,3 +3524,20 @@ ul.feature_list.feature_list1 {
     margin-bottom: 1em;
 }
 }
+.contact-persons-details .form-group,.family-details .form-group  {
+  width: 24%;
+  display: inline-block;
+  padding: 0 5px;
+}
+.contact-persons-details,.family-details {
+  padding-top: 20px;
+}
+.family-details .form-group  {
+  width: 32%;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.basic_1 td.day_label{
+  width: 20%;
+}
