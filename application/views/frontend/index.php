@@ -2,10 +2,10 @@
   <div class="container">
     <div class="banner_info">
       <h3>Coming Soon!!!</h3>
-      <a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a>
+      <?php /*<a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a>*/ ?>
     </div>
   </div>
-  <div class="profile_search">
+ <?php /* <div class="profile_search">
   	<div class="container wrap_1">
 	  <form action="">
 	  	<div class="search_top">
@@ -68,7 +68,7 @@
 		</div>
      </form>
     </div>
-  </div> 
+  </div> */?>
 </div> 
 <!--
 <div class="grid_1">
@@ -400,3 +400,15 @@
 	   <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3150859.767904157!2d-96.62081048651531!3d39.536794757966845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408111832978"> </iframe>
     </div>
     -->
+    
+<script>
+$( document ).ready(function() {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85002299-1', 'auto');
+  ga('send', 'pageview');
+});
+</script>

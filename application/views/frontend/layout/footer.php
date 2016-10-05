@@ -32,7 +32,7 @@
     		</div> -->
     		<div class="clearfix"> </div>
     		<div class="copy">
-		      <p>Copyright Â© 2015 Easy Nikkah . All Rights Reserved  | Design by <a href="#" target="_blank">Fahad</a> </p>
+		      <p>Copyright © 2015 Easy Nikah . All Rights Reserved  | Design by <a href="#" target="_blank">Fahad</a> </p>
 	        </div>
     	</div>
     </div>
