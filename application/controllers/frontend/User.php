@@ -5,12 +5,15 @@ class User extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-        $this->load->model(array('User_model','Location_model'));
+        $this->load->model(array('User_model','Location_model','Marital_status_model','Qualification_model','Age_group_model'));
     }
 
 	public function index()
 	{
 		$data['view'] = 'frontend/index';
+		$data['marital_statuses'] = $this->Marital_status_model->get_all_marital_statuses();
+		$data['qualifications'] = $this->Qualification_model->get_all_qualifications();
+		$data['age_groups'] = $this->Age_group_model->get_age_groups();
 		$this->load->view('frontend/layout/base_layout',$data);
 	}
 
@@ -45,6 +48,14 @@ class User extends CI_Controller {
 			$data['view'] = 'frontend/register';
 			$this->load->view('frontend/layout/base_layout',$data);
 		}
+	}
+
+	public function search()
+	{
+		$params = $_POST;
+
+		$result = $this->User_model->get_users_by_params($params);
+		pr($result);
 	}
 
 	public function check_if_marital_status_has_children($marital_status_id=0)
