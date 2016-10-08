@@ -1,12 +1,56 @@
-<div class="banner">
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/slick/slick-theme.css">
+<style>
+.slider {
+        width: 95%;
+        margin: 100px auto;
+    }
+
+    .slick-slide {
+      margin: 0px 20px;
+    height:500px;
+    }
+
+    .slick-slide img {
+      width: 100%;
+    height:600px;
+    }
+.slick-dotted.slick-slider{
+	margin-top: 10px;
+}
+    .slick-prev:before,
+    .slick-next:before {
+        color: black;
+    }
+    .comingsoon{
+    	padding: 0 450px;
+}
+
+</style>
+<div class="comingsoon">
+	<img src="<?php echo base_url() ?>resources/images/COMINGSOON.gif">
+</div>
+<section class="regular slider">
+    <div>
+      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 1.jpg">
+    </div>
+    <div>
+      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 4.jpg">
+    </div>
+    <div>
+      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 6.jpg">
+    </div>
+  </section>
+<?php /*?><div class="banner">
   <div class="container">
     <div class="banner_info">
       <h3>Coming Soon!!!</h3>
-      <?php /*<a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a>*/ ?>
+      <a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a>*/ ?>
     </div>
   </div>
-  <div class="profile_search">
-  	<div class="container wrap_1">
+ <div class="profile_search">  	<div class="container wrap_1">
 	  <form action="<?php echo base_url('frontend/user/search') ?>" method="post">
 	  	<div class="search_top">
 		 <div class="inline-block">
@@ -73,8 +117,7 @@
 		</div>
      </form>
     </div>
-  </div>
-</div> 
+  </div> 
 <!--
 <div class="grid_1">
       <div class="container">
@@ -408,6 +451,15 @@
     
 <script>
 $( document ).ready(function() {
+	$(".regular").slick({
+        dots: true,
+        infinite: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+		autoplay: true,
+  autoplaySpeed: 2000
+      });
+    
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

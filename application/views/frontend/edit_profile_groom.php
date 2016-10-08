@@ -186,7 +186,7 @@
 		                    <option value="">Year</option>
 		                    <?php
 		                    	$current_year = date('Y',time());
-		                    	$year = 1980;
+		                    	$year = 1936;
 		                     	while($year != $current_year)
 		                     	{
 		                     		if($user_age[2]==$year){$selected="selected";}
