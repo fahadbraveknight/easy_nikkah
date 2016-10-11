@@ -54,7 +54,7 @@
     			<?php echo $info_msg; ?>
     		</div>
     	<?php } ?>
-                    <form class="m-t" role="form" id="form" name="frm_login" action="<?php echo base_url('admin_login/check_login'); ?>" method="post">
+                    <form class="m-t" role="form" id="form" name="frm_login" action="<?php echo base_url('admin/admin_login/check_login'); ?>" method="post">
                         <div class="form-group">
                             <input type="email" class="form-control" placeholder="Username" required name="frm_username" value="">
                         </div>
