@@ -31,77 +31,14 @@ class User extends CI_Controller {
     						'profile_id' => $profile_id,
     						'gender' => $_POST['gender']);
 			$user_id = $this->User_model->add_user($params);
-			
-			if($user_id)
+			if($params['gender']=='male')
 			{
-
-				$this->load->library('email');
-			    $config['protocol']     = 'smtp';
-			    $config['smtp_host']    = 'smtp.zoho.com';
-			    $config['smtp_port']    = '465';
-			    $config['smtp_user']    = 'admin@bargaincry.com';
-			    $config['smtp_pass']    = 'hogo@007';
-			    $config['charset']     = 'utf-8';
-			    $config['newline']     = "\r\n";
-			    $config['mailtype']  = 'text'; // or html
-			    $config['validation']  = TRUE; // bool whether to validate email or not
-
-			    // $this->load->library('email');
-			    // $config['protocol']     = 'smtp';
-			    // $config['smtp_host']    = 'email-smtp.us-east-1.amazonaws.com';
-			    // $config['smtp_port']    = '465';
-			    // $config['smtp_user']    = 'AKIAJAN77COJ77CT2MWA';
-			    // $config['smtp_pass']    = 'Ak24bhQSnN7UT5KgRBzacWJ8H188K9ebFUCPA37tjvgf';
-			    // $config['charset']     = 'utf-8';
-			    // $config['newline']     = "\r\n";
-			    // $config['mailtype']  = 'html'; // or html
-			    // $config['validation']  = TRUE; // bool whether to validate email or not
-			    
-			    $this->email->initialize($config);
-				$this->email->set_newline("\n\r");
-
-
-				$this->email->from('admin@bargaincry.com','Muzammil');
-				$this->email->to('mukatuka7@gmail.com');
-				$this->email->subject('This is an email check for its working or not');
-				$this->email->message('It is working. Great!');
-
-				if($this->email->send())
-				{
-					echo "you email was sent";
-				}
-				else
-				{
-					show_error($this->email->print_debugger());
-				}
-
-
-
-			// $this->email->from('contact@easynikah.in', 'Easynikah');
-			// $this->email->to($params['email']);
-			// // $this->email->cc('another@another-example.com');
-			// // $this->email->bcc('them@their-example.com');
-
-			// $this->email->subject('Email Test');
-			// $this->email->message('Testing the email class.');
-
-			// $this->email->send();
-
-
-			// if($params['gender']=='male' && $this->email->send())
-			// {
-			// 	redirect('frontend/groom/edit_profile/'.$user_id);
-			// }
-			// else if($params['gender']=='female' && $this->email->send())
-			// {
-			// 	redirect('frontend/bride/edit_profile/'.$user_id);
-			// }
-
-
+				redirect('frontend/groom/edit_profile/'.$user_id);
 			}
-
-
-			
+			else if($params['gender']=='female')
+			{
+				redirect('frontend/bride/edit_profile/'.$user_id);
+			}
 		}
 		else
 		{
