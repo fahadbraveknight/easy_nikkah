@@ -31,6 +31,37 @@ class User extends CI_Controller {
     						'profile_id' => $profile_id,
     						'gender' => $_POST['gender']);
 			$user_id = $this->User_model->add_user($params);
+
+			if($user_id)
+			{
+
+				$config = Array(
+		        'protocol' => 'smtp',
+		        'smtp_host' => 'mail.easynikah.in',
+		        'smtp_port' => 587,
+		        'smtp_user' => 'contact@easynikah.in',
+		        'smtp_pass' => 'tech!1234',
+		        );
+
+			$this->load->library('email');
+
+			$this->email->from('contact@easynikah.in', 'Easynikah');
+			$this->email->to($params['email']);
+			// $this->email->cc('another@another-example.com');
+			// $this->email->bcc('them@their-example.com');
+
+			$this->email->subject('Email Test');
+			$this->email->message('Testing the email class.');
+
+			$this->email->send();
+
+
+
+
+
+			}
+
+
 			if($params['gender']=='male')
 			{
 				redirect('frontend/groom/edit_profile/'.$user_id);
