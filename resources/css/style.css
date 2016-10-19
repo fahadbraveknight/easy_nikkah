@@ -128,7 +128,7 @@ body a{
 }
 .navbar-inverse-blue .navbar-inner {
   padding: 7px 0;
-  background:#c32143;
+  background:#ff6868;
   border:none;
   font-size: 0.85em;
 }
@@ -205,7 +205,7 @@ body a{
     text-align: center;
     color: #fff;
     font-weight: 100;
-    font-size:14px;
+    font-size:17px;
 }
 .dropdown-menu.columns-2 {
     min-width: 400px;
@@ -295,7 +295,7 @@ ul.nav_1 li.last{
     color:#fff !important;
 }
 .banner{
-	background:url(../images/wed.jpg)no-repeat center top;
+	background:url(../images/bg3.jpg)no-repeat center top;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -1051,8 +1051,6 @@ a.religion_1 {
 }
 /*-- footer --*/
 .footer{
-	background:#fff;
-	padding:5em 0;
 }
 .col_2 h4{
 	color:#000;
@@ -1100,7 +1098,6 @@ i.fa1:hover {
     background-color:#555;
 }
 .copy{
-	margin:3em 0 0 0;
 	text-align:center;
 }
 .copy p{
@@ -3542,4 +3539,42 @@ ul.feature_list.feature_list1 {
 
 .basic_1 td.day_label{
   width: 20%;
+}
+.home_title {
+	font-size: 35px;
+    font-weight: bold;
+    padding: 0 30px 30px;
+    text-align: center;
+}
+.salam {
+	text-align: center;
+	padding: 0 10px 10px;
+}
+.centre_part {
+	text-align: center;
+}
+.first_para {
+	font-family: fantasy;
+    font-size: 15px;
+    padding: 8px;
+}
+.second_para {
+	color: #771216;
+    padding: 10px 220px;
+}
+.third_para {
+	-moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #781518 none repeat scroll 0 0;
+    border-bottom: 1px solid;
+    border-image: none;
+    border-left: 1px solid;
+    border-radius: 10px;
+    border-top: 1px solid;
+    color: #ffffff;
+    margin: auto;
+    padding: 10px 0;
+    width: 70%;
 }

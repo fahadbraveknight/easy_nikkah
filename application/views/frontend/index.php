@@ -25,24 +25,55 @@
         color: black;
     }
     .comingsoon{
-    	padding: 0 450px;
-}
+    	font-family: FontAwesome;
+    	padding: 5px 0 0;
+    	font-size: 20px;
+    	color: #f90404;
+    }
 
 </style>
-<div class="comingsoon">
-	<img src="<?php echo base_url() ?>resources/images/COMINGSOON.gif">
-</div>
-<section class="regular slider">
-    <div>
-      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 1.jpg">
-    </div>
-    <div>
-      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 4.jpg">
-    </div>
-    <div>
-      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 6.jpg">
-    </div>
-  </section>
+<div class="banner">
+	<div class="comingsoon">
+		<marquee>"SubhanAllah Matrimony is now Easy Nikah"</marquee>
+	</div>
+	<div class="home_title">
+		Easy Nikah - Striving to Make Nikah Easy and Zina very difficult!!!
+	</div>
+	<div class="salam">
+		<img src="<?php echo base_url() ?>resources/images/Salaam.png">
+	</div>
+	<div class="centre_part">
+		<div class="first_para">
+			Hope you are doing good by the grace, mercy and blessings of Allah (Glorified and Exalted be He).
+		</div>
+		<h3 class="second_para">
+			Easy Nikah is glad to introduce you to the world of Match Making for Indian Muslim families based in India or abroad. We try our best to assist you in finding suitable match for you and complete half of your deen.
+		</h3>
+		<h3 class="second_para">
+			With Easy Nikah say Good Bye to all professional AGENTS, CO ORDINATORS, NewsPaper advertisements and other traditional way of finding the match and welcome the latest means to contact directly the families of your potential match Insha Allah.
+		</h3>
+		<h3 class="second_para">
+			Easy Nikah is "<b><u>COMPLETELY FREE</u></b>" with no charges or fees for registration, during profile search or after finding the right MATCH. There are absolutely no hidden charges and you can easily reject anyone who claims to be part of Easy Nikah and demands any fees/money from you.
+		</h3>
+		<h4 class="third_para">
+			This service is extended to all Muslim families of all backgrounds, ethnicity, cast, maslaks and madhabs.
+		</h4>
+		<div style="clear: both;"></div><br>
+		<h3 class="second_para">
+			We hope your journey with us in searching life partner meets your set expectations and we make dua to Allah (Glorified & Exalted be He) that the search gets complete soon In sha Allah. 
+		</h3>
+	</div>
+	<?php /*?><section class="regular slider">
+	    <div>
+	      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 1.jpg">
+	    </div>
+	    <div>
+	      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 4.jpg">
+	    </div>
+	    <div>
+	      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 6.jpg">
+	    </div>
+	</section>*/?>
 <?php /*?><div class="banner">
   <div class="container">
     <div class="banner_info">

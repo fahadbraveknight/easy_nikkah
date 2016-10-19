@@ -58,7 +58,7 @@ $(document).ready(function(){
 			   </ul>
              </nav>
            </div>
-           <a class="brand" href="<?php echo base_url('frontend/user') ?>"><h2 style="display: inline-block;">Easy Nikah</h2></a>
+           <a class="brand" href="<?php echo base_url('frontend/user') ?>" style="color: #1500ff;"><h2 style="display: inline-block; margin-top:6px;margin-bottom:3px;">Easy Nikah</h2></a>
            <div class="pull-right">
           	<nav class="navbar nav_bottom" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -75,8 +75,8 @@ $(document).ready(function(){
 		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 		        <ul class="nav navbar-nav nav_1">
 		            <li><a href="<?php echo base_url('frontend/user') ?>">Home</a></li>
-		            <li><a href="#">About</a></li>
-		    		<li class="dropdown">
+		            <li><a href="#">About Us</a></li>
+		    		<?php /*?><li class="dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matches<span class="caret"></span></a>
 		              <ul class="dropdown-menu" role="menu">
 		                <li><a href="#">New Matches</a></li>
@@ -85,18 +85,18 @@ $(document).ready(function(){
 		                <li><a href="#">Premium Members</a></li>
 		                <li><a href="#">Shortlisted Profile</a></li>
 		              </ul>
-		            </li>
+		            </li>*/?>
 					<li class="dropdown">
-		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search<span class="caret"></span></a>
-		              <ul class="dropdown-menu" role="menu">
+		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search&nbsp;<span class="fa fa-search fa-1"></span></a>
+		              <?php /*?><ul class="dropdown-menu" role="menu">
 		                <li><a href="#">Regular Search</a></li>
 		                <li><a href="#">Recently Viewed Profiles</a></li>
 		                <li><a href="#">Search By Profile ID</a></li>
 		                <li><a href="#">Faq</a></li>
 		                <li><a href="#">Shortcodes</a></li>
-		              </ul>
+		              </ul>*/?>
 		            </li>
-		            <li class="dropdown">
+		            <?php /*?><li class="dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages<span class="caret"></span></a>
 		              <ul class="dropdown-menu" role="menu">
 		                <li><a href="#">Inbox</a></li>
@@ -105,8 +105,8 @@ $(document).ready(function(){
 		                <li><a href="#">Sent</a></li>
 		                <li><a href="#">Upgrade</a></li>
 		              </ul>
-		            </li>
-		            <li class="last"><a href="#">Contacts</a></li>
+		            </li>*/?>
+		            <li class="last"><a href="#">Contact Us</a></li>
 		        </ul>
 		     </div><!-- /.navbar-collapse -->
 		    </nav>
