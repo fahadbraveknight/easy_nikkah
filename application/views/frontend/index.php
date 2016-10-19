@@ -51,11 +51,12 @@
     </div>
   </div>
  <div class="profile_search">  	<div class="container wrap_1">
-	  <form action="<?php echo base_url('frontend/user/search') ?>" method="post">
+	  <form action="" method="get">
 	  	<div class="search_top">
 		 <div class="inline-block">
 		  <label class="gender_1">I am looking for :</label>
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
+ 				<span class="bg-danger"><?php echo form_error('gender'); ?></span>
 				<select name="gender">
 					<option value="">* Select Gender</option>
 					<option value="female">Bride</option>
@@ -63,19 +64,17 @@
 				</select>
 		   </div>
 	    </div>
-        <div class="inline-block">
-		  <label class="gender_1">Located In :</label>
+       	<div class="inline-block">
+		  <label class="gender_1">Status :</label>
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
-				<select>
-					<option value="">* Select State</option>
-					<option value="Washington">Washington</option>
-					<option value="Texas">Texas</option>
-					<option value="Georgia">Georgia</option>
-					<option value="Virginia">Virginia</option>
-					<option value="Colorado">Colorado</option>
-               </select>
-          </div>
-        </div>
+				<select name="marital_status">
+					<option value="">* Select Status</option>
+					<?php foreach ($marital_statuses as $key => $value) {
+						echo  "<option value=".$value['id'].">".$value['marital_status_name']."</option>";
+					}?>
+				</select>
+		  </div>
+	    </div>
         <div class="inline-block">
 		  <label class="gender_1">Education Qualification :</label>
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
@@ -88,36 +87,96 @@
           </div>
        </div>
      </div>
+     <div class="inline-block location">
+		  <label class="gender_1">Located In :</label>
+			<div class="age_box1 country" style="max-width: 100%; display: inline-block;">
+				<div class="form_box">
+            		<select name="location_country" class="countries-list">
+                		<option value="">Country</option>
+                    <?php foreach ($countries as $key => $country) {
+                    	echo '<option value="'.$country['id'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+                    }
+                    ?>
+            		</select>
+        		</div>
+        	</div>
+        	<div class="age_box1 state" style="max-width: 100%; display: inline-block; padding-left: 1%;">
+        		<div class="form_box2">
+                	<select name="location_state" class="states-list">
+                		<option value="">State</option>
+                	</select>
+            	</div>
+            </div>
+            <div class="age_box1 city" style="max-width: 100%; display: inline-block; padding-left: 1%;">
+            	<div class="form_box1">
+            		<select name="location_city">
+                		<option value="">City</option>
+           			</select>
+              	</div>
+            </div>
+	 	<br clear="all">
+ 		<span class="bg-danger"><?php echo form_error('location_state'); ?><?php echo form_error('location_city'); ?></span>
+        </div>
 	 <div class="inline-block">
-	   <div class="age_box2" style="max-width: 220px;">
 	   	<label class="gender_1">Age :</label>
-	   		<div class="age_box1" style="max-width: 100%; display: inline-block;">
-				<select name="age">
-					<option value="">* Select Age Group</option>
-					<?php foreach ($age_groups as $key => $value) {
-						echo  "<option value='".$value['min_age']." AND ".$value['max_age']."'>".$value['age_group']."</option>";
-					}?>
-				</select>
-		 	</div>
-		</div>
+   		<div class="age_box1" style="max-width: 100%; display: inline-block;">
+			<div class="dropdown" style="margin: 0; top:7px"> 
+			    <dt>
+			    <a href="#asd">
+			      <span class="hida">Select</span>    
+			      <p class="multiSel"></p>  
+			    </a>
+			    </dt>
+			  
+			    <dd>
+			        <div class="mutliSelect">
+			            <ul>
+			            	<?php 
+			            	for ($i=14; $i < 80 ; $i++) { 
+			            		echo '<li><input type="checkbox" name="age[]" value="'.$i.'" />'.$i.'</li>';
+			            	}
+			            	?>
+			            </ul>
+			        </div>
+			    </dd>
+			</div>
+	 	</div>
+	 	<br clear="all">
 	 </div>
-       <div class="inline-block">
-		  <label class="gender_1">Status :</label>
-			<div class="age_box1" style="max-width: 100%; display: inline-block;">
-				<select name="marital_status">
-					<option value="">* Select Status</option>
-					<?php foreach ($marital_statuses as $key => $value) {
-						echo  "<option value=".$value['id'].">".$value['marital_status_name']."</option>";
-					}?>
-				</select>
-		  </div>
-	    </div>
 		<div class="submit inline-block">
 		   <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="Find Matches">
 		</div>
      </form>
     </div>
   </div> 
+  <?php if(!empty($result)){ ?>
+  	<div class="container">
+		<div class="paid_people">
+		   <h1>Search Results</h1>
+		   <div class="row_1">
+		   		<?php foreach ($result as $key => $value) { ?>
+		   		<?php if($value['gender']=='male'){ $_controller = "groom";}elseif($value['gender']=='female'){ $_controller = "bride";} ?>
+		   			<div class="col-sm-6">
+					 	<ul class="profile_item">
+						  <a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>">
+						   <li class="profile_item-img">
+						   	  <h4><?php echo $value['profile_id'] ?></h4>
+						   </li>
+						   <li class="profile_item-desc">
+						   	  <p><?php echo $value['full_name']; ?></p>
+						   	  <p><?php echo $value['age'] ?> Yrs, 5Ft 5in Christian</p>
+						   	  <h5><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>">View Full Profile</a></h5>
+						   </li>
+						   <div class="clearfix"> </div>
+						  </a>
+					     </ul>
+					</div>
+		   		<?php } ?>   
+			   	<div class="clearfix"> </div>
+		   </div>
+		</div>
+	</div>
+  <?php } ?>
 <!--
 <div class="grid_1">
       <div class="container">
@@ -448,7 +507,83 @@
 	   <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3150859.767904157!2d-96.62081048651531!3d39.536794757966845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408111832978"> </iframe>
     </div>
     -->
-    
+    <style type="text/css">
+    	.location .age_box1 select{
+    		width: 90px;
+    	}
+
+    	.age_box1 dt{
+    		font-weight: normal;
+    	}
+		.dropdown dd,
+		.dropdown dt {
+		  margin: 0px;
+		  padding: 0px;
+		}
+
+		.dropdown ul {
+		  margin: -1px 0 0 0;
+		}
+
+		.dropdown dd {
+		  position: relative;
+		}
+
+		.dropdown a,
+		.dropdown a:visited {
+		  color: black;
+		  text-decoration: none;
+		  outline: none;
+		  font-size: 12px;
+		}
+
+		.dropdown dt a {
+		  background-color: #fff;
+		  display: block;
+		  padding: 8px 20px 5px 10px;
+		  min-height: 25px;
+		  line-height: 10px;
+		  overflow: hidden;
+		  border: 0;
+		  width: 92px;
+		}
+
+		.dropdown dt a span,
+		.multiSel span {
+		  cursor: pointer;
+		  display: inline-block;
+		  padding: 0 3px 2px 0;
+		}
+
+		.dropdown dd ul {
+		  background-color: #fff;
+		  border: 0;
+		  color: black;
+		  display: none;
+		  left: 0px;
+    	  font-size: 11px;
+		  padding: 2px 15px 2px 5px;
+		  position: absolute;
+		  top: 2px;
+		  width: 92px;
+		  list-style: none;
+		  height: 100px;
+		  overflow: auto;
+		}
+
+		.dropdown span.value {
+		  display: none;
+		}
+
+		.dropdown dd ul li a {
+		  /*padding: 5px;*/
+		  display: block;
+		}
+
+		.dropdown dd ul li a:hover {
+		  background-color: #fff;
+		}
+    </style>
 <script>
 $( document ).ready(function() {
 	$(".regular").slick({
@@ -467,5 +602,95 @@ $( document ).ready(function() {
 
   ga('create', 'UA-85002299-1', 'auto');
   ga('send', 'pageview');
+
+
+	$(document).on('change','.countries-list',function(){
+		var country_id = $(this).find(':selected').attr('data-id');
+		var next = $(this).parents('.country').siblings('.state').find('select');
+		var this_name = $(this).attr('name');
+		$.ajax({
+			url:BASE_URL+"frontend/user/ajax_get_all_states/"+country_id,
+			dataType: "JSON",
+			type:"POST",
+			success:function(response){
+				if(response.rc)
+				{
+					if( this_name =="location_country")
+					{
+						$.each(response.states,function(index,data){
+							next.append( '<option data-id="'+data.id+'" value="'+data.id+'">'+data.state_name+'</option>');
+						})
+					}
+					else
+					{						
+						$.each(response.states,function(index,data){
+							next.append( '<option data-id="'+data.id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
+						})
+					}
+				}
+			}
+		});
+	})
+
+	$(document).on('change','.states-list',function(){
+		var state_id = $(this).find(':selected').attr('data-id');
+		var next = $(this).parents('.state').siblings('.city').find('select');
+		var this_name = $(this).attr('name');
+		$.ajax({
+			url:BASE_URL+"frontend/user/ajax_get_all_cities/"+state_id,
+			dataType: "JSON",
+			type:"POST",
+			success:function(response){
+				if(response.rc)
+				{
+					if( this_name =='location_state')
+					{
+						$.each(response.cities,function(index,data){
+							next.append( '<option data-id="'+data.id+'" value="'+data.id+'">'+data.city_name+'</option>');
+						})
+					}
+					else
+					{						
+						$.each(response.cities,function(index,data){
+							next.append( '<option data-id="'+data.id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
+						})
+					}
+				}
+			}
+		});
+	})	
+});
+$(".dropdown dt a").on('click', function() {
+  $(".dropdown dd ul").slideToggle('fast');
+});
+
+$(".dropdown dd ul li a").on('click', function() {
+  $(".dropdown dd ul").hide();
+});
+
+function getSelectedValue(id) {
+  return $("#" + id).find("dt a span.value").html();
+}
+
+$(document).bind('click', function(e) {
+  var $clicked = $(e.target);
+  if (!$clicked.parents().hasClass("dropdown")) $(".dropdown dd ul").hide();
+});
+
+$('.mutliSelect input[type="checkbox"]').on('click', function() {
+
+  var title = $(this).closest('.mutliSelect').find('input[type="checkbox"]').val(),
+    title = $(this).val() + ",";
+
+  if ($(this).is(':checked')) {
+    var html = '<span title="' + title + '">' + title + '</span>';
+    $('.multiSel').append(html);
+    $(".hida").hide();
+  } else {
+    $('span[title="' + title + '"]').remove();
+    var ret = $(".hida");
+    $('.dropdown dt a').append(ret);
+
+  }
 });
 </script>

@@ -9,12 +9,22 @@ class User extends CI_Controller {
     }
 
 	public function index()
-	{
+	{	
+		if(!empty($_GET))
+		{
+			$params = $_GET;
+			
+			$result = $this->User_model->get_users_by_params($params);
+			$data['result'] = $result;
+			// pr($result);
+		}
 		$data['view'] = 'frontend/index';
 		$data['marital_statuses'] = $this->Marital_status_model->get_all_marital_statuses();
 		$data['qualifications'] = $this->Qualification_model->get_all_qualifications();
 		$data['age_groups'] = $this->Age_group_model->get_age_groups();
+		$data['countries'] = $this->Location_model->get_countries();
 		$this->load->view('frontend/layout/base_layout',$data);
+		
 	}
 
 	public function register()
@@ -22,9 +32,9 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('full_name', 'Full Name' , 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email' , 'required|is_unique[users.email]|xss_clean');
 
-		$profile_id = $this->create_profile_id();
 		if($this->form_validation->run())
 		{
+			$profile_id = $this->create_profile_id();
 			$age = strtotime($_POST['age-date'].'-'.$_POST['age-month'].'-'.$_POST['age-year']);
 
 			$params = array('full_name' => $_POST['full_name'],
@@ -48,31 +58,6 @@ class User extends CI_Controller {
 			$data['view'] = 'frontend/register';
 			$this->load->view('frontend/layout/base_layout',$data);
 		}
-	}
-
-	public function search()
-	{
-		$params = $_POST;
-
-		$result = $this->User_model->get_users_by_params($params);
-		pr($result);
-	}
-
-	public function check_if_marital_status_has_children($marital_status_id=0)
-	{
-		$marital_status = $this->User_model->get_marital_status_by_id($marital_status_id);
-		if(!empty($marital_status))
-		{
-			if($marital_status['marital_status_has_children'])
-			{
-				$response['marital_status_has_children'] = true;
-			}
-			else
-			{
-				$response['marital_status_has_children'] = false;
-			}
-		}
-		echo json_encode($response);
 	}
 
 	public function ajax_get_all_states($country_id=0)
@@ -110,13 +95,14 @@ class User extends CI_Controller {
 
 	function create_profile_id()
 	{
-		$profile = $this->db->query('SELECT profile_id FROM users ORDER BY profile_id DESC LIMIT 1')->row_array();
-		if($profile['profile_id'] < 2000)
+		$profile_id = "EN_".rand(0,100000);
+		$profile = $this->db->query('SELECT profile_id FROM users where profile_id ="'.$profile_id.'"')->row_array();
+		if(!empty($profile['profile_id']))
 		{
-			return 2000;
+			$this->create_profile_id();
 		}
 		else{
-			return $profile['profile_id']+1;
+			return $profile_id;
 		}
 	}
 }

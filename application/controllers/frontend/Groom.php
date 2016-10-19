@@ -46,18 +46,8 @@ class Groom extends CI_Controller {
 				// echo '<pre>';print_r($_POST);exit;
 				$user_work_location = $_POST['user_work_location_city'].' '.$_POST['user_work_location_state'].' '.$_POST['user_work_location_country'];
 				$user_native_location = $_POST['user_native_location_city'].' '.$_POST['user_native_location_state'].' '.$_POST['user_native_location_country'];
-				$user_partner_current_location = $_POST['partner_location_city'].' '.$_POST['partner_location_state'].' '.$_POST['partner_location_country'];
-				$user_partner_native_location = $_POST['partner_native_location_city'].' '.$_POST['partner_native_location_state'].' '.$_POST['partner_native_location_country'];
 				$age = strtotime($_POST['age-date'].'-'.$_POST['age-month'].'-'.$_POST['age-year']);
-				if(isset($_POST['user_partner_marital_status']))
-				{
-					$user_partner_marital_status_params = array();
-					foreach ($_POST['user_partner_marital_status'] as $key => $value) {
-						$user_partner_marital_status_params [$key] ['user_partner_marital_status'] = $value;
-						$user_partner_marital_status_params [$key] ['user_id'] = $groom['id'];
-					}
-					$this->User_model->add_user_partner_marital_status($groom['id'],$user_partner_marital_status_params);
-				}
+		
 				$params = array('full_name' => $_POST['full_name'],
 	    						'user_height' => $_POST['user_height'],
 	    						'user_namaz_type' => $_POST['user_namaz_type'],
@@ -65,7 +55,7 @@ class Groom extends CI_Controller {
 	    						'user_fasting_type' => $_POST['user_fasting_type'],
 	    						'user_beard_type' => $_POST['user_beard_type'],
 	    						'user_marital_status' => $_POST['user_marital_status'],
-	    						'user_children_status' => $_POST['user_children_status'],
+	    						'user_children' => $_POST['user_children'],
 	    						'user_partner_age_group' => $_POST['user_partner_age_group'],
 	    						'user_qualification' => $_POST['user_qualification'],
 	    						'user_profession' => $_POST['user_profession'],
@@ -76,8 +66,6 @@ class Groom extends CI_Controller {
 				if(!empty($_POST['user_location_city'])){$params['user_location_city'] = $_POST['user_location_city']; }
 				if($user_work_location != "  "){$params['user_work_location'] = $user_work_location; }
 				if($user_native_location != "  "){$params['user_native_location'] = $user_native_location; }
-				if($user_partner_current_location != "  "){$params['user_partner_current_location'] = $user_partner_current_location; }
-				if($user_partner_native_location != "  "){$params['user_partner_native_location'] = $user_partner_native_location; }
 				$this->Groom_model->edit_groom($id,$params);
 
 				$add_user_family = array();
@@ -154,7 +142,6 @@ class Groom extends CI_Controller {
 				$data['groom_family'] = $this->User_model->get_user_family($groom['id']);
 				$data['groom_contact_persons'] = $this->User_model->get_user_contact_person($groom['id']);
 				$data['groom'] = $groom;
-				$data['groom_traits'] = $this->Groom_model->get_groom_traits();
 				$data['countries'] = $this->Location_model->get_countries();
 				$data['view'] = 'frontend/edit_profile_groom';
 				$this->load->view('frontend/layout/base_layout',$data);
