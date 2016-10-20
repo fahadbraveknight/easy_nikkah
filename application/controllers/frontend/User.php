@@ -44,14 +44,58 @@ class User extends CI_Controller {
     						'profile_id' => $profile_id,
     						'gender' => $_POST['gender']);
 			$user_id = $this->User_model->add_user($params);
-			if($params['gender']=='male')
+
+			//email verification
+			if($user_id)
 			{
-				redirect('frontend/groom/edit_profile/'.$user_id);
+				$this->load->library('email');
+			    $config['protocol']     = 'smtp';
+			    $config['smtp_host']    = 'bh-33.webhostbox.net';
+			    $config['smtp_port']    = '587';
+			    $config['smtp_user']    = 'contact@easynikah.in';
+			    $config['smtp_pass']    = 'Tech!1234';
+			    $config['charset']     = 'utf-8';
+			    $config['newline']     = "\r\n";
+			    $config['mailtype']  = 'html'; // or html
+			    $config['validation']  = TRUE; // bool whether to validate email or not
+
+			    $this->email->initialize($config);
+				$this->email->set_newline("\n\r");
+
+
+				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$_POST['full_name']."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/eamil_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah>";
+
+
+
+				$this->email->from('contact@easynikah.in','Easynikah');
+				$this->email->to($params['email']);
+				$this->email->subject('Easynikah Verification');
+				$this->email->message($message);
+
+				if($this->email->send())
+				{
+					// echo "you email was sent";
+					// $data['view'] = 'frontend/verification';
+					// $this->load->view('frontend/layout/base_layout',$data);
+					$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>An Email has been sent to your mail id for your account registration. Kindly click on verification link to confirm the same.</div>');
+					redirect('frontend/user/register');
+				}
+				else
+				{
+					show_error($this->email->print_debugger());
+				}
+
 			}
-			else if($params['gender']=='female')
-			{
-				redirect('frontend/bride/edit_profile/'.$user_id);
-			}
+
+
+			// if($params['gender']=='male')
+			// {
+			// 	redirect('frontend/groom/edit_profile/'.$user_id);
+			// }
+			// else if($params['gender']=='female')
+			// {
+			// 	redirect('frontend/bride/edit_profile/'.$user_id);
+			// }
 		}
 		else
 		{
@@ -104,5 +148,59 @@ class User extends CI_Controller {
 		else{
 			return $profile_id;
 		}
+	}
+
+	function eamil_verification($id)
+	{
+		$email_verification_status = $this->User_model->change_email_status($id);
+
+		$user = $this->User_model->get_user_details($id);
+		$email = $user->email;
+		$name = $user->full_name;
+
+		$this->load->library('email');
+	    $config['protocol']     = 'smtp';
+	    $config['smtp_host']    = 'bh-33.webhostbox.net';
+	    $config['smtp_port']    = '587';
+	    $config['smtp_user']    = 'contact@easynikah.in';
+	    $config['smtp_pass']    = 'Tech!1234';
+	    $config['charset']     = 'utf-8';
+	    $config['newline']     = "\r\n";
+	    $config['mailtype']  = 'html'; // or html
+	    $config['validation']  = TRUE; // bool whether to validate email or not
+
+	    $this->email->initialize($config);
+		$this->email->set_newline("\n\r");
+
+
+		$message = $name."<br><br>Alhamdulillah!!! Your profile has been verified successfully. Please login and complete your detailed profile.<br><br>All the services at Easy Nikah are absolutely FREE  and will always be In sha Allah with no charges during registration, search or after you find your match In sha Allah.<br><br>We sincerely hope you find your desired match at Easy Nikah and your search here is fruitful. <br><br>All the very best!!! <br><br> Best Regards<br>Admin - Easy Nikah>";
+
+
+
+		$this->email->from('contact@easynikah.in','Easynikah');
+		$this->email->to($email);
+		$this->email->subject('Easynikah Verification');
+		$this->email->message($message);
+
+		if($this->email->send())
+		{
+			$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Your email has been verified. Please login and complete your profile by filling up the detailed form.</div>');
+			redirect('frontend/user');	
+		}
+		else
+		{
+			show_error($this->email->print_debugger());
+		}
+
+		// $gender = $user->gender;
+
+		// if($gender == 'male')
+		// 	{
+		// 		redirect('frontend/groom/edit_profile/'.$user->id);
+		// 	}
+		// 	else if($params['gender']=='female')
+		// 	{
+		// 		redirect('frontend/bride/edit_profile/'.$user->id);
+		// 	}
 	}
 }
