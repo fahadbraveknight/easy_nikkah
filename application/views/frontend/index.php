@@ -25,7 +25,15 @@
         color: black;
     }
 
-</style>
+</style><div class="container">
+	<?php 
+		if($this->session->flashdata('message'))
+		{
+			echo "<br>";
+			echo $this->session->flashdata('message');
+		}
+	?>
+	</div>
 	<div class="home_title">
 		Easy Nikah - Striving to Make Nikah Easy and Zina very difficult!!!
 	</div>
