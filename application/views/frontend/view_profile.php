@@ -20,7 +20,7 @@
 						</tr>
 					    <tr class="opened">
 							<td class="day_label">Marital Status :</td>
-							<td class="day_value"><?php echo $groom['marital_status'] ?></td>
+							<td class="day_value"><?php echo $groom['user_marital_status'] ?></td>
 						</tr>
 					    <tr class="opened">
 							<td class="day_label">Location :</td>
@@ -44,7 +44,7 @@
 			   <ul id="myTab" class="nav nav-tabs nav-tabs1" role="tablist">
 				  <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">About Myself</a></li>
 				  <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Family Details</a></li>
-				  <li role="presentation"><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile1">Partner Preference</a></li>
+				  <!-- <li role="presentation"><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile1">Partner Preference</a></li> -->
 			   </ul>
 			   <div id="myTabContent" class="tab-content">
 				  <div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
@@ -63,7 +63,7 @@
 								</tr>
 							    <tr class="opened">
 									<td class="day_label">Marital Status :</td>
-									<td class="day_value"><?php echo $groom['marital_status']; ?></td>
+									<td class="day_value"><?php echo $groom['user_marital_status']; ?></td>
 								</tr>
 							    <tr class="opened">
 									<td class="day_label">Height :</td>
@@ -93,11 +93,11 @@
 				        	<tbody>
 				        		<tr class="opened">
 									<td class="day_label">Beard :</td>
-									<td class="day_value"><?php echo $groom['beard_type_name'] ?></td>
+									<td class="day_value"><?php echo  preg_replace("/_/", " ", $groom['user_beard_type']); ?></td>
 								</tr>
 				        		<tr class="opened">
 									<td class="day_label">Namaz :</td>
-									<td class="day_value"><?php echo $groom['namaz_type_name'] ?></td>
+									<td class="day_value"><?php echo preg_replace("/_/", " ", $groom['user_namaz_type']); ?></td>
 								</tr>
 							    <tr class="opened">
 									<td class="day_label">Date of Birth :</td>
@@ -105,7 +105,7 @@
 								</tr>
 							    <tr class="opened">
 									<td class="day_label">Fasting :</td>
-									<td class="day_value closed"><span><?php echo $groom['fasting_type_name']  ?></span></td>
+									<td class="day_value closed"><span><?php echo  preg_replace("/_/", "/", $groom['user_fasting_type']);  ?></span></td>
 								</tr>
 							 </tbody>
 				          </table>
@@ -183,31 +183,7 @@
 				 <div role="tabpanel" class="tab-pane fade" id="profile1" aria-labelledby="profile-tab1">
 				    <div class="basic_1 basic_2">
 				       <div class="basic_1-left">
-				    	  <table class="table_working_hours">
-				        	<tbody>
-				        		<tr class="opened">
-									<td class="day_label">Age Group :</td>
-									<td class="day_value"><?php echo $groom['age_group'] ?></td>
-								</tr>
-				        		<tr class="opened">
-									<td class="day_label">Marital Status :</td>
-									<td class="day_value"><?php foreach ($marital_statuses as $key => $value) {
-										$p_statuses = explode(",",$groom['partner_marital_statuses']);
-										if(in_array($value['id'], $p_statuses)){
-											echo $value['marital_status_name']." ";
-										}
-									} ?></td>
-								</tr>
-								<tr class="opened">
-									<td class="day_label">Current Location :</td>
-									<td class="day_value closed"><span><?php echo $groom['user_partner_current_location'] ?></span></td>
-								</tr>
-								<tr class="opened">
-									<td class="day_label">Native Location :</td>
-									<td class="day_value closed"><span><?php echo $groom['user_partner_native_location'] ?></span></td>
-								</tr>
-							 </tbody>
-				          </table>
+				    	  
 				        </div>
 				     </div>
 				 </div>

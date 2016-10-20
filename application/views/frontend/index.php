@@ -100,9 +100,9 @@
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
 				<select name="marital_status">
 					<option value="">* Select Status</option>
-					<?php foreach ($marital_statuses as $key => $value) {
-						echo  "<option value=".$value['id'].">".$value['marital_status_name']."</option>";
-					}?>
+					 <option  value="unmarried">Unmarried</option>
+                    <option   value="divorced">Divorced</option>
+                    <option  value="widowed">Widowed</option>
 				</select>
 		  </div>
 	    </div>

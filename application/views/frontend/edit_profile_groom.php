@@ -109,37 +109,39 @@
 		            	</div>
 	            	</div>
 			    </div>
-			    <div class="country-select">
-			      <label for="edit-location">Location <span class="form-required" title="This field is required.">*</span></label>
-			        <div class="age_grid">
-			         <div class="col-sm-4 country form_box">
-	                  <div class="select-block1">
-	                    <select name="user_location_country" class="countries-list">
-		                    <option value="">Country</option>
-		                    <?php foreach ($countries as $key => $country) {
-					                echo '<option value="'.$country['id'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
-		                    	}
-		                    ?>
-		         
-	                    </select>
-	                  </div>
-	            	</div>
-	            	<div class="col-sm-4 state form_box2">
-	                   <div class="select-block1">
-		                    <select name="user_location_state" class="states-list">
-		                    	<option value="">State</option>
+			    <div class="form-group">
+				    <div class="country-select">
+				      <label for="edit-location">Location <span class="form-required" title="This field is required.">*</span></label>
+				        <div class="age_grid">
+				         <div class="col-sm-4 country form_box">
+		                  <div class="select-block1">
+		                    <select name="user_location_country" class="countries-list">
+			                    <option value="">Country</option>
+			                    <?php foreach ($countries as $key => $country) {
+						                echo '<option value="'.$country['id'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+			                    	}
+			                    ?>
+			         
 		                    </select>
-	                  	</div>
-	                </div>
-	                <div class="col-sm-4 city form_box1">
-	                   <div class="select-block1">
-	                    <select name="user_location_city">
-		                    <option value="">City</option>
-		               
-	                    </select>
-	                   </div>
-	                  </div>
-	                 </div>
+		                  </div>
+		            	</div>
+		            	<div class="col-sm-4 state form_box2">
+		                   <div class="select-block1">
+			                    <select name="user_location_state" class="states-list">
+			                    	<option value="">State</option>
+			                    </select>
+		                  	</div>
+		                </div>
+		                <div class="col-sm-4 city form_box1">
+		                   <div class="select-block1">
+		                    <select name="user_location_city">
+			                    <option value="">City</option>
+			               
+		                    </select>
+		                   </div>
+		                  </div>
+		                 </div>
+		              </div>
 	              </div>
 	              <div class="age_select">
 			    	<?php 
@@ -226,67 +228,73 @@
 					     		</div>
 			            	</div>
 					    </div>
-						<div class="country-select">
-						    <label for="edit-location">Work Location <span class="form-required" title="This field is required.">*</span></label>
-					        <div class="age_grid">
-					         	<div class="col-sm-4 country form_box">
-			                  		<div class="select-block1">
-			                    		<select name="user_work_location_country" class="countries-list">
-				                    		<option value="">Country</option>
-					                    <?php foreach ($countries as $key => $country) {
-					                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
-					                    }
-					                    ?>
-			                    		</select>
-			                  		</div>
-			            		</div>
-			            		<div class="col-sm-4 state form_box2">
-			                   		<div class="select-block1">
-				                    	<select name="user_work_location_state" class="states-list">
-				                    		<option value="">State</option>
-				                    	</select>
-			                  		</div>
-			                	</div>
-			                	<div class="col-sm-4 city form_box1">
-			                   		<div class="select-block1">
-			                    		<select name="user_work_location_city">
-				                    		<option value="">City</option>
-				               			</select>
-			                   		</div>
-			                  	</div>
-			                </div>
-				        </div>
-					    <div class="country-select">
-						    <label for="edit-location">Native Place <span class="form-required" title="This field is required.">*</span></label>
-					        <div class="age_grid">
-					         	<div class="col-sm-4 country form_box">
-			                  		<div class="select-block1">
-			                    		<select name="user_native_location_country" class="countries-list">
-				                    		<option value="">Country</option>
-					                    <?php foreach ($countries as $key => $country) {
-					                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
-					                    }
-					                    ?>
-			                    		</select>
-			                  		</div>
-			            		</div>
-			            		<div class="col-sm-4 state form_box2">
-			                   		<div class="select-block1">
-				                    	<select name="user_native_location_state" class="states-list">
-				                    		<option value="">State</option>
-				                    	</select>
-			                  		</div>
-			                	</div>
-			                	<div class="col-sm-4 city form_box1">
-			                   		<div class="select-block1">
-			                    		<select name="user_native_location_city">
-				                    		<option value="">City</option>
-				               			</select>
-			                   		</div>
-			                  	</div>
-			                </div>
-				        </div>
+						
+	              		<div class="form-group">
+							<div class="country-select">
+							    <label for="edit-location">Work Location <span class="form-required" title="This field is required.">*</span></label>
+						        <div class="age_grid">
+						         	<div class="col-sm-4 country form_box">
+				                  		<div class="select-block1">
+				                    		<select name="user_work_location_country" class="countries-list">
+					                    		<option value="">Country</option>
+						                    <?php foreach ($countries as $key => $country) {
+						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+						                    }
+						                    ?>
+				                    		</select>
+				                  		</div>
+				            		</div>
+				            		<div class="col-sm-4 state form_box2">
+				                   		<div class="select-block1">
+					                    	<select name="user_work_location_state" class="states-list">
+					                    		<option value="">State</option>
+					                    	</select>
+				                  		</div>
+				                	</div>
+				                	<div class="col-sm-4 city form_box1">
+				                   		<div class="select-block1">
+				                    		<select name="user_work_location_city">
+					                    		<option value="">City</option>
+					               			</select>
+				                   		</div>
+				                  	</div>
+				                </div>
+					        </div>
+					    </div>
 
+	              		<div class="form-group">
+						    <div class="country-select">
+							    <label for="edit-location">Native Place <span class="form-required" title="This field is required.">*</span></label>
+						        <div class="age_grid">
+						         	<div class="col-sm-4 country form_box">
+				                  		<div class="select-block1">
+				                    		<select name="user_native_location_country" class="countries-list">
+					                    		<option value="">Country</option>
+						                    <?php foreach ($countries as $key => $country) {
+						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+						                    }
+						                    ?>
+				                    		</select>
+				                  		</div>
+				            		</div>
+				            		<div class="col-sm-4 state form_box2">
+				                   		<div class="select-block1">
+					                    	<select name="user_native_location_state" class="states-list">
+					                    		<option value="">State</option>
+					                    	</select>
+				                  		</div>
+				                	</div>
+				                	<div class="col-sm-4 city form_box1">
+				                   		<div class="select-block1">
+				                    		<select name="user_native_location_city">
+					                    		<option value="">City</option>
+					               			</select>
+				                   		</div>
+				                  	</div>
+				                </div>
+					        </div>
+					        <br clear="all">
+					    </div>
 					    
 					    
 					   
@@ -318,7 +326,7 @@
 								    <label for="edit-contact-person-relation">Contact Person Relation <span class="form-required" title="This field is required.">*</span></label>
 								    <input type="text" id="edit-contact-person-relation" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_relation]" value="<?php echo $groom_contact['contact_person_relation'] ?>" size="60" maxlength="60" class="form-text required">
 							    </div>
-							    
+
 						    </div>
 					    <?php  $contact_data_key++;
 								}

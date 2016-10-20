@@ -108,7 +108,7 @@ class User_model extends CI_Model {
 
         if(!empty($params['marital_status']))
         {
-            $marital_status_condition = " AND u.user_marital_status=".$params['marital_status'];
+            $marital_status_condition = " AND u.user_marital_status='".$params['marital_status']."'";
         }
         if(!empty($params['qualification']))
         {
