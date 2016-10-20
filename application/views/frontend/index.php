@@ -32,6 +32,17 @@
     }
 
 </style>
+
+	<div class="container">
+	<?php 
+		if($this->session->flashdata('message'))
+		{
+			echo "<br>";
+			echo $this->session->flashdata('message');
+		}
+	?>
+	</div>
+
 <div class="banner">
 	<div class="comingsoon">
 		<marquee>"SubhanAllah Matrimony is now Easy Nikah"</marquee>
