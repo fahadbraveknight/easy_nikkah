@@ -142,6 +142,21 @@ class User_model extends CI_Model {
                 ";
         return $this->db->query($sql)->result_array();
     }
+
+    //for getting all details of user.
+    function get_user_details($id)
+    {
+       return $this->db->where('verification_id',$id)->get('users')->row();
+    }
+
+    //for email_verification_status changing.
+    function change_email_status($id)
+    {
+        $data = array(
+            'email_verification_status' => 1
+            );
+        return $this->db->where('verification_id',$id)->update('users',$data);
+    }
 }
 
 ?>

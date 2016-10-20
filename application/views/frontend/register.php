@@ -6,6 +6,7 @@
         <a href="index.html"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
         <li class="current-page">Register</li>
+        <?php echo $this->session->flashdata('message'); ?>
      </ul>
    </div>
    <div class="services">
