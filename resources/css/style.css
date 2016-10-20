@@ -3546,6 +3546,12 @@ ul.feature_list.feature_list1 {
     padding: 0 30px 30px;
     text-align: center;
 }
+.comingsoon{
+   	font-family: FontAwesome;
+   	padding: 5px 0 0;
+   	font-size: 20px;
+   	color: #f90404;
+}
 .salam {
 	text-align: center;
 	padding: 0 10px 10px;
@@ -3555,7 +3561,7 @@ ul.feature_list.feature_list1 {
 }
 .first_para {
 	font-family: fantasy;
-    font-size: 15px;
+    font-size: 16px;
     padding: 8px;
 }
 .second_para {
@@ -3563,17 +3569,11 @@ ul.feature_list.feature_list1 {
     padding: 10px 220px;
 }
 .third_para {
-	-moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: #781518 none repeat scroll 0 0;
-    border-bottom: 1px solid;
-    border-image: none;
-    border-left: 1px solid;
+	background: #781518 none repeat scroll 0 0;
+    border: medium none;
     border-radius: 10px;
-    border-top: 1px solid;
     color: #ffffff;
+    font-weight: bold;
     margin: auto;
     padding: 10px 0;
     width: 70%;

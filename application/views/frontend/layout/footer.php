@@ -1,3 +1,4 @@
+    </div>
     <div class="footer">
     	<div class="container">
     		<!-- <div class="col-md-4 col_2">

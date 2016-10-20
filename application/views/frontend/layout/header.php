@@ -75,7 +75,7 @@ $(document).ready(function(){
 		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 		        <ul class="nav navbar-nav nav_1">
 		            <li><a href="<?php echo base_url('frontend/user') ?>">Home</a></li>
-		            <li><a href="#">About Us</a></li>
+		            <li><a href="<?php echo base_url('frontend/about') ?>">About Us</a></li>
 		    		<?php /*?><li class="dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matches<span class="caret"></span></a>
 		              <ul class="dropdown-menu" role="menu">
@@ -106,7 +106,7 @@ $(document).ready(function(){
 		                <li><a href="#">Upgrade</a></li>
 		              </ul>
 		            </li>*/?>
-		            <li class="last"><a href="#">Contact Us</a></li>
+		            <li class="last"><a href="<?php echo base_url('frontend/contact') ?>">Contact Us</a></li>
 		        </ul>
 		     </div><!-- /.navbar-collapse -->
 		    </nav>
@@ -116,3 +116,7 @@ $(document).ready(function(){
       </div> <!-- end navbar-inner -->
     </div> <!-- end navbar-inverse-blue -->
 <!-- ============================  Navigation End ============================ -->
+<div class="banner">
+	<div class="comingsoon">
+		<marquee>"SubhanAllah Matrimony is now Easy Nikah"</marquee>
+	</div>

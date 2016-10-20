@@ -24,18 +24,8 @@
     .slick-next:before {
         color: black;
     }
-    .comingsoon{
-    	font-family: FontAwesome;
-    	padding: 5px 0 0;
-    	font-size: 20px;
-    	color: #f90404;
-    }
 
 </style>
-<div class="banner">
-	<div class="comingsoon">
-		<marquee>"SubhanAllah Matrimony is now Easy Nikah"</marquee>
-	</div>
 	<div class="home_title">
 		Easy Nikah - Striving to Make Nikah Easy and Zina very difficult!!!
 	</div>
@@ -74,11 +64,12 @@
 	      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 6.jpg">
 	    </div>
 	</section>*/?>
+
 <?php /*?><div class="banner">
   <div class="container">
     <div class="banner_info">
       <h3>Coming Soon!!!</h3>
-      <a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a>*/ ?>
+      <a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a> ?>
     </div>
   </div>
  <div class="profile_search">  	<div class="container wrap_1">
@@ -207,7 +198,7 @@
 		   </div>
 		</div>
 	</div>
-  <?php } ?>
+  <?php } */?>
 <!--
 <div class="grid_1">
       <div class="container">
