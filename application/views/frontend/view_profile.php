@@ -32,10 +32,10 @@
 						</tr>
 				    </tbody>
 				</table>
-				<ul class="login_details">
+<!-- 				<ul class="login_details">
 			      <li>Already a member? <a href="login.html">Login Now</a></li>
 			      <li>If not a member? <a href="register.html">Register Now</a></li>
-			    </ul>
+			    </ul> -->
 			</div>
 			<div class="clearfix"> </div>
 		</div>
@@ -64,6 +64,10 @@
 							    <tr class="opened">
 									<td class="day_label">Marital Status :</td>
 									<td class="day_value"><?php echo $groom['user_marital_status']; ?></td>
+								</tr>
+								<tr class="opened">
+									<td class="day_label">Children :</td>
+									<td class="day_value"><?php echo $groom['user_children']==0 ? "No Children" :$groom['user_children']; ?></td>
 								</tr>
 							    <tr class="opened">
 									<td class="day_label">Height :</td>

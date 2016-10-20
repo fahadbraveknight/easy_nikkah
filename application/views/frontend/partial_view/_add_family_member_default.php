@@ -14,11 +14,9 @@
           	<div class="select-block1">
                 <select id="edit-family-member-marital-status" name="family_info[<?php echo $family_data_key  ?>][family_member_marital_status]">
                     <option value="">Select</option>
-                    <?php foreach ($groom_traits['marital_status'] as $key => $value){
-                    	$selected="";
-                    	if($value['id']==$family['family_member_marital_status']){$selected="selected";}
-                    	echo '<option '.$selected.' value="'.$value['id'].'">'.$value['marital_status_name'].'</option>';
-                    	} ?>
+                    <option value="unmarried">Unmarried</option>
+                    <option value="divorced">Divorced</option>
+                    <option value="widowed">Widowed</option>
          
                 </select>
           	</div>

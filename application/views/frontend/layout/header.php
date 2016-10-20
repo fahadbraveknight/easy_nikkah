@@ -50,15 +50,22 @@ $(document).ready(function(){
 				<li class="green">
 					<a href="#" class="icon-home"></a>
 					<ul>
-						<li><a href="#<?php /*echo base_url('frontend/user/login') */?>">Login</a></li>
-					    <li><a href="#<?php /*echo base_url('frontend/user/register') */?>">Register</a></li>
-					    <li><a href="<?php echo base_url();?>">Logout</a></li>
+						<?php if(!$this->session->userdata('userid')){ ?>
+							<li><a href="<?php echo base_url('frontend/user/login') ?>">Login</a></li>
+						    <li><a href="<?php echo base_url('frontend/user/register') ?>">Register</a></li>
+			           	<?php } ?>
+			           	<?php if($this->session->userdata('userid')){ ?>
+
+						    <li><a href="<?php echo base_url('frontend/'.$this->session->userdata('user_detail').'/view_profile/'.$this->session->userdata('userid'));?>">View Profile</a></li>
+						    <li><a href="<?php echo base_url('frontend/'.$this->session->userdata('user_detail').'/edit_profile/'.$this->session->userdata('userid'));?>">Edit Profile</a></li>
+						    <li><a href="<?php echo base_url('frontend/user/logout');?>">Logout</a></li>
+						<?php } ?>
 					</ul>
 				</li>
 			   </ul>
              </nav>
            </div>
-           <a class="brand" href="<?php echo base_url('frontend/user') ?>" style="color: #1500ff;"><h2 style="display: inline-block; margin-top:6px;margin-bottom:3px;">Easy Nikah</h2></a>
+           <a class="brand" href="<?php echo base_url('frontend/user') ?>" ><h2 style="display: inline-block; margin-top:6px;margin-bottom:3px;">Easy Nikah</h2></a>
            <div class="pull-right">
           	<nav class="navbar nav_bottom" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -86,16 +93,7 @@ $(document).ready(function(){
 		                <li><a href="#">Shortlisted Profile</a></li>
 		              </ul>
 		            </li>*/?>
-					<li class="dropdown">
-		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search&nbsp;<span class="fa fa-search fa-1"></span></a>
-		              <?php /*?><ul class="dropdown-menu" role="menu">
-		                <li><a href="#">Regular Search</a></li>
-		                <li><a href="#">Recently Viewed Profiles</a></li>
-		                <li><a href="#">Search By Profile ID</a></li>
-		                <li><a href="#">Faq</a></li>
-		                <li><a href="#">Shortcodes</a></li>
-		              </ul>*/?>
-		            </li>
+					
 		            <?php /*?><li class="dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages<span class="caret"></span></a>
 		              <ul class="dropdown-menu" role="menu">
@@ -107,6 +105,21 @@ $(document).ready(function(){
 		              </ul>
 		            </li>*/?>
 		            <li class="last"><a href="#">Contact Us</a></li>
+		           	<?php if($this->session->userdata('userid')){ ?>
+			            <li class="dropdown">
+			              <a href="<?php echo base_url('frontend/user#p-search') ?>" >Search&nbsp;<span class="fa fa-search fa-1"></span></a>
+			              <?php /*?>
+			              <a href="<?php echo base_url('frontend/user#p-search') ?>" class="dropdown-toggle" data-toggle="dropdown">Search&nbsp;<span class="fa fa-search fa-1"></span></a>
+			              <ul class="dropdown-menu" role="menu">
+			                <li><a href="#">Regular Search</a></li>
+			                <li><a href="#">Recently Viewed Profiles</a></li>
+			                <li><a href="#">Search By Profile ID</a></li>
+			                <li><a href="#">Faq</a></li>
+			                <li><a href="#">Shortcodes</a></li>
+			              </ul>*/?>
+			            </li>
+			            <li><a href="<?php echo base_url('frontend/user/logout') ?>">Logout</a></li>
+		            <?php } ?>
 		        </ul>
 		     </div><!-- /.navbar-collapse -->
 		    </nav>

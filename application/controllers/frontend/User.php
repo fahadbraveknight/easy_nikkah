@@ -26,6 +26,46 @@ class User extends CI_Controller {
 		$this->load->view('frontend/layout/base_layout',$data);
 		
 	}
+	public function login()
+	{
+		$this->form_validation->set_rules('email', 'Email' , 'required|xss_clean');
+		$this->form_validation->set_rules('password', 'password' , 'required|xss_clean');
+
+		if($this->form_validation->run())
+		{
+			$result = $this->User_model->login($_POST['email'],$_POST['password']);
+			// pr($result);
+			if($result['rc'])
+			{
+				if($result['user_height'] == '')
+				{
+					redirect('frontend/'.$this->session->userdata('user_detail').'/edit_profile/'.$result['id']);
+					exit;
+				}
+				redirect('frontend/user');
+				exit;
+			}
+			else
+			{
+				$this->session->set_flashdata('error_login',$result['error']);
+				redirect('frontend/user/login');
+				exit;
+			}
+		}
+		else
+		{
+			$data['view'] = 'frontend/login';
+			$this->load->view('frontend/layout/base_layout',$data);
+		}
+
+	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('frontend/user');
+		exit;
+	}
 
 	public function register()
 	{
@@ -42,7 +82,9 @@ class User extends CI_Controller {
     						'password' => $_POST['password'],
     						'age' => $age,
     						'profile_id' => $profile_id,
-    						'gender' => $_POST['gender']);
+    						'gender' => $_POST['gender'],
+    						'verification_id'=> rand(1,10000)+rand(1,10000) );
+			$verification_id = $params['verification_id'];
 			$user_id = $this->User_model->add_user($params);
 
 			//email verification
@@ -63,7 +105,7 @@ class User extends CI_Controller {
 				$this->email->set_newline("\n\r");
 
 
-				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$_POST['full_name']."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/eamil_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah>";
+				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$_POST['full_name']."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/email_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah>";
 
 
 
@@ -150,7 +192,7 @@ class User extends CI_Controller {
 		}
 	}
 
-	function eamil_verification($id)
+	function email_verification($id)
 	{
 		$email_verification_status = $this->User_model->change_email_status($id);
 

@@ -92,17 +92,18 @@
       <a href="<?php echo base_url('frontend/user/register') ?>" class="hvr-shutter-out-horizontal">Create your Profile</a>*/ ?>
     </div>
   </div>
- <div class="profile_search">  	<div class="container wrap_1">
-	  <form action="" method="get">
+<?php if($this->session->userdata('userid')){ ?>
+ <div class="profile_search" id="p-search">  	<div class="container wrap_1">
+	  <form action="" method="get" id="search-form">
 	  	<div class="search_top">
 		 <div class="inline-block">
 		  <label class="gender_1">I am looking for :</label>
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
- 				<span class="bg-danger"><?php echo form_error('gender'); ?></span>
+ 				<span class="bg-danger gender-error"></span>
 				<select name="gender">
 					<option value="">* Select Gender</option>
-					<option value="female">Bride</option>
-					<option value="male">Groom</option>
+					<option  <?php echo isset($_GET['gender']) && $_GET['gender']=='female' ? 'selected' : ""; ?> value="female">Bride</option>
+					<option <?php echo isset($_GET['gender']) && $_GET['gender']=='male' ? 'selected' : ""; ?> value="male">Groom</option>
 				</select>
 		   </div>
 	    </div>
@@ -111,9 +112,9 @@
 			<div class="age_box1" style="max-width: 100%; display: inline-block;">
 				<select name="marital_status">
 					<option value="">* Select Status</option>
-					 <option  value="unmarried">Unmarried</option>
-                    <option   value="divorced">Divorced</option>
-                    <option  value="widowed">Widowed</option>
+					 <option <?php echo isset($_GET['marital_status']) && $_GET['marital_status']=='unmarried' ? 'selected' : ""; ?>  value="unmarried">Unmarried</option>
+                    <option  <?php echo isset($_GET['marital_status']) && $_GET['marital_status']=='divorced' ? 'selected' : ""; ?> value="divorced">Divorced</option>
+                    <option <?php echo isset($_GET['marital_status']) && $_GET['marital_status']=='widowed' ? 'selected' : ""; ?> value="widowed">Widowed</option>
 				</select>
 		  </div>
 	    </div>
@@ -123,7 +124,9 @@
 				<select name="qualification">
 					<option value="">* Select Qualification</option>
 					<?php foreach ($qualifications as $key => $value) {
-						echo "<option value=".$value['id'].">".$value['qualification_name']."</option>";
+						$selected = "";
+						if (isset($_GET['qualification']) && $_GET['qualification']==$value['id']) {$selected ='selected';}  
+						echo "<option ".$selected." value=".$value['id'].">".$value['qualification_name']."</option>";
 					} ?>
                </select>
           </div>
@@ -131,12 +134,15 @@
      </div>
      <div class="inline-block location">
 		  <label class="gender_1">Located In :</label>
+
 			<div class="age_box1 country" style="max-width: 100%; display: inline-block;">
 				<div class="form_box">
             		<select name="location_country" class="countries-list">
                 		<option value="">Country</option>
                     <?php foreach ($countries as $key => $country) {
-                    	echo '<option value="'.$country['id'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+                    	$selected = "";
+						if (isset($_GET['location_country']) && $_GET['location_country']==$country['id']) {$selected ='selected';}  
+                    	echo '<option '.$selected.' value="'.$country['id'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
                     }
                     ?>
             		</select>
@@ -157,7 +163,7 @@
               	</div>
             </div>
 	 	<br clear="all">
- 		<span class="bg-danger"><?php echo form_error('location_state'); ?><?php echo form_error('location_city'); ?></span>
+	 	<span class="bg-danger location-error"></span>
         </div>
 	 <div class="inline-block">
 	   	<label class="gender_1">Age :</label>
@@ -174,11 +180,22 @@
 			        <div class="mutliSelect">
 			            <ul>
 			            	<?php 
+			            	$m_select="";
 			            	for ($i=14; $i < 80 ; $i++) { 
-			            		echo '<li><input type="checkbox" name="age[]" value="'.$i.'" />'.$i.'</li>';
+			            		$checked = ""; 
+								if (isset($_GET['age']) && in_array($i, $_GET['age'])) {$checked ='checked'; $m_select.="<span title='".$i.",'>".$i.",</span>";}  
+			            		echo '<li><input '.$checked.' type="checkbox" name="age[]" value="'.$i.'" />'.$i.'</li>';
 			            	}
 			            	?>
 			            </ul>
+			            <?php if(!empty($_GET['age'])){ ?>
+			            <script type="text/javascript">
+			            	$(document).ready(function(){
+			            		$('.hida').hide();
+			            		$('.multiSel').html("<?php echo $m_select ?>");
+			            	})
+			            </script>
+			            <?php } ?>
 			        </div>
 			    </dd>
 			</div>
@@ -186,7 +203,7 @@
 	 	<br clear="all">
 	 </div>
 		<div class="submit inline-block">
-		   <input id="submit-btn" class="hvr-wobble-vertical" type="submit" value="Find Matches">
+		   <input id="submit-btn" class="hvr-wobble-vertical" type="button" value="Find Matches">
 		</div>
      </form>
     </div>
@@ -206,7 +223,7 @@
 						   </li>
 						   <li class="profile_item-desc">
 						   	  <p><?php echo $value['full_name']; ?></p>
-						   	  <p><?php echo $value['age'] ?> Yrs, 5Ft 5in Christian</p>
+						   	  <p><?php echo $value['age'] ?> Yrs, <?php echo $value['user_height'] ?></p>
 						   	  <h5><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>">View Full Profile</a></h5>
 						   </li>
 						   <div class="clearfix"> </div>
@@ -219,6 +236,8 @@
 		</div>
 	</div>
   <?php } ?>
+<?php } ?>
+
 <!--
 <div class="grid_1">
       <div class="container">
@@ -673,6 +692,28 @@ $( document ).ready(function() {
 			}
 		});
 	})
+
+	$(document).on('click',"#submit-btn",function(){
+		var has_error=false;
+
+		$('.gender-error,.location-error').html('');
+		if($('select[name="gender"]').val() == '')
+		{
+			has_error = true;
+			$('.gender-error').html('Please Choose a Gender');
+		}
+
+		if($('select[name="location_country"]').find(':selected').text().toLowerCase() == 'india' && ($('select[name="location_state"]').val() == "" || $('select[name="location_city"]').val() == ""))
+		{
+			has_error = true;
+			$('.location-error').html('Please Choose State and City');
+		}
+
+		if(!has_error)
+		{
+			$('#search-form').submit();
+		}
+	});
 
 	$(document).on('change','.states-list',function(){
 		var state_id = $(this).find(':selected').attr('data-id');

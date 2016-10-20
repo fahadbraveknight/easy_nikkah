@@ -9,6 +9,41 @@ class User_model extends CI_Model {
     }
 
 
+    function login($email,$password)
+    {
+        $user = $this->db->get_where('users',array('email'=>$email , 'password' =>md5($password)))->row_array();
+
+        if(!empty($user))
+        {
+            if($user['email_verification_status'] == 1){
+                $response['rc'] = TRUE;
+                $response['user_height'] = $user['user_height'];
+                $response['id'] = $user['id'];
+                $this->session->set_userdata('userid',$user['id']);
+                if($user['gender'] == 'male'){
+                    $user_detail = 'groom';
+                }
+                elseif($user['gender'] == 'female')
+                {
+                    $user_detail = 'bride';
+                }
+                $this->session->set_userdata('user_detail',$user_detail);
+            }
+            else
+            {       
+                $response['rc'] = FALSE;
+                $response['error'] = "Not a Verified User.";
+            }
+        }
+        else
+        {
+            $response['rc'] = FALSE;
+            $response['error'] = "Invalid Credentials.";
+        }
+
+        return $response;
+    }
+
     function add_user($params)
     {
     	$add_data = array(	'full_name' => $params['full_name'],
@@ -16,7 +51,8 @@ class User_model extends CI_Model {
     						'password' => md5($params['password']),
     						'age' => $params['age'],
     						'gender' => $params['gender'],
-                            'profile_id' => $params['profile_id']
+                            'profile_id' => $params['profile_id'],
+                            'verification_id' => $params['verification_id']
     					);
 
     	$this->db->insert('users',$add_data);
@@ -117,7 +153,12 @@ class User_model extends CI_Model {
 
         if(!empty($params['location_country']))
         {
-            $location_condition = " AND u.user_location_country=".$params['location_country']." AND u.user_location_state= ".$params['location_state']." AND u.user_location_city= ".$params['location_city'];
+            $location_condition = " AND u.user_location_country=".$params['location_country'];
+
+            if(!empty($params['location_state']) && !empty($params['location_city']))
+            {
+                $location_condition .= " AND u.user_location_state= ".$params['location_state']." AND u.user_location_city= ".$params['location_city'];
+            }
         }
 
         $sql = "SELECT 

@@ -290,8 +290,8 @@ ul.nav_1 li.last{
 	margin-right:0;
 }
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus, .nav>li>a:hover, .nav>li>a:focus{
-    background-color:#ffa417 !important;
-    border-color:#ffa417;
+    background-color: rgba(162, 43, 58, 0.22) !important;
+    /*border-color:#ffa417;*/
     color:#fff !important;
 }
 .banner{
@@ -367,7 +367,8 @@ padding: 100px 320px;
 	text-align: center;
     background-color:rgba(12, 9, 10, 0.29);
     padding: 2em;
-    margin:11em 0 0 0;
+    /*margin:11em 0 0 0;*/
+    margin: 0;
 }
 .input-group input[type="text"], select{
     -moz-box-shadow: none;

@@ -14,6 +14,7 @@
 		  	    <div class="form-group">
 			      <label for="edit-name">Full Name <span class="form-required" title="This field is required.">*</span></label>
 			      <input type="text" id="edit-name" name="full_name" value="<?php echo $groom['full_name'] ?>" size="60" maxlength="60" class="form-text required">
+			      <span><?php echo form_error('full_name'); ?></span>
 			    </div>
 			    <div class="form-group">
 			      <label for="edit-height">Height <span class="form-required" title="This field is required.">*</span></label>
@@ -32,6 +33,7 @@
 			                    	} ?>
 			         
 		                    </select>
+		                    <span><?php echo form_error('user_height'); ?></span>
 	                  	</div>
 	            	</div>
 			    </div>
@@ -362,9 +364,9 @@
 					                  	<div class="select-block1">
 						                    <select id="edit-family-member-marital-status" name="family_info[<?php echo $family_data_key  ?>][family_member_marital_status]">
 							                    <option value="">Select</option>
-							                    <option <?php echo "unmarried"==$groom['user_beard_type'] ? "selected" : "" ?>  value="unmarried">Unmarried</option>
-							                    <option <?php echo "divorced"==$groom['user_beard_type'] ? "selected" : "" ?>  value="divorced">Divorced</option>
-							                    <option <?php echo "widowed"==$groom['user_beard_type'] ? "selected" : "" ?>  value="widowed">Widowed</option>
+							                    <option <?php echo "unmarried"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="unmarried">Unmarried</option>
+							                    <option <?php echo "divorced"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="divorced">Divorced</option>
+							                    <option <?php echo "widowed"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="widowed">Widowed</option>
 							         
 						                    </select>
 					                  	</div>
@@ -423,6 +425,7 @@
 				success:function(response){
 					if(response.rc)
 					{
+						next.html('<option>Select</option>');
 						if( this_name =="user_location_country")
 						{
 							$.each(response.states,function(index,data){
@@ -451,6 +454,7 @@
 				success:function(response){
 					if(response.rc)
 					{
+						next.html('<option>Select</option>');
 						if( this_name =='user_location_state')
 						{
 							$.each(response.cities,function(index,data){

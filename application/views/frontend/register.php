@@ -13,16 +13,19 @@
    	  <div class="col-sm-6 login_left">
 	     <form method="post">
 	  	    <div class="form-group">
-		      <label for="edit-name">Username <span class="form-required" title="This field is required.">*</span></label>
+		      <label for="edit-name">Full Name <span class="form-required" title="This field is required.">*</span></label>
 		      <input type="text" id="edit-name" name="full_name" value="" size="60" maxlength="60" class="form-text required">
+		      <span><?php echo form_error('full_name'); ?></span>
 		    </div>
 		    <div class="form-group">
 		      <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label>
 		      <input type="password" id="edit-pass" name="password" size="60" maxlength="128" class="form-text required">
+		      <span><?php echo form_error('password'); ?></span>
 		    </div>
 		    <div class="form-group">
 		      <label for="edit-name">Email <span class="form-required" title="This field is required.">*</span></label>
 		      <input type="text" id="edit-name" name="email" value="" size="60" maxlength="60" class="form-text required">
+		      <span><?php echo form_error('email'); ?></span>
 		    </div>
 		    <div class="age_select">
 		      <label for="edit-pass">Age <span class="form-required" title="This field is required.">*</span></label>
