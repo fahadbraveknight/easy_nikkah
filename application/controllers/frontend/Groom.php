@@ -5,7 +5,7 @@ class Groom extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-        $this->load->model(array('User_model','Groom_model','Location_model','Profession_model','Qualification_model','Marital_status_model'));
+        $this->load->model(array('User_model','Groom_model','Location_model','Profession_model','Qualification_model',));
     }
 
 	public function index()
@@ -134,11 +134,7 @@ class Groom extends CI_Controller {
 				}
 				else
 				{
-					$data['user_partner_marital_status'] = array();
-					$partner_marital_statuses = $this->User_model->get_user_partner_marital_status($groom['id']);
-					foreach ($partner_marital_statuses as $key => $value) {
-						array_push($data['user_partner_marital_status'], $value['user_partner_marital_status']);
-					}
+					
 					$data['qualifications'] = $this->Qualification_model->get_all_qualifications();
 					$data['professions'] = $this->Profession_model->get_all_professions();
 					$data['groom_family'] = $this->User_model->get_user_family($groom['id']);
@@ -167,7 +163,6 @@ class Groom extends CI_Controller {
 		{
 			$data['groom'] = $groom;
 			$data['groom_family'] = $this->User_model->get_user_family($groom['id']);
-			$data['marital_statuses'] = $this->Marital_status_model->get_all_marital_statuses();
 			$data['groom_contact_persons'] = $this->User_model->get_user_contact_person($groom['id']);
 			// echo '<pre>'; print_r($groom);exit;
 			$data['view'] = 'frontend/view_profile';

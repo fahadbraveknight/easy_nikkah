@@ -32,8 +32,7 @@
 			                    		}
 			                    	} ?>
 			         
-		                    </select>
-		                    <span><?php echo form_error('user_height'); ?></span>
+		                    </select>s
 	                  	</div>
 	            	</div>
 			    </div>

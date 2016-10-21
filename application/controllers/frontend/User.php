@@ -5,7 +5,7 @@ class User extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-        $this->load->model(array('User_model','Location_model','Marital_status_model','Qualification_model','Age_group_model'));
+        $this->load->model(array('User_model','Location_model','Qualification_model',));
     }
 
 	public function index()
@@ -19,9 +19,7 @@ class User extends CI_Controller {
 			// pr($result);
 		}
 		$data['view'] = 'frontend/index';
-		$data['marital_statuses'] = $this->Marital_status_model->get_all_marital_statuses();
 		$data['qualifications'] = $this->Qualification_model->get_all_qualifications();
-		$data['age_groups'] = $this->Age_group_model->get_age_groups();
 		$data['countries'] = $this->Location_model->get_countries();
 		$this->load->view('frontend/layout/base_layout',$data);
 		
@@ -83,7 +81,7 @@ class User extends CI_Controller {
     						'age' => $age,
     						'profile_id' => $profile_id,
     						'gender' => $_POST['gender'],
-    						'verification_id'=> rand(1,10000)+rand(1,10000) );
+    						'verification_id'=> random_string('alnum', 50) );
 			$verification_id = $params['verification_id'];
 			$user_id = $this->User_model->add_user($params);
 
