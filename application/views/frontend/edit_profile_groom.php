@@ -206,8 +206,8 @@
 					                    <option value="">Select</option>
 					                    <?php foreach ($qualifications as $key => $value){
 					                    	$selected="";
-					                    	if($groom['user_qualification']==$value['id']){$selected='selected';}
-				                     		echo '<option '.$selected.' value="'.$value['id'].'">'.$value['qualification_name'].'</option>';
+					                    	if($groom['user_qualification']==$value['qualification_id']){$selected='selected';}
+				                     		echo '<option '.$selected.' value="'.$value['qualification_id'].'">'.$value['qualification_name'].'</option>';
 					                    	} ?>
 					     			</select>
 					     		</div>

@@ -165,12 +165,11 @@ class User_model extends CI_Model {
                     u.id,u.profile_id,u.user_personal_description,u.full_name,u.email,u.gender,u.age as user_birthday, TIMESTAMPDIFF(YEAR, FROM_UNIXTIME(u.age), NOW()) as age,u.user_height,ms.marital_status_name as marital_status ,q.qualification_name,p.profession_name,ct.city_name,st.state_name,ctry.country_name,u.user_work_location,u.user_native_location,u.user_partner_current_location,u.user_partner_native_location
                 from
                     users u
-                left JOIN  marital_status ms on ms.id=u.user_marital_status
-                left JOIN  qualifications q on q.id=u.user_qualification
+                left JOIN  qualifications q on q.qualification_id=u.user_qualification
                 left JOIN  professions p on p.id=u.user_profession
-                left JOIN  cities ct on ct.id=u.user_location_city
-                left JOIN  states st on st.id=u.user_location_state
-                left JOIN  countries ctry on ctry.id=u.user_location_country
+                left JOIN  cities ct on ct.city_id=u.user_location_city
+                left JOIN  states st on st.state_id=u.user_location_state
+                left JOIN  countries ctry on ctry.country_id=u.user_location_country
                 WHERE 
                     1=1
                 $age_condition

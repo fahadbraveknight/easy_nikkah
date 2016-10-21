@@ -125,8 +125,8 @@
 					<option value="">* Select Qualification</option>
 					<?php foreach ($qualifications as $key => $value) {
 						$selected = "";
-						if (isset($_GET['qualification']) && $_GET['qualification']==$value['id']) {$selected ='selected';}  
-						echo "<option ".$selected." value=".$value['id'].">".$value['qualification_name']."</option>";
+						if (isset($_GET['qualification']) && $_GET['qualification']==$value['qualification_id']) {$selected ='selected';}  
+						echo "<option ".$selected." value=".$value['qualification_id'].">".$value['qualification_name']."</option>";
 					} ?>
                </select>
           </div>

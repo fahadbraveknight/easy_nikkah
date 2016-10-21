@@ -148,7 +148,7 @@ class User extends CI_Controller {
 	public function ajax_get_all_states($country_id=0)
 	{
 		$states = $this->Location_model->get_states_by_country_id($country_id);
-
+		pr($states);
 		if(!empty($states))
 		{
 			$response['rc'] = true;
