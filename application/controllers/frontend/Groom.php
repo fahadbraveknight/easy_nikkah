@@ -58,7 +58,6 @@ class Groom extends CI_Controller {
 		    						'user_beard_type' => $_POST['user_beard_type'],
 		    						'user_marital_status' => $_POST['user_marital_status'],
 		    						'user_children' => $_POST['user_children'],
-		    						'user_partner_age_group' => $_POST['user_partner_age_group'],
 		    						'user_qualification' => $_POST['user_qualification'],
 		    						'user_profession' => $_POST['user_profession'],
 		    						'user_personal_description' => $_POST['user_personal_description']

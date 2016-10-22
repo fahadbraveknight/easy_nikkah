@@ -1,4 +1,4 @@
-<div class="family-member-view" family-data-key="<?php echo $family_data_key  ?>">
+<div class="family-member-view family" family-data-key="<?php echo $family_data_key  ?>">
 	<input type="hidden" name="family_info[<?php echo $family_data_key ?>][id]" value="0">
   	<div class="form-group">
 	    <label for="edit-contact-person-name">Family Member Full Name <span class="form-required" title="This field is required.">*</span></label>
@@ -22,4 +22,5 @@
           	</div>
     	</div>
 	</div>
+  <div class="display-inline"></div>
 </div>

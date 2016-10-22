@@ -149,8 +149,8 @@
                 		<option value="">Country</option>
                     <?php foreach ($countries as $key => $country) {
                     	$selected = "";
-						if (isset($_GET['location_country']) && $_GET['location_country']==$country['id']) {$selected ='selected';}  
-                    	echo '<option '.$selected.' value="'.$country['id'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+						if (isset($_GET['location_country']) && $_GET['location_country']==$country['country_id']) {$selected ='selected';}  
+                    	echo '<option '.$selected.' value="'.$country['country_id'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
                     }
                     ?>
             		</select>
@@ -695,13 +695,13 @@ $( document ).ready(function() {
 					if( this_name =="location_country")
 					{
 						$.each(response.states,function(index,data){
-							next.append( '<option data-id="'+data.id+'" value="'+data.id+'">'+data.state_name+'</option>');
+							next.append( '<option data-id="'+data.state_id+'" value="'+data.state_id+'">'+data.state_name+'</option>');
 						})
 					}
 					else
 					{						
 						$.each(response.states,function(index,data){
-							next.append( '<option data-id="'+data.id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
+							next.append( '<option data-id="'+data.state_id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
 						})
 					}
 				}
@@ -745,13 +745,13 @@ $( document ).ready(function() {
 					if( this_name =='location_state')
 					{
 						$.each(response.cities,function(index,data){
-							next.append( '<option data-id="'+data.id+'" value="'+data.id+'">'+data.city_name+'</option>');
+							next.append( '<option data-id="'+data.city_id+'" value="'+data.city_id+'">'+data.city_name+'</option>');
 						})
 					}
 					else
 					{						
 						$.each(response.cities,function(index,data){
-							next.append( '<option data-id="'+data.id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
+							next.append( '<option data-id="'+data.city_id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
 						})
 					}
 				}

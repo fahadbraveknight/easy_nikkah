@@ -70,6 +70,7 @@ class User extends CI_Controller {
 	{
 		$this->form_validation->set_rules('full_name', 'Full Name' , 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email' , 'required|is_unique[users.email]|xss_clean');
+		$this->form_validation->set_message('is_unique', 'Already registered email,try another.');
 
 		if($this->form_validation->run())
 		{
@@ -148,7 +149,7 @@ class User extends CI_Controller {
 	public function ajax_get_all_states($country_id=0)
 	{
 		$states = $this->Location_model->get_states_by_country_id($country_id);
-		pr($states);
+		// pr($states);
 		if(!empty($states))
 		{
 			$response['rc'] = true;
@@ -170,6 +171,34 @@ class User extends CI_Controller {
 			$response['rc'] = true;
 			$response['cities'] = $cities;
 			
+		}
+		else
+		{
+			$response['rc'] = false;
+		}
+		echo json_encode($response);
+	}
+
+	public function ajax_delete_contact_person($contact_person_id=0)
+	{
+		$result = $this->User_model->delete_user_contact_person($contact_person_id);
+		if($result)
+		{
+			$response['rc'] = true;
+		}
+		else
+		{
+			$response['rc'] = false;
+		}
+		echo json_encode($response);
+	}	
+
+	public function ajax_delete_family($family_id=0)
+	{
+		$result = $this->User_model->delete_user_family($family_id);
+		if($result)
+		{
+			$response['rc'] = true;
 		}
 		else
 		{

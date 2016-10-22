@@ -119,7 +119,7 @@
 		                    <select name="user_location_country" class="countries-list">
 			                    <option value="">Country</option>
 			                    <?php foreach ($countries as $key => $country) {
-						                echo '<option value="'.$country['id'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+						                echo '<option value="'.$country['country_id'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
 			                    	}
 			                    ?>
 			         
@@ -239,7 +239,7 @@
 				                    		<select name="user_work_location_country" class="countries-list">
 					                    		<option value="">Country</option>
 						                    <?php foreach ($countries as $key => $country) {
-						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
 						                    }
 						                    ?>
 				                    		</select>
@@ -272,7 +272,7 @@
 				                    		<select name="user_native_location_country" class="countries-list">
 					                    		<option value="">Country</option>
 						                    <?php foreach ($countries as $key => $country) {
-						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['id'].'">'.$country['country_name'].'</option>';
+						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
 						                    }
 						                    ?>
 				                    		</select>
@@ -310,7 +310,7 @@
 					  		if(!empty($groom_contact_persons)){
 					  			foreach ($groom_contact_persons as $key => $groom_contact) { ?>
 					  		<div class="contact-person">
-						  		<input type="hidden" name="contact_person[<?php echo $contact_data_key ?>][id]" value="<?php echo $groom_contact['id'] ?>">
+						  		<input id="edit-contact-person-id" type="hidden" name="contact_person[<?php echo $contact_data_key ?>][id]" value="<?php echo $groom_contact['id'] ?>">
 							  	<div class="form-group">
 								    <label for="edit-contact-person-name">Contact Person Full Name <span class="form-required" title="This field is required.">*</span></label>
 								    <input type="text" id="edit-contact-person-name" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_name]" value="<?php echo $groom_contact['contact_person_name'] ?>" size="60" maxlength="60" class="form-text required">
@@ -326,6 +326,9 @@
 							    <div class="form-group">
 								    <label for="edit-contact-person-relation">Contact Person Relation <span class="form-required" title="This field is required.">*</span></label>
 								    <input type="text" id="edit-contact-person-relation" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_relation]" value="<?php echo $groom_contact['contact_person_relation'] ?>" size="60" maxlength="60" class="form-text required">
+							    </div>
+							    <div class="display-inline">
+									<i class="fa fa-trash-o delete-contact"></i>
 							    </div>
 
 						    </div>
@@ -348,7 +351,7 @@
 					  		if(!empty($groom_family)){
 					  			foreach ($groom_family as $key => $family) { ?>
 					  		<div class="family">
-						  		<input type="hidden" name="family_info[<?php echo $family_data_key ?>][id]" value="<?php echo $family['id'] ?>">
+						  		<input id="family-id" type="hidden" name="family_info[<?php echo $family_data_key ?>][id]" value="<?php echo $family['id'] ?>">
 							  	<div class="form-group">
 								    <label for="edit-contact-person-name">Family Member Full Name <span class="form-required" title="This field is required.">*</span></label>
 								    <input type="text" id="edit-family-member-name" name="family_info[<?php echo $family_data_key  ?>][family_member_name]" value="<?php echo $family['family_member_name'] ?>" size="60" maxlength="60" class="form-text required">
@@ -370,6 +373,9 @@
 						                    </select>
 					                  	</div>
 					            	</div>
+							    </div>
+							    <div class="display-inline">
+									<i class="fa fa-trash-o delete-family"></i>
 							    </div>
 						    </div>
 					    <?php  $family_data_key++;
@@ -397,9 +403,67 @@
   </div>
 </div>
 
-
+<style type="text/css">
+	.display-inline{
+		display: inline-block;
+	}
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		$(document).on('click','.delete-contact',function(){
+			contact_person = $(this).parents('.contact-person');
+			contact_person_id = contact_person.find('#edit-contact-person-id').val();
+			if(contact_person_id == 0 || contact_person_id == undefined ){
+				contact_person.hide();
+				console.log(contact_person);
+			}
+			else
+			{
+				$.ajax({
+					url:BASE_URL+"frontend/user/ajax_delete_contact_person/"+contact_person_id,
+					dataType: "JSON",
+					type:"POST",
+					success:function(response){
+						if(response.rc){
+							contact_person.hide();
+						}	
+						else
+						{
+							alert('Failed to Delete Contact');
+						}
+					}
+				})
+			}
+		})
+
+		$(document).on('click','.delete-family',function(){
+			family = $(this).parents('.family');
+			family_id = family.find('#family-id').val();
+			if(family_id == 0 || family_id == undefined ){
+				family.hide();
+			}
+			else
+			{
+				$.ajax({
+					url:BASE_URL+"frontend/user/ajax_delete_family/"+family_id,
+					dataType: "JSON",
+					type:"POST",
+					success:function(response){
+						if(response.rc){
+							family.hide();
+						}	
+						else
+						{
+							alert('Failed to Delete Family');
+						}
+					}
+				})
+			}
+		})
+
+
+
 		$(document).on('change','select[name="user_marital_status"]',function(){
 			marital_status = $(this).val();
 			if(marital_status == "divorced" ||  marital_status == "widowed"){
@@ -428,13 +492,13 @@
 						if( this_name =="user_location_country")
 						{
 							$.each(response.states,function(index,data){
-								next.append( '<option data-id="'+data.id+'" value="'+data.id+'">'+data.state_name+'</option>');
+								next.append( '<option data-id="'+data.state_id+'" value="'+data.state_id+'">'+data.state_name+'</option>');
 							})
 						}
 						else
 						{						
 							$.each(response.states,function(index,data){
-								next.append( '<option data-id="'+data.id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
+								next.append( '<option data-id="'+data.state_id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
 							})
 						}
 					}
@@ -457,13 +521,13 @@
 						if( this_name =='user_location_state')
 						{
 							$.each(response.cities,function(index,data){
-								next.append( '<option data-id="'+data.id+'" value="'+data.id+'">'+data.city_name+'</option>');
+								next.append( '<option data-id="'+data.city_id+'" value="'+data.city_id+'">'+data.city_name+'</option>');
 							})
 						}
 						else
 						{						
 							$.each(response.cities,function(index,data){
-								next.append( '<option data-id="'+data.id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
+								next.append( '<option data-id="'+data.city_id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
 							})
 						}
 					}
@@ -475,7 +539,7 @@
 			var contact_data_key = $('.contact-person-view').last().attr('contact-data-key');
 			var new_contact_data_key= parseInt(contact_data_key)+1;
 			var new_html = $('.contact-person-view').last().html();
-			$('.contact-person-view[contact-data-key="'+contact_data_key+'"]').after('<div class="contact-person-view" contact-data-key="'+new_contact_data_key+'"></div');
+			$('.contact-person-view[contact-data-key="'+contact_data_key+'"]').after('<div class="contact-person-view contact-person" contact-data-key="'+new_contact_data_key+'"></div');
 			new_contact =$('.contact-person-view[contact-data-key="'+new_contact_data_key+'"]');
 			new_contact.html(new_html).fadeIn();
 			new_contact.find('#edit-contact-person-id').attr('name','contact_person['+new_contact_data_key+'][id]');
@@ -483,6 +547,7 @@
 			new_contact.find('#edit-contact-person-email').attr('name','contact_person['+new_contact_data_key+'][contact_person_email]');
 			new_contact.find('#edit-contact-person-phone-no').attr('name','contact_person['+new_contact_data_key+'][contact_person_phone_no]');
 			new_contact.find('#edit-contact-person-relation').attr('name','contact_person['+new_contact_data_key+'][contact_person_relation]');
+			$('.contact-person-view[contact-data-key="'+contact_data_key+'"]').find('.display-inline').html('<i class="fa fa-trash-o delete-contact"></i>');
  		});
 
  		$(document).on('click','.add-family-img',function(){
@@ -490,13 +555,14 @@
 			var family_data_key = $('.family-member-view').last().attr('family-data-key');
 			var new_family_data_key= parseInt(family_data_key)+1;
 			var new_html = $('.family-member-view').last().html();
-			$('.family-member-view[family-data-key="'+family_data_key+'"]').after('<div class="family-member-view" family-data-key="'+new_family_data_key+'"></div');
+			$('.family-member-view[family-data-key="'+family_data_key+'"]').after('<div class="family-member-view family" family-data-key="'+new_family_data_key+'"></div');
 			new_family =$('.family-member-view[family-data-key="'+new_family_data_key+'"]');
 			new_family.html(new_html).fadeIn();
 			new_family.find('#edit-family-member-id').attr('name','family_info['+new_family_data_key+'][id]');
 			new_family.find('#edit-family-member-name').attr('name','family_info['+new_family_data_key+'][family_member_name]');
 			new_family.find('#edit-family-member-relation').attr('name','family_info['+new_family_data_key+'][family_member_relation]');
 			new_family.find('#edit-family-member-marital-status').attr('name','family_info['+new_family_data_key+'][family_member_marital_status]');
+			$('.family-member-view[family-data-key="'+family_data_key+'"]').find('.display-inline').html('<i class="fa fa-trash-o delete-family"></i>');
  		});
 	})
 </script>

@@ -99,12 +99,14 @@ class User_model extends CI_Model {
       
     function delete_user_family ($id)
     {
-        return $this->db->delete('user_has_family',$id);
+        $this->db->where('id', $id);
+        return $this->db->delete('user_has_family');
     }  
 
     function delete_user_contact_person ($id)
     {
-        return $this->db->delete('user_has_contact_person',$id);
+        $this->db->where('id', $id);
+        return $this->db->delete('user_has_contact_person');
     }
 
     function get_user_family($user_id)
@@ -155,14 +157,18 @@ class User_model extends CI_Model {
         {
             $location_condition = " AND u.user_location_country=".$params['location_country'];
 
-            if(!empty($params['location_state']) && !empty($params['location_city']))
+            if(!empty($params['location_state']) )
             {
-                $location_condition .= " AND u.user_location_state= ".$params['location_state']." AND u.user_location_city= ".$params['location_city'];
+                $location_condition .= " AND u.user_location_state= ".$params['location_state'];
+                if(!empty($params['location_city']))
+                {
+                    $location_condition .= " AND u.user_location_city= ".$params['location_city'];
+                }
             }
         }
 
         $sql = "SELECT 
-                    u.id,u.profile_id,u.user_personal_description,u.full_name,u.email,u.gender,u.age as user_birthday, TIMESTAMPDIFF(YEAR, FROM_UNIXTIME(u.age), NOW()) as age,u.user_height,ms.marital_status_name as marital_status ,q.qualification_name,p.profession_name,ct.city_name,st.state_name,ctry.country_name,u.user_work_location,u.user_native_location,u.user_partner_current_location,u.user_partner_native_location
+                    u.id,u.profile_id,u.user_personal_description,u.full_name,u.email,u.gender,u.age as user_birthday, TIMESTAMPDIFF(YEAR, FROM_UNIXTIME(u.age), NOW()) as age,u.user_height,q.qualification_name,p.profession_name,ct.city_name,st.state_name,ctry.country_name,u.user_work_location,u.user_native_location,u.user_partner_current_location,u.user_partner_native_location
                 from
                     users u
                 left JOIN  qualifications q on q.qualification_id=u.user_qualification
