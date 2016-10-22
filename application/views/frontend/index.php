@@ -1,7 +1,15 @@
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
+<?php /*?><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>resources/slick/slick-theme.css">
+<!-- Important Owl stylesheet -->
+<link rel="stylesheet" href="<?php echo base_url() ?>resources/css/owl-carousel/owl.carousel.css">
+ 
+<!-- Default Theme -->
+<link rel="stylesheet" href="<?php echo base_url() ?>resources/css/owl-carousel/owl.theme.css">
+
+<!-- Include js plugin -->
+<script src="<?php echo base_url() ?>resources/css/owl-carousel/owl.carousel.js"></script>*/?>
 <style>
 .slider {
         width: 95%;
@@ -24,12 +32,6 @@
     .slick-next:before {
         color: black;
     }
-    .comingsoon{
-    	font-family: FontAwesome;
-    	padding: 5px 0 0;
-    	font-size: 20px;
-    	color: #f90404;
-    }
 
 </style>
 
@@ -42,11 +44,17 @@
 		}
 	?>
 	</div>
-
-<div class="banner">
-	<div class="comingsoon">
-		<marquee>"SubhanAllah Matrimony is now Easy Nikah"</marquee>
-	</div>
+	<?php /*?><div id="owl-example" class="owl-carousel">
+	  <div>
+	      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 1.jpg">
+	    </div>
+	    <div>
+	      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 4.jpg">
+	    </div>
+	    <div>
+	      <img src="<?php echo base_url() ?>resources/images/Easy Nikah 6.jpg">
+	    </div>
+	</div>*/?>
 	<div class="home_title">
 		Easy Nikah - Striving to Make Nikah Easy and Zina very difficult!!!
 	</div>
@@ -647,14 +655,22 @@
     </style>
 <script>
 $( document ).ready(function() {
-	$(".regular").slick({
+		 
+			  /*$("#owl-example").owlCarousel({
+				  navigation : true, // Show next and prev buttons
+			      slideSpeed : 300,
+			      paginationSpeed : 400,
+			      singleItem:true
+			  );*/
+		 
+	/*$(".regular").slick({
         dots: true,
         infinite: false,
         slidesToShow: 1,
         slidesToScroll: 1,
 		autoplay: true,
   autoplaySpeed: 2000
-      });
+      });*/
     
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
