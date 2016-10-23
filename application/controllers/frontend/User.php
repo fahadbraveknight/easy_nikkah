@@ -117,13 +117,13 @@ class User extends CI_Controller {
 				$this->email->set_newline("\n\r");
 
 
-				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$_POST['full_name']."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/email_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah>";
+				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$_POST['full_name']."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/email_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah";
 
 
 
-				$this->email->from('contact@easynikah.in','Easynikah');
+				$this->email->from('contact@easynikah.in','Admin - Easy Nikah');
 				$this->email->to($params['email']);
-				$this->email->subject('Easynikah Verification');
+				$this->email->subject('Easy Nikah Profile Verification');
 				$this->email->message($message);
 
 				if($this->email->send())
@@ -263,13 +263,13 @@ class User extends CI_Controller {
 		$this->email->set_newline("\n\r");
 
 
-		$message = $name."<br><br>Alhamdulillah!!! Your profile has been verified successfully. Please login and complete your detailed profile.<br><br>All the services at Easy Nikah are absolutely FREE  and will always be In sha Allah with no charges during registration, search or after you find your match In sha Allah.<br><br>We sincerely hope you find your desired match at Easy Nikah and your search here is fruitful. <br><br>All the very best!!! <br><br> Best Regards<br>Admin - Easy Nikah>";
+		$message = $name."<br><br>Alhamdulillah!!! Your profile has been verified successfully. Please login and complete your detailed profile.<br><br>All the services at Easy Nikah are absolutely FREE  and will always be In sha Allah with no charges during registration, search or after you find your match In sha Allah.<br><br>We sincerely hope you find your desired match at Easy Nikah and your search here is fruitful. <br><br>All the very best!!! <br><br> Best Regards<br>Admin - Easy Nikah";
 
 
 
-		$this->email->from('contact@easynikah.in','Easynikah');
+		$this->email->from('contact@easynikah.in','Admin - Easy Nikah');
 		$this->email->to($email);
-		$this->email->subject('Easynikah Verification');
+		$this->email->subject('Easy Nikah Profile successfully verified');
 		$this->email->message($message);
 
 		if($this->email->send())
