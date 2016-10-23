@@ -5,98 +5,710 @@
      <ul>
         <a href="index.html"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page">Register</li>
+        <li class="current-page">Edit Bride</li>
      </ul>
    </div>
    <div class="services">
-   	  <div class="col-sm-6 login_left">
-	     <form method="post">
-	  	    <div class="form-group">
-		      <label for="edit-name">Username <span class="form-required" title="This field is required.">*</span></label>
-		      <input type="text" id="edit-name" name="full_name" value="" size="60" maxlength="60" class="form-text required">
-		    </div>
-		    <div class="form-group">
-		      <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label>
-		      <input type="password" id="edit-pass" name="password" size="60" maxlength="128" class="form-text required">
-		    </div>
-		    <div class="form-group">
-		      <label for="edit-name">Email <span class="form-required" title="This field is required.">*</span></label>
-		      <input type="text" id="edit-name" name="email" value="" size="60" maxlength="60" class="form-text required">
-		    </div>
-		    <div class="age_select">
-		      <label for="edit-pass">Age <span class="form-required" title="This field is required.">*</span></label>
-		        <div class="age_grid">
-		         <div class="col-sm-4 form_box">
-                  <div class="select-block1">
-                    <select name="age-date">
-	                    <option value="">Date</option>
-	                    <?php for($i=1;$i<31;$i++){
-	                    	echo '<option value="'.$i.'">'.$i.'</option>';
-	                    	} ?>
-	         
-                    </select>
-                  </div>
-            </div>
-            <div class="col-sm-4 form_box2">
-                   <div class="select-block1">
-                    <select name="age-month">
+	    <form method="post">
+	  		<div class="col-sm-6 login_left">
+		  	    <div class="form-group">
+			      <label for="edit-name">Full Name <span class="form-required" title="This field is required.">*</span></label>
+			      <input type="text" id="edit-name" name="full_name" value="<?php echo $bride['full_name'] ?>" size="60" maxlength="60" class="form-text required">
+			      <span><?php echo form_error('full_name'); ?></span>
+			    </div>
+			    <div class="form-group">
+			      <label for="edit-height">Height <span class="form-required" title="This field is required.">*</span></label>
+			      <div class="form_box">
+	                  	<div class="select-block1">
+		                    <select name="user_height">
+			                    <option value="">Select</option>
+			                    <?php for($i=4;$i<=6;$i++){
+			                    	for($j=1;$j<=12;$j++){
+			                    		$k="$i&#39;$j&quot;";
+			                    		$l="$i'$j\"";
+			                    		$selected="";
+			                    		if($l===$bride['user_height']){$selected="selected";}
+			                    		echo "<option ".$selected." value='$k'>$k</option>";
+			                    		}
+			                    	} ?>
+			         
+		                    </select>
+	                  	</div>
+	            	</div>
+			      	<span><?php echo form_error('user_height'); ?></span>
+			    </div>
+			    <div class="form-group">
+			      <label for="edit-namaz-type">Salah - Namaz - Prayer <span class="form-required" title="This field is required.">*</span></label>
+			      	<div class="form_box">
+	                  	<div class="select-block1">
+		                    <select name="user_namaz_type">
+			                    <option value="">Select</option>
+			                    <option <?php echo "sometime"==$bride['user_namaz_type'] ? "selected" : "" ?>  value="sometime"><?php echo get_namaz_type('sometime') ?></option>
+			                    <option <?php echo "regular"==$bride['user_namaz_type'] ? "selected" : "" ?>  value="regular"><?php echo get_namaz_type('regular') ?></option>
+			                    <option <?php echo "friday"==$bride['user_namaz_type'] ? "selected" : "" ?>  value="friday"><?php echo get_namaz_type('friday') ?></option>
+		                    </select>
+	                  	</div>
+	            	</div>
+
+			      	<span><?php echo form_error('user_namaz_type'); ?></span>
+			    </div>
+			    <div class="form-group">
+			      <label for="edit-fasting-type">Fasting  <span class="form-required" title="This field is required.">*</span></label>
+			      	<div class="form_box">
+	                  	<div class="select-block1">
+		                    <select name="user_fasting_type">
+			                    <option value="">Select</option>
+			                    <option <?php echo "ramzan"==$bride['user_fasting_type'] ? "selected" : "" ?>  value="ramzan"><?php echo get_fasting_type('ramzan') ?></option>
+			                    <option <?php echo "ramzan_sunnah"==$bride['user_fasting_type'] ? "selected" : "" ?>  value="ramzan_sunnah"><?php echo get_fasting_type('ramzan_sunnah') ?></option>
+			                    <option <?php echo "ramzan_sunnah_nawafil"==$bride['user_fasting_type'] ? "selected" : "" ?>  value="ramzan_sunnah_nawafil"><?php echo get_fasting_type('ramzan_sunnah_nawafil') ?></option>
+			         
+		                    </select>
+	                  	</div>
+	            	</div>
+
+			      	<span><?php echo form_error('user_fasting_type'); ?></span>
+			    </div>
+			    <div class="form-group">
+			      <label for="edit-beard-type">Hijab  <span class="form-required" title="This field is required.">*</span></label>
+			      	<div class="form_box">
+	                  	<div class="select-block1">
+		                    <select name="user_hijab">
+			                    <option <?php echo 1==$bride['user_hijab'] ? "selected" : "" ?>  value="1">Yes</option>
+			                    <option <?php echo 0==$bride['user_hijab'] ? "selected" : "" ?>  value="0">No</option>
+		                    </select>
+	                  	</div>
+	            	</div>
+			      	<span><?php echo form_error('user_hijab'); ?></span>
+			    </div>
+			   	<div class="form-group">
+			   		<div class="row">
+				   		<div class="col-md-6">
+						     <label for="edit-marital-status">Marital Status  <span class="form-required" title="This field is required.">*</span></label>
+					      	<div class="form_box">
+			                  	<div class="select-block1">
+				                    <select name="user_marital_status" >
+					                    <option value="">Select</option>
+					                    <option <?php echo "unmarried"==$bride['user_marital_status'] ? "selected" : "" ?>  value="unmarried">Unmarried</option>
+					                    <option <?php echo "divorced"==$bride['user_marital_status'] ? "selected" : "" ?>  value="divorced">Divorced</option>
+					                    <option <?php echo "widowed"==$bride['user_marital_status'] ? "selected" : "" ?>  value="widowed">Widowed</option>
+					                     <option <?php echo "married"==$bride['user_marital_status'] ? "selected" : "" ?>  value="married">Married</option>
+				                    </select>
+			                  	</div>
+			            	</div>
+			      			<span><?php echo form_error('user_marital_status'); ?></span>
+		            	</div>
+		            	<div class="col-md-6 <?php if(!$bride['user_children']){echo 'hidden';} ?> user-children">
+		            		<label for="edit-children">Children  <span class="form-required" title="This field is required.">*</span></label>
+					      	<div class="form_box">
+			                  	<div class="select-block1">
+				                    <select name="user_children">
+				                    	<?php 
+				                    		for ($i=1; $i <= 10; $i++) { 
+				                    		$selected="";
+				                    		if($bride['user_children']==$i) { $selected = "selected";}else{ $selected =  "";}
+				                    		echo "<option ".$selected." value=".$i.">".$i."</option>";
+				                    	} ?>
+				                    </select>
+			                  	</div>
+			            	</div>
+			      			<span><?php echo form_error('user_children'); ?></span>
+		            	</div>
+	            	</div>
+			    </div>
+			    <div class="form-group">
+				    <div class="country-select">
+				      <label for="edit-location">Location <span class="form-required" title="This field is required.">*</span></label>
+				        <div class="age_grid">
+				         <div class="col-sm-4 country form_box">
+		                  <div class="select-block1">
+		                    <select name="user_location_country" class="countries-list">
+			                    <option value="">Country</option>
+			                    <?php foreach ($countries as $key => $country) {
+						                echo '<option value="'.$country['country_id'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
+			                    	}
+			                    ?>
+			         
+		                    </select>
+		                  </div>
+		            	</div>
+		            	<div class="col-sm-4 state form_box2">
+		                   <div class="select-block1">
+			                    <select name="user_location_state" class="states-list">
+			                    	<option value="">State</option>
+			                    </select>
+		                  	</div>
+		                </div>
+		                <div class="col-sm-4 city form_box1">
+		                   <div class="select-block1">
+		                    <select name="user_location_city">
+			                    <option value="">City</option>
+			               
+		                    </select>
+		                   </div>
+		                  </div>
+		                 </div>
+		              </div>
+						<span><?php echo form_error('user_location_country'); ?></span>
+						<span><?php echo form_error('user_location_state'); ?></span>
+						<span><?php echo form_error('user_location_city'); ?></span>
+	              </div>
+	              <div class="age_select">
+			    	<?php 
+			   			$age = date('d-m-Y',$bride['age']);
+			   			$user_age = explode('-', $age);
+			   			 ?>
+			      <label for="edit-pass">Date of Birth <span class="form-required" title="This field is required.">*</span></label>
+			        <div class="age_grid">
+			         <div class="col-sm-4 form_box">
+	                  <div class="select-block1">
+	                    <select name="age-date">
+		                    <option value="">Date</option>
+		                    <?php for($i=1;$i<31;$i++){
+		                    	$selected="";
+		                    	if($user_age[0]==$i){$selected="selected";}
+		                    	echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+		                    	} ?>
+		         
+	                    </select>
+	                  </div>
+	            </div>
+	            <div class="col-sm-4 form_box2">
+	                   <div class="select-block1">
+	                    <select name="age-month">
 	                    <option value="">Month</option>
-	                    <option value="1">January</option>
-	                    <option value="2">February</option>
-	                    <option value="3">March</option>
-	                    <option value="4">April</option>
-	                    <option value="5">May</option>
-	                    <option value="6">June</option>
-	                    <option value="7">July</option>
-	                    <option value="8">August</option>
-	                    <option value="9">September</option>
-	                    <option value="10">October</option>
-	                    <option value="11">November</option>
-	                    <option value="12">December</option>
-                    </select>
-                  </div>
-                 </div>
-                 <div class="col-sm-4 form_box1">
-                   <div class="select-block1">
-                    <select name="age-year">
-	                    <option value="">Year</option>
-	                    <option value="1980">1980</option>
-	                    <option value="1981">1981</option>
-                    </select>
-                   </div>
-                  </div>
-                  <div class="clearfix"> </div>
-                 </div>
-              </div>
-              <div class="form-group form-group1">
-                <label class="col-sm-7 control-lable" for="sex">Sex : </label>
-                <div class="col-sm-5">
-                    <div class="radios">
-				        <label for="radio-01" class="label_radio">
-				            <input type="radio" name="gender" checked="" value="male"> Male
-				        </label>
-				        <label for="radio-02" class="label_radio">
-				            <input type="radio" name="gender" value="female"> Female
-				        </label>
-	                </div>
-                </div>
-                <div class="clearfix"> </div>
-             </div>
-			  <div class="form-actions">
-			    <input type="submit" id="edit-submit" name="op" value="Submit" class="btn_1 submit">
-			  </div>
+	                   <?php 
+	                   	$month = array('January','February','March','April','May','June','July','August','September','October','November','December');
+	                   	foreach ($month as $key => $value) {
+	                   		$selected="";
+		                    if($user_age[1]==$key+1){$selected="selected";}
+	                   		echo '<option '.$selected.' value="'.($key+1).'">'.$value.'</option>';
+	                   } ?>
+	                    </select>
+	                  </div>
+	                 </div>
+	                 <div class="col-sm-4 form_box1">
+	                   <div class="select-block1">
+	                    <select name="age-year">
+		                    <option value="">Year</option>
+		                    <?php
+		                    	$current_year = date('Y',time());
+		                    	$year = 1936;
+		                     	while($year != $current_year)
+		                     	{
+		                     		$selected="";
+		                     		if($user_age[2]==$year){$selected="selected";}
+		                     		echo '<option '.$selected.' value="'.$year.'">'.$year.'</option>';
+		                     		$year++;
+		                     	} ?>
+	                    </select>
+	                   </div>
+	                  </div>
+	                 </div>
+	                 <span><?php echo form_error('age-date'); ?></span>
+	                 <span><?php echo form_error('age-month'); ?></span>
+	                 <span><?php echo form_error('age-year'); ?></span>
+	              </div>
+	            
+	              </div>
+				  	<div class="col-sm-6" >
+					  	<div class="form-group">
+					      <label for="edit-education-qualification">Educational Qualification  <span class="form-required" title="This field is required.">*</span></label>
+					      	<div class="form_box">
+						      	<div class="select-block1">
+				                    <select name="user_qualification">
+					                    <option value="">Select</option>
+					                    <?php foreach ($qualifications as $key => $value){
+					                    	$selected="";
+					                    	if($bride['user_qualification']==$value['qualification_id']){$selected='selected';}
+				                     		echo '<option '.$selected.' value="'.$value['qualification_id'].'">'.$value['qualification_name'].'</option>';
+					                    	} ?>
+					     			</select>
+					     		</div>
+			            	</div>
+				            <span><?php echo form_error('user_qualification'); ?></span>
+					    </div>
+
+						<div class="form-group">
+					      <label for="edit-profession">Profession  <span class="form-required" title="This field is required.">*</span></label>
+					      	<div class="form_box">
+						      	<div class="select-block1">
+				                    <select name="user_profession">
+					                    <option value="">Select</option>
+					                    <?php foreach ($professions as $key => $value){
+					                    	$selected="";
+					                    	if($bride['user_profession']==$value['id']){$selected='selected';}
+				                     		echo '<option '.$selected.' value="'.$value['id'].'">'.$value['profession_name'].'</option>';
+					                    	} ?>
+					     			</select>
+					     		</div>
+			            	</div>
+				            <span><?php echo form_error('user_profession'); ?></span>
+					    </div>
+						
+	              		<div class="form-group">
+							<div class="country-select">
+							    <label for="edit-location">Work Location <span class="form-required" title="This field is required.">*</span></label>
+						        <div class="age_grid">
+						         	<div class="col-sm-4 country form_box">
+				                  		<div class="select-block1">
+				                    		<select name="user_work_location_country" class="countries-list">
+					                    		<option value="">Country</option>
+						                    <?php foreach ($countries as $key => $country) {
+						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
+						                    }
+						                    ?>
+				                    		</select>
+				                  		</div>
+				            		</div>
+				            		<div class="col-sm-4 state form_box2">
+				                   		<div class="select-block1">
+					                    	<select name="user_work_location_state" class="states-list">
+					                    		<option value="">State</option>
+					                    	</select>
+				                  		</div>
+				                	</div>
+				                	<div class="col-sm-4 city form_box1">
+				                   		<div class="select-block1">
+				                    		<select name="user_work_location_city">
+					                    		<option value="">City</option>
+					               			</select>
+				                   		</div>
+				                  	</div>
+				                </div>
+					        </div>
+			      			<span><?php echo form_error('user_work_location_country'); ?></span>
+			      			<span><?php echo form_error('user_work_location_state'); ?></span>
+			      			<span><?php echo form_error('user_work_location_city'); ?></span>
+
+					    </div>
+
+	              		<div class="form-group">
+						    <div class="country-select">
+							    <label for="edit-location">Native Place <span class="form-required" title="This field is required.">*</span></label>
+						        <div class="age_grid">
+						         	<div class="col-sm-4 country form_box">
+				                  		<div class="select-block1">
+				                    		<select name="user_native_location_country" class="countries-list">
+					                    		<option value="">Country</option>
+						                    <?php foreach ($countries as $key => $country) {
+						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
+						                    }
+						                    ?>
+				                    		</select>
+				                  		</div>
+				            		</div>
+				            		<div class="col-sm-4 state form_box2">
+				                   		<div class="select-block1">
+					                    	<select name="user_native_location_state" class="states-list">
+					                    		<option value="">State</option>
+					                    	</select>
+				                  		</div>
+				                	</div>
+				                	<div class="col-sm-4 city form_box1">
+				                   		<div class="select-block1">
+				                    		<select name="user_native_location_city">
+					                    		<option value="">City</option>
+					               			</select>
+				                   		</div>
+				                  	</div>
+				                </div>
+					        </div>
+						    <span><?php echo form_error('user_native_location_country'); ?></span>
+						    <span><?php echo form_error('user_native_location_state'); ?></span>
+						    <span><?php echo form_error('user_native_location_city'); ?></span>
+					        <br clear="all">
+					    </div>
+					     <div class="form-group">
+					         <div class="col-sm-6 form_box">
+						         <label for="edit-father-name">Father's Name <span class="form-required" title="This field is required.">*</span></label>
+				                 <input type="text" id="edit-name" name="user_father_name" value="<?php echo $bride['user_father_name'] ?>" size="60" maxlength="60" class="form-text required">
+			     				 <span><?php echo form_error('user_father_name'); ?></span>
+			            	</div>
+				            	
+			                <div class="col-sm-6  form_box1">
+			                   <label for="edit-father-profession">Father's Profession <span class="form-required" title="This field is required.">*</span></label>
+				                 <div class="select-block1">
+				                    <select name="user_father_profession">
+					                    <option value="">Select</option>
+					                    <?php foreach ($professions as $key => $value){
+					                    	$selected="";
+					                    	if($bride['user_father_profession']==$value['profession_name']){$selected='selected';}
+				                     		echo '<option '.$selected.' value="'.$value['profession_name'].'">'.$value['profession_name'].'</option>';
+					                    	} ?>
+					     			</select>
+					     		</div>
+			     				 <span><?php echo form_error('user_father_profession'); ?></span>
+			                 </div>
+	              		</div>
+
+	              		<div class="form-group">
+					         <div class="col-sm-6 form_box">
+						         <label for="edit-mother-name">Mother's Name <span class="form-required" title="This field is required.">*</span></label>
+				                 <input type="text" id="edit-name" name="user_mother_name" value="<?php echo $bride['user_mother_profession'] ?>" size="60" maxlength="60" class="form-text required">
+			     				 <span><?php echo form_error('user_mother_name'); ?></span>
+			            	</div>
+				            	
+			                <div class="col-sm-6  form_box1">
+			                   <label for="edit-mother-profession">Mother's Profession <span class="form-required" title="This field is required.">*</span></label>
+				                 <div class="select-block1">
+				                    <select name="user_mother_profession">
+					                    <option value="">Select</option>
+					                    <?php foreach ($professions as $key => $value){
+					                    	$selected="";
+					                    	if($bride['user_mother_profession']==$value['profession_name']){$selected='selected';}
+				                     		echo '<option '.$selected.' value="'.$value['profession_name'].'">'.$value['profession_name'].'</option>';
+					                    	} ?>
+					     			</select>
+					     		</div>
+			     				 <span><?php echo form_error('user_mother_profession'); ?></span>
+			                 </div>
+	              		</div>
+
+				  	<div class="form-group">
+				         <div class="col-sm-6 form_box">
+					         <label for="edit-brother">Number of Brothers<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_brothers">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($bride['user_brothers']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_brothers'); ?></span>
+		            	</div>
+				            	
+		                <div class="col-sm-6  form_box1">
+		                   <label for="edit-brother-married">Number of Brothers (Married)<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_married_brothers">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($bride['user_married_brothers']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_married_brothers'); ?></span>
+		                 </div>
+	              	</div>
+
+	              	<div class="form-group">
+				         <div class="col-sm-6 form_box">
+					         <label for="edit-sister">Number of Sister<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_sisters">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($bride['user_sisters']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_sisters'); ?></span>
+		            	</div>
+				            	
+		                <div class="col-sm-6  form_box1">
+		                   <label for="edit-sister-married">Number of Sister (Married)<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_married_sisters">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($bride['user_married_sisters']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_married_sisters'); ?></span>
+		                 </div>
+	              	</div>
+				  	</div>
+				  </div>
+				  <div class="col-sm-12 login_left" >
+				  	<div class="contact-persons-details">
+					  	<?php $contact_data_key=0;
+					  		if(!empty($bride_contact_persons)){
+					  			foreach ($bride_contact_persons as $key => $bride_contact) { ?>
+					  		<div class="contact-person">
+						  		<input id="edit-contact-person-id" type="hidden" name="contact_person[<?php echo $contact_data_key ?>][id]" value="<?php echo $bride_contact['id'] ?>">
+							  	<div class="form-group">
+								    <label for="edit-contact-person-name">Contact Person Full Name <span class="form-required" title="This field is required.">*</span></label>
+								    <input type="text" id="edit-contact-person-name" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_name]" value="<?php echo $bride_contact['contact_person_name'] ?>" size="60" maxlength="60" class="form-text required">
+									<span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_name]'); ?></span>
+							    </div>
+							    <div class="form-group">
+								    <label for="edit-contact-person-email">Contact Person Email <span class="form-required" title="This field is required.">*</span></label>
+								    <input type="text" id="edit-contact-person-email" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_email]" value="<?php echo $bride_contact['contact_person_email'] ?>" size="60" maxlength="60" class="form-text required">
+								    <span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_email]'); ?></span>
+							    </div>
+							    <div class="form-group">
+								    <label for="edit-name">Contact Person Phone Number <span class="form-required" title="This field is required.">*</span></label>
+								    <input type="text" id="edit-contact-person-phone-no" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_phone_no]" value="<?php echo $bride_contact['contact_person_phone_no'] ?>" size="60" maxlength="60" class="form-text required">
+			      					<span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_phone_no]'); ?></span>
+							    </div>
+							    <div class="form-group">
+								    <label for="edit-contact-person-relation">Contact Person Relation <span class="form-required" title="This field is required.">*</span></label>
+								    <div class="form_box">
+					                  	<div class="select-block1">
+						                    <select id="edit-contact-person-relation" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_relation]">
+							                    <option value="">Select</option>
+							                    <option <?php echo "father"==$bride_contact['contact_person_relation'] ? "selected" : "" ?>  value="father">Father</option>
+							                    <option <?php echo "mother"==$bride_contact['contact_person_relation'] ? "selected" : "" ?>  value="mother">Mother</option>
+							                    <option <?php echo "brother"==$bride_contact['contact_person_relation'] ? "selected" : "" ?>  value="brother">Brother</option>
+							         			<option <?php echo "sister"==$bride_contact['contact_person_relation'] ? "selected" : "" ?>  value="sister">Sister</option>
+							         			<option <?php echo "other"==$bride_contact['contact_person_relation'] ? "selected" : "" ?>  value="other">Other</option>
+						                    </select>
+					                  	</div>
+					            	</div>
+					            	<span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_relation]'); ?></span>
+							    </div>
+							    <div class="display-inline">
+									<i class="fa fa-trash-o delete-contact"></i>
+							    </div>
+
+						    </div>
+					    <?php  $contact_data_key++;
+								}
+					    	} 
+					    	$data['contact_data_key'] = $contact_data_key;
+					    	$this->load->view('frontend/partial_view/_add_contact_person_default.php',$data);
+					    	?>
+						</div>
+
+						<div class="add-contact hidden">
+							<div class="text-center">
+								<i class="fa fa-plus add-contact-img"></i>
+							</div>    	
+					    </div>
+
+						<div class="family-details hidden">
+					  	<?php $family_data_key=0;
+					  		if(!empty($bride_family)){
+					  			foreach ($bride_family as $key => $family) { ?>
+					  		<div class="family">
+						  		<input id="family-id" type="hidden" name="family_info[<?php echo $family_data_key ?>][id]" value="<?php echo $family['id'] ?>">
+							  	<div class="form-group">
+								    <label for="edit-contact-person-name">Family Member Full Name <span class="form-required" title="This field is required.">*</span></label>
+								    <input type="text" id="edit-family-member-name" name="family_info[<?php echo $family_data_key  ?>][family_member_name]" value="<?php echo $family['family_member_name'] ?>" size="60" maxlength="60" class="form-text required">
+							    </div>
+							    <div class="form-group">
+								    <label for="edit-family-member-relation">Family Member Relation <span class="form-required" title="This field is required.">*</span></label>
+								    <input type="text" id="edit-family-member-relation" name="family_info[<?php echo $family_data_key  ?>][family_member_relation]" value="<?php echo $family['family_member_relation'] ?>" size="60" maxlength="60" class="form-text required">
+							    </div>
+							    <div class="form-group">
+								    <label for="edit-name">Family Member Marital Status <span class="form-required" title="This field is required.">*</span></label>
+								    <div class="form_box">
+					                  	<div class="select-block1">
+						                    <select id="edit-family-member-marital-status" name="family_info[<?php echo $family_data_key  ?>][family_member_marital_status]">
+							                    <option value="">Select</option>
+							                    <option <?php echo "unmarried"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="unmarried">Unmarried</option>
+							                    <option <?php echo "divorced"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="divorced">Divorced</option>
+							                    <option <?php echo "widowed"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="widowed">Widowed</option>
+							         			<option <?php echo "married"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="married">Married</option>
+						                    </select>
+					                  	</div>
+					            	</div>
+							    </div>
+							    <div class="display-inline">
+									<i class="fa fa-trash-o delete-family"></i>
+							    </div>
+						    </div>
+					    <?php  $family_data_key++;
+								}
+					    	} 
+					    	$data['family_data_key'] = $family_data_key;
+					    	$this->load->view('frontend/partial_view/_add_family_member_default.php',$data);
+					    	?>
+						</div>
+					 
+					    <div class="add-family hidden">
+							<div class="text-center">
+								<i class="fa fa-plus add-family-img"></i>
+							</div>    	
+					    </div>
+				  </div>
+				  <div class="clearfix"> </div>
+				  <div class="form-actions">
+				    <input type="submit" id="edit-submit" name="op" value="Submit" class="btn_1 submit">
+				  </div>
+			</div>  
 		 </form>
-	  </div>
-<!-- 	  <div class="col-sm-6">
-	     <ul class="sharing">
-			<li><a href="#" class="facebook" title="Facebook"><i class="fa fa-boxed fa-fw fa-facebook"></i> Share on Facebook</a></li>
-		  	<li><a href="#" class="twitter" title="Twitter"><i class="fa fa-boxed fa-fw fa-twitter"></i> Tweet</a></li>
-		  	<li><a href="#" class="google" title="Google"><i class="fa fa-boxed fa-fw fa-google-plus"></i> Share on Google+</a></li>
-		  	<li><a href="#" class="linkedin" title="Linkedin"><i class="fa fa-boxed fa-fw fa-linkedin"></i> Share on LinkedIn</a></li>
-		  	<li><a href="#" class="mail" title="Email"><i class="fa fa-boxed fa-fw fa-envelope-o"></i> E-mail</a></li>
-		 </ul>
-	  </div> -->
 	  <div class="clearfix"> </div>
    </div>
   </div>
 </div>
+
+<style type="text/css">
+	.display-inline{
+		display: inline-block;
+	}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$(document).on('click','.delete-contact',function(){
+			contact_person = $(this).parents('.contact-person');
+			contact_person_id = contact_person.find('#edit-contact-person-id').val();
+			if(contact_person_id == 0 || contact_person_id == undefined ){
+				contact_person.hide();
+				console.log(contact_person);
+			}
+			else
+			{
+				$.ajax({
+					url:BASE_URL+"frontend/user/ajax_delete_contact_person/"+contact_person_id,
+					dataType: "JSON",
+					type:"POST",
+					success:function(response){
+						if(response.rc){
+							contact_person.hide();
+							contact_person.find('input').val('');
+							contact_person.find('select').val('');
+							$('.contact-person-view').last().removeClass('hidden');
+						}	
+						else
+						{
+							alert('Failed to Delete Contact');
+						}
+					}
+				})
+			}
+		})
+
+		$(document).on('click','.delete-family',function(){
+			family = $(this).parents('.family');
+			family_id = family.find('#family-id').val();
+			if(family_id == 0 || family_id == undefined ){
+				family.hide();
+			}
+			else
+			{
+				$.ajax({
+					url:BASE_URL+"frontend/user/ajax_delete_family/"+family_id,
+					dataType: "JSON",
+					type:"POST",
+					success:function(response){
+						if(response.rc){
+							family.hide();
+							family.find('input').val('');
+							family.find('select').val('');
+							$('.family-member-view').last().removeClass('hidden');
+						}	
+						else
+						{
+							alert('Failed to Delete Family');
+						}
+					}
+				})
+			}
+		})
+
+
+
+		$(document).on('change','select[name="user_marital_status"]',function(){
+			marital_status = $(this).val();
+			if(marital_status == "unmarried"){	
+				$('.user-children').addClass('hidden');
+			}
+			else
+			{
+				$('.user-children').removeClass('hidden');
+			}
+
+		})
+
+
+		$(document).on('change','.countries-list',function(){
+			var country_id = $(this).find(':selected').attr('data-id');
+			var next = $(this).parents('.country').siblings('.state').find('select');
+			var this_name = $(this).attr('name');
+			$.ajax({
+				url:BASE_URL+"frontend/user/ajax_get_all_states/"+country_id,
+				dataType: "JSON",
+				type:"POST",
+				success:function(response){
+					if(response.rc)
+					{
+						next.html('<option value="">Select</option>');
+						if( this_name =="user_location_country")
+						{
+							$.each(response.states,function(index,data){
+								next.append( '<option data-id="'+data.state_id+'" value="'+data.state_id+'">'+data.state_name+'</option>');
+							})
+						}
+						else
+						{						
+							$.each(response.states,function(index,data){
+								next.append( '<option data-id="'+data.state_id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
+							})
+						}
+					}
+				}
+			});
+		})
+
+		$(document).on('change','.states-list',function(){
+			var state_id = $(this).find(':selected').attr('data-id');
+			var next = $(this).parents('.state').siblings('.city').find('select');
+			var this_name = $(this).attr('name');
+			$.ajax({
+				url:BASE_URL+"frontend/user/ajax_get_all_cities/"+state_id,
+				dataType: "JSON",
+				type:"POST",
+				success:function(response){
+					if(response.rc)
+					{
+						next.html('<option value="">Select</option>');
+						if( this_name =='user_location_state')
+						{
+							$.each(response.cities,function(index,data){
+								next.append( '<option data-id="'+data.city_id+'" value="'+data.city_id+'">'+data.city_name+'</option>');
+							})
+						}
+						else
+						{						
+							$.each(response.cities,function(index,data){
+								next.append( '<option data-id="'+data.city_id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
+							})
+						}
+					}
+				}
+			});
+		})		
+		$(document).on('click','.add-contact-img',function(){
+			// var contact_data_key = $('.contact-person').length+1;
+			var contact_data_key = $('.contact-person-view').last().attr('contact-data-key');
+			var new_contact_data_key= parseInt(contact_data_key)+1;
+			var new_html = $('.contact-person-view').last().html();
+			$('.contact-person-view[contact-data-key="'+contact_data_key+'"]').after('<div class="contact-person-view contact-person" contact-data-key="'+new_contact_data_key+'"></div');
+			new_contact =$('.contact-person-view[contact-data-key="'+new_contact_data_key+'"]');
+			new_contact.html(new_html).fadeIn();
+			new_contact.find('#edit-contact-person-id').attr('name','contact_person['+new_contact_data_key+'][id]');
+			new_contact.find('#edit-contact-person-name').attr('name','contact_person['+new_contact_data_key+'][contact_person_name]');
+			new_contact.find('#edit-contact-person-email').attr('name','contact_person['+new_contact_data_key+'][contact_person_email]');
+			new_contact.find('#edit-contact-person-phone-no').attr('name','contact_person['+new_contact_data_key+'][contact_person_phone_no]');
+			new_contact.find('#edit-contact-person-relation').attr('name','contact_person['+new_contact_data_key+'][contact_person_relation]');
+			$('.contact-person-view[contact-data-key="'+contact_data_key+'"]').find('.display-inline').html('<i class="fa fa-trash-o delete-contact"></i>');
+ 		});
+
+ 		$(document).on('click','.add-family-img',function(){
+			// var contact_data_key = $('.contact-person').length+1;
+			var family_data_key = $('.family-member-view').last().attr('family-data-key');
+			var new_family_data_key= parseInt(family_data_key)+1;
+			var new_html = $('.family-member-view').last().html();
+			$('.family-member-view[family-data-key="'+family_data_key+'"]').after('<div class="family-member-view family" family-data-key="'+new_family_data_key+'"></div');
+			new_family =$('.family-member-view[family-data-key="'+new_family_data_key+'"]');
+			new_family.html(new_html).fadeIn();
+			new_family.find('#edit-family-member-id').attr('name','family_info['+new_family_data_key+'][id]');
+			new_family.find('#edit-family-member-name').attr('name','family_info['+new_family_data_key+'][family_member_name]');
+			new_family.find('#edit-family-member-relation').attr('name','family_info['+new_family_data_key+'][family_member_relation]');
+			new_family.find('#edit-family-member-marital-status').attr('name','family_info['+new_family_data_key+'][family_member_marital_status]');
+			$('.family-member-view[family-data-key="'+family_data_key+'"]').find('.display-inline').html('<i class="fa fa-trash-o delete-family"></i>');
+ 		});
+	})
+</script>

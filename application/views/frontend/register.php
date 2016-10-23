@@ -11,7 +11,7 @@
    </div>
    <div class="services">
    	  <div class="col-sm-6 login_left">
-	     <form method="post">
+	     <form method="post" id="register-form">
 	  	    <div class="form-group">
 		      <label for="edit-name">Full Name <span class="form-required" title="This field is required.">*</span></label>
 		      <input type="text" id="edit-name" name="full_name" value="" size="60" maxlength="60" class="form-text required">
@@ -28,7 +28,7 @@
 		      <span><?php echo form_error('email'); ?></span>
 		    </div>
 		    <div class="age_select">
-		      <label for="edit-pass">Age <span class="form-required" title="This field is required.">*</span></label>
+		      <label for="edit-pass">Date of Birth <span class="form-required" title="This field is required.">*</span></label>
 		        <div class="age_grid">
 		         <div class="col-sm-4 form_box">
                   <div class="select-block1">
@@ -78,10 +78,11 @@
                   </div>
                   <div class="clearfix"> </div>
                  </div>
+                 <span><?php echo form_error('age-date'); ?></span><span><?php echo form_error('age-month'); ?></span><span><?php echo form_error('age-year'); ?></span>
               </div>
               <div class="form-group form-group1">
-                <label class="col-sm-7 control-lable" for="sex">Sex : </label>
-                <div class="col-sm-5">
+                <label class="col-sm-1 control-lable" for="sex">Sex : </label>
+                <div class="col-sm-11">
                     <div class="radios">
 				        <label for="radio-01" class="label_radio">
 				            <input type="radio" name="gender" checked="" value="male"> Male
@@ -92,6 +93,11 @@
 	                </div>
                 </div>
                 <div class="clearfix"> </div>
+             </div>
+             <div class="form-group">
+             	<label for="accept-terms" class="">
+					By clicking on Submit you Agree to the <a href="#">Privacy</a> and <a href="#">Terms</a> of Easy Nikah.
+				</label>
              </div>
 			  <div class="form-actions">
 			    <input type="submit" id="edit-submit" name="op" value="Submit" class="btn_1 submit">

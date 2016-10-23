@@ -11,6 +11,13 @@ class User extends CI_Controller {
 
 	public function index()
 	{	
+		$data['view'] = 'frontend/index';
+		$this->load->view('frontend/layout/base_layout',$data);
+		
+	}
+
+	public function search()
+	{	
 		if(!empty($_GET))
 		{
 			$params = $_GET;
@@ -19,12 +26,13 @@ class User extends CI_Controller {
 			$data['result'] = $result;
 			// pr($result);
 		}
-		$data['view'] = 'frontend/index';
+		$data['view'] = 'frontend/search';
 		$data['qualifications'] = $this->Qualification_model->get_all_qualifications();
-		$data['countries'] = $this->Location_model->get_countries();
+		$data['countries'] = $this->Location_model->get_valid_countries();
 		$this->load->view('frontend/layout/base_layout',$data);
 		
 	}
+
 	public function login()
 	{
 		$this->form_validation->set_rules('email', 'Email' , 'required|xss_clean');
@@ -70,6 +78,10 @@ class User extends CI_Controller {
 	{
 		$this->form_validation->set_rules('full_name', 'Full Name' , 'required|xss_clean');
 		$this->form_validation->set_rules('email', 'Email' , 'required|is_unique[users.email]|xss_clean');
+
+		$this->form_validation->set_rules('age-month', 'Month' , 'required|xss_clean');
+		$this->form_validation->set_rules('age-date', 'Date' , 'required|xss_clean');
+		$this->form_validation->set_rules('age-year', 'Year' , 'required|xss_clean');
 		$this->form_validation->set_message('is_unique', 'Already registered email,try another.');
 
 		if($this->form_validation->run())
@@ -148,8 +160,12 @@ class User extends CI_Controller {
 
 	public function ajax_get_all_states($country_id=0)
 	{
+
 		$states = $this->Location_model->get_states_by_country_id($country_id);
 		// pr($states);
+		if(isset($_POST['valid']) && $_POST['valid']==true){
+			$states = $this->Location_model->get_valid_states($country_id);
+		}
 		if(!empty($states))
 		{
 			$response['rc'] = true;
@@ -166,6 +182,9 @@ class User extends CI_Controller {
 	public function ajax_get_all_cities($state_id=0)
 	{
 		$cities = $this->Location_model->get_cities_by_state($state_id);
+		if(isset($_POST['valid']) && $_POST['valid']==true){
+			$cities = $this->Location_model->get_valid_cities($state_id);
+		}
 		if(!empty($cities))
 		{
 			$response['rc'] = true;
@@ -209,14 +228,15 @@ class User extends CI_Controller {
 
 	function create_profile_id()
 	{
-		$profile_id = "EN_".rand(0,100000);
-		$profile = $this->db->query('SELECT profile_id FROM users where profile_id ="'.$profile_id.'"')->row_array();
-		if(!empty($profile['profile_id']))
+		$profile = $this->db->query('SELECT id,profile_id FROM users ORDER BY id DESC LIMIT 1')->row_array();
+
+		if(empty($profile))
 		{
-			$this->create_profile_id();
+			return 'EN_1';
 		}
 		else{
-			return $profile_id;
+			$profile_id= $profile['id']+1;
+			return 'EN_'.$profile_id;
 		}
 	}
 

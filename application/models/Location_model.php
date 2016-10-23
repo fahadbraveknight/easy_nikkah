@@ -32,6 +32,43 @@ class Location_model extends CI_Model {
     {
         return $this->db->get_where('states',array('country_id'=>$country_id))->result_array();
     }
+
+    function get_valid_countries()
+    {
+        $sql = "SELECT countries.* 
+                From 
+                    countries 
+                JOIN users on countries.country_id= users.user_location_country
+            ";
+        return $this->db->query($sql)->result_array();
+    }
+
+    function get_valid_states($country_id)
+    {
+        $sql = "SELECT states.* 
+                From 
+                    states 
+                JOIN users on states.state_id= users.user_location_state
+                WHERE 
+                    states.country_id=".$country_id;
+        return $this->db->query($sql)->result_array();
+    }
+
+    function get_valid_cities($state_id)
+    {
+        $sql = "SELECT cities.* 
+                From 
+                    cities 
+                JOIN users on cities.city_id= users.user_location_city
+                WHERE 
+                    cities.state_id=".$state_id;
+        return $this->db->query($sql)->result_array();
+    }
+
+    function get_country_by_name($country)
+    {
+        return $this->db->get_where('countries',array('country_name' => $country))->row_array();
+    }
 }
 
 ?>

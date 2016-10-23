@@ -49,18 +49,13 @@ $(document).ready(function(){
 			   <ul>
 				<li class="green">
 					<a href="#" class="icon-home"></a>
-					<ul>
-						<?php if(!$this->session->userdata('userid')){ ?>
-							<li><a href="<?php echo base_url('frontend/user/login') ?>">Login</a></li>
-						    <li><a href="<?php echo base_url('frontend/user/register') ?>">Register</a></li>
-			           	<?php } ?>
-			           	<?php if($this->session->userdata('userid')){ ?>
-
+			        <?php if($this->session->userdata('userid')){ ?>
+			           	<ul>
 						    <li><a href="<?php echo base_url('frontend/'.$this->session->userdata('user_detail').'/view_profile/'.$this->session->userdata('userid'));?>">View Profile</a></li>
 						    <li><a href="<?php echo base_url('frontend/'.$this->session->userdata('user_detail').'/edit_profile/'.$this->session->userdata('userid'));?>">Edit Profile</a></li>
 						    <li><a href="<?php echo base_url('frontend/user/logout');?>">Logout</a></li>
-						<?php } ?>
-					</ul>
+						</ul>
+					<?php } ?>	
 				</li>
 			   </ul>
              </nav>
@@ -82,6 +77,10 @@ $(document).ready(function(){
 		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 		        <ul class="nav navbar-nav nav_1">
 		            <li><a href="<?php echo base_url('frontend/user') ?>">Home</a></li>
+		            <?php if(!$this->session->userdata('userid')){ ?>
+							<li><a href="<?php echo base_url('frontend/user/login') ?>">Login</a></li>
+						    <li><a href="<?php echo base_url('frontend/user/register') ?>">Register</a></li>
+			        <?php } ?>
 		            <li><a href="<?php echo base_url('frontend/about') ?>">About Us</a></li>
 		    		<?php /*?><li class="dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matches<span class="caret"></span></a>
@@ -107,7 +106,7 @@ $(document).ready(function(){
 		            <li class="last"><a href="<?php echo base_url('frontend/contact') ?>">Contact Us</a></li>
 		           	<?php if($this->session->userdata('userid')){ ?>
 			            <li class="dropdown">
-			              <a href="<?php echo base_url('frontend/user#p-search') ?>" >Search&nbsp;<span class="fa fa-search fa-1"></span></a>
+			              <a href="<?php echo base_url('frontend/user/search') ?>" >Search&nbsp;<span class="fa fa-search fa-1"></span></a>
 			              <?php /*?>
 			              <a href="<?php echo base_url('frontend/user#p-search') ?>" class="dropdown-toggle" data-toggle="dropdown">Search&nbsp;<span class="fa fa-search fa-1"></span></a>
 			              <ul class="dropdown-menu" role="menu">

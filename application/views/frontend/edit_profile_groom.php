@@ -32,9 +32,10 @@
 			                    		}
 			                    	} ?>
 			         
-		                    </select>s
+		                    </select>
 	                  	</div>
 	            	</div>
+			      	<span><?php echo form_error('user_height'); ?></span>
 			    </div>
 			    <div class="form-group">
 			      <label for="edit-namaz-type">Salah - Namaz - Prayer <span class="form-required" title="This field is required.">*</span></label>
@@ -42,12 +43,14 @@
 	                  	<div class="select-block1">
 		                    <select name="user_namaz_type">
 			                    <option value="">Select</option>
-			                    <option <?php echo "sometime"==$groom['user_namaz_type'] ? "selected" : "" ?>  value="sometime">Sometime</option>
-			                    <option <?php echo "regular"==$groom['user_namaz_type'] ? "selected" : "" ?>  value="regular">Regular</option>
-			                    <option <?php echo "friday"==$groom['user_namaz_type'] ? "selected" : "" ?>  value="friday">Friday</option>
+			                    <option <?php echo "sometime"==$groom['user_namaz_type'] ? "selected" : "" ?>  value="sometime"><?php echo get_namaz_type('sometime') ?></option>
+			                    <option <?php echo "regular"==$groom['user_namaz_type'] ? "selected" : "" ?>  value="regular"><?php echo get_namaz_type('regular') ?></option>
+			                    <option <?php echo "friday"==$groom['user_namaz_type'] ? "selected" : "" ?>  value="friday"><?php echo get_namaz_type('friday') ?></option>
 		                    </select>
 	                  	</div>
 	            	</div>
+
+			      	<span><?php echo form_error('user_namaz_type'); ?></span>
 			    </div>
 			    <div class="form-group">
 			      <label for="edit-fasting-type">Fasting  <span class="form-required" title="This field is required.">*</span></label>
@@ -55,13 +58,15 @@
 	                  	<div class="select-block1">
 		                    <select name="user_fasting_type">
 			                    <option value="">Select</option>
-			                    <option <?php echo "ramzan"==$groom['user_fasting_type'] ? "selected" : "" ?>  value="ramzan">Ramzan</option>
-			                    <option <?php echo "ramzan_sunnah"==$groom['user_fasting_type'] ? "selected" : "" ?>  value="ramzan_sunnah">Ramzn And Sunnah</option>
-			                    <option <?php echo "ramzan_sunnah_nawafil"==$groom['user_fasting_type'] ? "selected" : "" ?>  value="ramzan_sunnah_nawafil">Friday</option>
+			                    <option <?php echo "ramzan"==$groom['user_fasting_type'] ? "selected" : "" ?>  value="ramzan"><?php echo get_fasting_type('ramzan') ?></option>
+			                    <option <?php echo "ramzan_sunnah"==$groom['user_fasting_type'] ? "selected" : "" ?>  value="ramzan_sunnah"><?php echo get_fasting_type('ramzan_sunnah') ?></option>
+			                    <option <?php echo "ramzan_sunnah_nawafil"==$groom['user_fasting_type'] ? "selected" : "" ?>  value="ramzan_sunnah_nawafil"><?php echo get_fasting_type('ramzan_sunnah_nawafil') ?></option>
 			         
 		                    </select>
 	                  	</div>
 	            	</div>
+
+			      	<span><?php echo form_error('user_fasting_type'); ?></span>
 			    </div>
 			    <div class="form-group">
 			      <label for="edit-beard-type">Beard  <span class="form-required" title="This field is required.">*</span></label>
@@ -70,13 +75,14 @@
 		                    <select name="user_beard_type">
 			                    <option value="">Select</option>
 			                    
-			                    <option <?php echo "yes_sunnah"==$groom['user_beard_type'] ? "selected" : "" ?>  value="yes_sunnah">Yes with Sunnah</option>
-			                    <option <?php echo "no_sunnah"==$groom['user_beard_type'] ? "selected" : "" ?>  value="no_sunnah">Yes but without Sunnah</option>
-			                    <option <?php echo "no_beard"==$groom['user_beard_type'] ? "selected" : "" ?>  value="no_beard">No Beard</option>
+			                    <option <?php echo "yes_sunnah"==$groom['user_beard_type'] ? "selected" : "" ?>  value="yes_sunnah"><?php echo get_beard_type('yes_sunnah') ?></option>
+			                    <option <?php echo "no_sunnah"==$groom['user_beard_type'] ? "selected" : "" ?>  value="no_sunnah"><?php echo get_beard_type('no_sunnah') ?></option>
+			                    <option <?php echo "no_beard"==$groom['user_beard_type'] ? "selected" : "" ?>  value="no_beard"><?php echo get_beard_type('no_beard') ?></option>
 			         
 		                    </select>
 	                  	</div>
 	            	</div>
+			      	<span><?php echo form_error('user_beard_type'); ?></span>
 			    </div>
 			   	<div class="form-group">
 			   		<div class="row">
@@ -86,12 +92,14 @@
 			                  	<div class="select-block1">
 				                    <select name="user_marital_status" >
 					                    <option value="">Select</option>
-					                    <option <?php echo "unmarried"==$groom['user_beard_type'] ? "selected" : "" ?>  value="unmarried">Unmarried</option>
-					                    <option <?php echo "divorced"==$groom['user_beard_type'] ? "selected" : "" ?>  value="divorced">Divorced</option>
-					                    <option <?php echo "widowed"==$groom['user_beard_type'] ? "selected" : "" ?>  value="widowed">Widowed</option>
+					                    <option <?php echo "unmarried"==$groom['user_marital_status'] ? "selected" : "" ?>  value="unmarried">Unmarried</option>
+					                    <option <?php echo "divorced"==$groom['user_marital_status'] ? "selected" : "" ?>  value="divorced">Divorced</option>
+					                    <option <?php echo "widowed"==$groom['user_marital_status'] ? "selected" : "" ?>  value="widowed">Widowed</option>
+					                     <option <?php echo "married"==$groom['user_marital_status'] ? "selected" : "" ?>  value="married">Married</option>
 				                    </select>
 			                  	</div>
 			            	</div>
+			      			<span><?php echo form_error('user_marital_status'); ?></span>
 		            	</div>
 		            	<div class="col-md-6 <?php if(!$groom['user_children']){echo 'hidden';} ?> user-children">
 		            		<label for="edit-children">Children  <span class="form-required" title="This field is required.">*</span></label>
@@ -99,7 +107,7 @@
 			                  	<div class="select-block1">
 				                    <select name="user_children">
 				                    	<?php 
-				                    		for ($i=0; $i <= 9; $i++) { 
+				                    		for ($i=1; $i <= 10; $i++) { 
 				                    		$selected="";
 				                    		if($groom['user_children']==$i) { $selected = "selected";}else{ $selected =  "";}
 				                    		echo "<option ".$selected." value=".$i.">".$i."</option>";
@@ -107,6 +115,7 @@
 				                    </select>
 			                  	</div>
 			            	</div>
+			      			<span><?php echo form_error('user_children'); ?></span>
 		            	</div>
 	            	</div>
 			    </div>
@@ -143,12 +152,16 @@
 		                  </div>
 		                 </div>
 		              </div>
+						<span><?php echo form_error('user_location_country'); ?></span>
+						<span><?php echo form_error('user_location_state'); ?></span>
+						<span><?php echo form_error('user_location_city'); ?></span>
 	              </div>
 	              <div class="age_select">
 			    	<?php 
 			   			$age = date('d-m-Y',$groom['age']);
-			   			$user_age = explode('-', $age); ?>
-			      <label for="edit-pass">Age <span class="form-required" title="This field is required.">*</span></label>
+			   			$user_age = explode('-', $age);
+			   			 ?>
+			      <label for="edit-pass">Date of Birth <span class="form-required" title="This field is required.">*</span></label>
 			        <div class="age_grid">
 			         <div class="col-sm-4 form_box">
 	                  <div class="select-block1">
@@ -186,6 +199,7 @@
 		                    	$year = 1936;
 		                     	while($year != $current_year)
 		                     	{
+		                     		$selected="";
 		                     		if($user_age[2]==$year){$selected="selected";}
 		                     		echo '<option '.$selected.' value="'.$year.'">'.$year.'</option>';
 		                     		$year++;
@@ -194,6 +208,9 @@
 	                   </div>
 	                  </div>
 	                 </div>
+	                 <span><?php echo form_error('age-date'); ?></span>
+	                 <span><?php echo form_error('age-month'); ?></span>
+	                 <span><?php echo form_error('age-year'); ?></span>
 	              </div>
 	            
 	              </div>
@@ -212,6 +229,7 @@
 					     			</select>
 					     		</div>
 			            	</div>
+				            <span><?php echo form_error('user_qualification'); ?></span>
 					    </div>
 
 						<div class="form-group">
@@ -228,6 +246,7 @@
 					     			</select>
 					     		</div>
 			            	</div>
+				            <span><?php echo form_error('user_profession'); ?></span>
 					    </div>
 						
 	              		<div class="form-group">
@@ -261,6 +280,10 @@
 				                  	</div>
 				                </div>
 					        </div>
+			      			<span><?php echo form_error('user_work_location_country'); ?></span>
+			      			<span><?php echo form_error('user_work_location_state'); ?></span>
+			      			<span><?php echo form_error('user_work_location_city'); ?></span>
+
 					    </div>
 
 	              		<div class="form-group">
@@ -294,16 +317,122 @@
 				                  	</div>
 				                </div>
 					        </div>
+						    <span><?php echo form_error('user_native_location_country'); ?></span>
+						    <span><?php echo form_error('user_native_location_state'); ?></span>
+						    <span><?php echo form_error('user_native_location_city'); ?></span>
 					        <br clear="all">
 					    </div>
-					    
-					    
-					   
 					     <div class="form-group">
-					      <label for="edit-personal-description">Description your self<span class="form-required" title="This field is required.">*</span></label>
-					      <textarea  id="edit-personal-description" name="user_personal_description" class="form-text"><?php echo $groom['user_personal_description'] ?></textarea>
-					    </div>
+					         <div class="col-sm-6 form_box">
+						         <label for="edit-father-name">Father's Name <span class="form-required" title="This field is required.">*</span></label>
+				                 <input type="text" id="edit-name" name="user_father_name" value="<?php echo $groom['user_father_name'] ?>" size="60" maxlength="60" class="form-text required">
+			     				 <span><?php echo form_error('user_father_name'); ?></span>
+			            	</div>
+				            	
+			                <div class="col-sm-6  form_box1">
+			                   <label for="edit-father-profession">Father's Profession <span class="form-required" title="This field is required.">*</span></label>
+				                 <div class="select-block1">
+				                    <select name="user_father_profession">
+					                    <option value="">Select</option>
+					                    <?php foreach ($professions as $key => $value){
+					                    	$selected="";
+					                    	if($groom['user_father_profession']==$value['profession_name']){$selected='selected';}
+				                     		echo '<option '.$selected.' value="'.$value['profession_name'].'">'.$value['profession_name'].'</option>';
+					                    	} ?>
+					     			</select>
+					     		</div>
+			     				 <span><?php echo form_error('user_father_profession'); ?></span>
+			                 </div>
+	              		</div>
+
+	              		<div class="form-group">
+					         <div class="col-sm-6 form_box">
+						         <label for="edit-mother-name">Mother's Name <span class="form-required" title="This field is required.">*</span></label>
+				                 <input type="text" id="edit-name" name="user_mother_name" value="<?php echo $groom['user_mother_profession'] ?>" size="60" maxlength="60" class="form-text required">
+			     				 <span><?php echo form_error('user_mother_name'); ?></span>
+			            	</div>
+				            	
+			                <div class="col-sm-6  form_box1">
+			                   <label for="edit-mother-profession">Mother's Profession <span class="form-required" title="This field is required.">*</span></label>
+				                 <div class="select-block1">
+				                    <select name="user_mother_profession">
+					                    <option value="">Select</option>
+					                    <?php foreach ($professions as $key => $value){
+					                    	$selected="";
+					                    	if($groom['user_mother_profession']==$value['profession_name']){$selected='selected';}
+				                     		echo '<option '.$selected.' value="'.$value['profession_name'].'">'.$value['profession_name'].'</option>';
+					                    	} ?>
+					     			</select>
+					     		</div>
+			     				 <span><?php echo form_error('user_mother_profession'); ?></span>
+			                 </div>
+	              		</div>
+
+				  	<div class="form-group">
+				         <div class="col-sm-6 form_box">
+					         <label for="edit-brother">Number of Brothers<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_brothers">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($groom['user_brothers']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_brothers'); ?></span>
+		            	</div>
+				            	
+		                <div class="col-sm-6  form_box1">
+		                   <label for="edit-brother-married">Number of Brothers (Married)<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_married_brothers">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($groom['user_married_brothers']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_married_brothers'); ?></span>
+		                 </div>
+	              	</div>
+
+	              	<div class="form-group">
+				         <div class="col-sm-6 form_box">
+					         <label for="edit-sister">Number of Sister<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_sisters">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($groom['user_sisters']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_sisters'); ?></span>
+		            	</div>
+				            	
+		                <div class="col-sm-6  form_box1">
+		                   <label for="edit-sister-married">Number of Sister (Married)<span class="form-required" title="This field is required.">*</span></label>
+			                 <div class="select-block1">
+			                    <select name="user_married_sisters">
+				                    <option value="">Select</option>
+				                    <?php for ($i=0; $i<=10 ; $i++){
+				                    	$selected="";
+				                    	if($groom['user_married_sisters']==$i){$selected='selected';}
+			                     		echo '<option '.$selected.' value="'.$i.'">'.$i.'</option>';
+				                    	} ?>
+				     			</select>
+				     		</div>
+		     				 <span><?php echo form_error('user_married_sisters'); ?></span>
+		                 </div>
+	              	</div>
 				  	</div>
+				  </div>
 				  <div class="col-sm-12 login_left" >
 				  	<div class="contact-persons-details">
 					  	<?php $contact_data_key=0;
@@ -314,18 +443,33 @@
 							  	<div class="form-group">
 								    <label for="edit-contact-person-name">Contact Person Full Name <span class="form-required" title="This field is required.">*</span></label>
 								    <input type="text" id="edit-contact-person-name" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_name]" value="<?php echo $groom_contact['contact_person_name'] ?>" size="60" maxlength="60" class="form-text required">
+									<span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_name]'); ?></span>
 							    </div>
 							    <div class="form-group">
 								    <label for="edit-contact-person-email">Contact Person Email <span class="form-required" title="This field is required.">*</span></label>
 								    <input type="text" id="edit-contact-person-email" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_email]" value="<?php echo $groom_contact['contact_person_email'] ?>" size="60" maxlength="60" class="form-text required">
+								    <span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_email]'); ?></span>
 							    </div>
 							    <div class="form-group">
 								    <label for="edit-name">Contact Person Phone Number <span class="form-required" title="This field is required.">*</span></label>
 								    <input type="text" id="edit-contact-person-phone-no" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_phone_no]" value="<?php echo $groom_contact['contact_person_phone_no'] ?>" size="60" maxlength="60" class="form-text required">
+			      					<span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_phone_no]'); ?></span>
 							    </div>
 							    <div class="form-group">
 								    <label for="edit-contact-person-relation">Contact Person Relation <span class="form-required" title="This field is required.">*</span></label>
-								    <input type="text" id="edit-contact-person-relation" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_relation]" value="<?php echo $groom_contact['contact_person_relation'] ?>" size="60" maxlength="60" class="form-text required">
+								    <div class="form_box">
+					                  	<div class="select-block1">
+						                    <select id="edit-contact-person-relation" name="contact_person[<?php echo $contact_data_key  ?>][contact_person_relation]">
+							                    <option value="">Select</option>
+							                    <option <?php echo "father"==$groom_contact['contact_person_relation'] ? "selected" : "" ?>  value="father">Father</option>
+							                    <option <?php echo "mother"==$groom_contact['contact_person_relation'] ? "selected" : "" ?>  value="mother">Mother</option>
+							                    <option <?php echo "brother"==$groom_contact['contact_person_relation'] ? "selected" : "" ?>  value="brother">Brother</option>
+							         			<option <?php echo "sister"==$groom_contact['contact_person_relation'] ? "selected" : "" ?>  value="sister">Sister</option>
+							         			<option <?php echo "other"==$groom_contact['contact_person_relation'] ? "selected" : "" ?>  value="other">Other</option>
+						                    </select>
+					                  	</div>
+					            	</div>
+					            	<span><?php echo form_error('contact_person['. $contact_data_key .'][contact_person_relation]'); ?></span>
 							    </div>
 							    <div class="display-inline">
 									<i class="fa fa-trash-o delete-contact"></i>
@@ -340,13 +484,13 @@
 					    	?>
 						</div>
 
-						<div class="add-contact">
+						<div class="add-contact hidden">
 							<div class="text-center">
 								<i class="fa fa-plus add-contact-img"></i>
 							</div>    	
 					    </div>
 
-						<div class="family-details">
+						<div class="family-details hidden">
 					  	<?php $family_data_key=0;
 					  		if(!empty($groom_family)){
 					  			foreach ($groom_family as $key => $family) { ?>
@@ -369,7 +513,7 @@
 							                    <option <?php echo "unmarried"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="unmarried">Unmarried</option>
 							                    <option <?php echo "divorced"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="divorced">Divorced</option>
 							                    <option <?php echo "widowed"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="widowed">Widowed</option>
-							         
+							         			<option <?php echo "married"==$family['family_member_marital_status'] ? "selected" : "" ?>  value="married">Married</option>
 						                    </select>
 					                  	</div>
 					            	</div>
@@ -386,7 +530,7 @@
 					    	?>
 						</div>
 					 
-					    <div class="add-family">
+					    <div class="add-family hidden">
 							<div class="text-center">
 								<i class="fa fa-plus add-family-img"></i>
 							</div>    	
@@ -427,6 +571,9 @@
 					success:function(response){
 						if(response.rc){
 							contact_person.hide();
+							contact_person.find('input').val('');
+							contact_person.find('select').val('');
+							$('.contact-person-view').last().removeClass('hidden');
 						}	
 						else
 						{
@@ -452,6 +599,9 @@
 					success:function(response){
 						if(response.rc){
 							family.hide();
+							family.find('input').val('');
+							family.find('select').val('');
+							$('.family-member-view').last().removeClass('hidden');
 						}	
 						else
 						{
@@ -466,12 +616,12 @@
 
 		$(document).on('change','select[name="user_marital_status"]',function(){
 			marital_status = $(this).val();
-			if(marital_status == "divorced" ||  marital_status == "widowed"){
-				$('.user-children').removeClass('hidden');
+			if(marital_status == "unmarried"){	
+				$('.user-children').addClass('hidden');
 			}
 			else
 			{
-				$('.user-children').addClass('hidden');
+				$('.user-children').removeClass('hidden');
 			}
 
 		})
@@ -488,7 +638,7 @@
 				success:function(response){
 					if(response.rc)
 					{
-						next.html('<option>Select</option>');
+						next.html('<option value="">Select</option>');
 						if( this_name =="user_location_country")
 						{
 							$.each(response.states,function(index,data){
@@ -517,7 +667,7 @@
 				success:function(response){
 					if(response.rc)
 					{
-						next.html('<option>Select</option>');
+						next.html('<option value="">Select</option>');
 						if( this_name =='user_location_state')
 						{
 							$.each(response.cities,function(index,data){

@@ -17,30 +17,50 @@ class Groom extends CI_Controller {
 	public function edit_profile($id=0)
 	{
 		$groom = $this->Groom_model->get_groom_by_id($id);
+		$india = $this->Location_model->get_country_by_name('india');
 		if($this->session->userdata('userid') == $id )
 		{
 			if(isset($groom['id']))
 			{
 				$this->form_validation->set_rules('full_name', 'Full Name' , 'required|xss_clean');
 				$this->form_validation->set_rules('user_height', 'Height' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_namaz_type', 'Namaz Type' , 'required|xss_clean');
+				$this->form_validation->set_rules('user_beard_type', 'Groom Beard' , 'required|trim|xss_clean');	
+				$this->form_validation->set_rules('user_fasting_type', 'Groom Fasting' , 'required|xss_clean');
+				$this->form_validation->set_rules('user_father_name', 'Groom Father\'s Name' , 'required|trim|xss_clean');	
+				$this->form_validation->set_rules('user_father_profession', 'Groom Father\'s Profession' , 'required|xss_clean');
+				$this->form_validation->set_rules('user_mother_name', 'Groom Mother\'s Name' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_mother_profession', 'Groom Mother\'s Profession' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_work_location_country', 'Work Country' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_location_country', 'Current Country' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_native_location_country', 'Native Country' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_qualification', 'Qualification' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_profession', 'Profession' , 'required|trim|xss_clean');
+				$this->form_validation->set_rules('user_marital_status', 'Marital Status' , 'required|trim|xss_clean');
 				// echo '<pre>';print_r($_POST);exit;
 				if(!empty($_POST['contact_person']))
 				{
 					foreach ($_POST['contact_person'] as $key => $contact) {
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_name]', 'Contact Person Name' , 'xss_clean');
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_email]', 'Contact Person Email' , 'trim|xss_clean');
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_phone_no]', 'Contact Person Phone Number' , 'xss_clean');
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_relation]', 'Contact Person Relation' , 'trim|xss_clean');
+						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_name]', 'Contact Person Name' , 'required|trim|xss_clean');
+						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_email]', 'Contact Person Email' , 'required|valid_email|trim|xss_clean');
+						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_phone_no]', 'Contact Person Phone Number' , 'required|trim|xss_clean');
+						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_relation]', 'Contact Person Relation' , 'required|trim|xss_clean');
 					}
 				}
 
-				if(!empty($_POST['family_info']))
-				{		foreach ($_POST['family_info'] as $key => $family) {
-						$this->form_validation->set_rules('family_info['.$key.'][family_member_name]', 'Family Member Name' , 'xss_clean');
-						$this->form_validation->set_rules('family_info['.$key.'][family_member_relation]', 'Family Member Relation' , 'xss_clean');
-						$this->form_validation->set_rules('family_info['.$key.'][family_member_marital_status]', 'Family Member Phone Marital Status' , 'xss_clean');
-					}
+				if(isset($_POST['user_location_country']) && $_POST['user_location_country']==$india['country_id'])
+				{
+					$this->form_validation->set_rules('user_location_city', 'Current City' , 'required|trim|xss_clean');
+					$this->form_validation->set_rules('user_location_state', 'Current State' , 'required|trim|xss_clean');
+					// pr($_POST);
 				}
+				// if(!empty($_POST['family_info']))
+				// {		foreach ($_POST['family_info'] as $key => $family) {
+				// 		$this->form_validation->set_rules('family_info['.$key.'][family_member_name]', 'Family Member Name' , 'xss_clean');
+				// 		$this->form_validation->set_rules('family_info['.$key.'][family_member_relation]', 'Family Member Relation' , 'xss_clean');
+				// 		$this->form_validation->set_rules('family_info['.$key.'][family_member_marital_status]', 'Family Member Phone Marital Status' , 'xss_clean');
+				// 	}
+				// }
 
 				if($this->form_validation->run())
 				{
@@ -60,7 +80,14 @@ class Groom extends CI_Controller {
 		    						'user_children' => $_POST['user_children'],
 		    						'user_qualification' => $_POST['user_qualification'],
 		    						'user_profession' => $_POST['user_profession'],
-		    						'user_personal_description' => $_POST['user_personal_description']
+		    						'user_father_name' => $_POST['user_father_name'],
+		    						'user_mother_name' => $_POST['user_mother_name'],
+		    						'user_father_profession' => $_POST['user_father_profession'],
+		    						'user_mother_profession' => $_POST['user_mother_profession'],
+		    						'user_brothers' => $_POST['user_brothers'],
+		    						'user_married_brothers' => $_POST['user_married_brothers'],
+		    						'user_sisters' => $_POST['user_sisters'],
+		    						'user_married_sisters' => $_POST['user_married_sisters']
 		    						);
 					if(!empty($_POST['user_location_country'])){$params['user_location_country'] = $_POST['user_location_country']; }
 					if(!empty($_POST['user_location_state'])){$params['user_location_state'] = $_POST['user_location_state']; }
@@ -69,35 +96,36 @@ class Groom extends CI_Controller {
 					if($user_native_location != "  "){$params['user_native_location'] = $user_native_location; }
 					$this->Groom_model->edit_groom($id,$params);
 
-					$add_user_family = array();
-					$edit_user_family = array();
+					//family functionality
+					// $add_user_family = array();
+					// $edit_user_family = array();
 
-					if(!empty($_POST['family_info']))
-					{
-						$add_key=0;
-						$edit_key=0;
-						foreach ($_POST['family_info'] as $key => $family) {
-							if($family['id']==0)
-							{
-								if($family['family_member_name']!=='')
-								{
-									$add_user_family[$add_key] = $family;
-									$add_user_family[$add_key]['user_id'] = $groom['id'];
-									$add_key++;
-								}
-							}
-							else
-							{
-								$edit_user_family[$edit_key] = $family;
-								$edit_key++;
-							}
-						}
-					}
+					// if(!empty($_POST['family_info']))
+					// {
+					// 	$add_key=0;
+					// 	$edit_key=0;
+					// 	foreach ($_POST['family_info'] as $key => $family) {
+					// 		if($family['id']==0)
+					// 		{
+					// 			if($family['family_member_name']!=='')
+					// 			{
+					// 				$add_user_family[$add_key] = $family;
+					// 				$add_user_family[$add_key]['user_id'] = $groom['id'];
+					// 				$add_key++;
+					// 			}
+					// 		}
+					// 		else
+					// 		{
+					// 			$edit_user_family[$edit_key] = $family;
+					// 			$edit_key++;
+					// 		}
+					// 	}
+					// }
 
-					if(!empty($add_user_family))
-						$this->User_model->add_user_family($add_user_family);
-					if(!empty($edit_user_family))
-						$this->User_model->edit_user_family($edit_user_family);
+					// if(!empty($add_user_family))
+					// 	$this->User_model->add_user_family($add_user_family);
+					// if(!empty($edit_user_family))
+					// 	$this->User_model->edit_user_family($edit_user_family);
 
 					$add_contact_person_params = array();
 					$edit_contact_person_params = array();
@@ -141,6 +169,7 @@ class Groom extends CI_Controller {
 					$data['groom'] = $groom;
 					$data['countries'] = $this->Location_model->get_countries();
 					$data['view'] = 'frontend/edit_profile_groom';
+					// pr($data);
 					$this->load->view('frontend/layout/base_layout',$data);
 				}
 			}
