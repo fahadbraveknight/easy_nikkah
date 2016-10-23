@@ -5,17 +5,12 @@
      <ul>
         <a href="index.html"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
-        <li class="current-page">Login</li>
+        <li class="current-page">Forgot Password</li>
      </ul>
    </div>
    <div class="services">
    	  <div class="col-sm-6 login_left">
-   	  	<?php 
-			if($this->session->flashdata('error_login'))
-			{
-				echo $this->session->flashdata('error_login');
-			}
-		?>
+   	  	<!-- <div class="container"> -->
 		<?php 
 			if($this->session->flashdata('message'))
 			{
@@ -23,20 +18,21 @@
 				echo $this->session->flashdata('message');
 			}
 		?>
-	   <form method="post">
+		<!-- </div> -->
+	   <form method="post" action="<?php echo base_url() ?>frontend/user/change_password_request">
   	    <div class="form-item form-type-textfield form-item-name">
 	      <label for="edit-name">Email <span class="form-required" title="This field is required.">*</span></label>
 	      <input type="text" id="edit-name" name="email" value="" size="60" maxlength="60" class="form-text required">
 	      <span><?php echo form_error('email'); ?></span>
 	    </div>
 	    <div class="form-item form-type-password form-item-pass">
-	      <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label>
-	      <input type="password" id="edit-pass" name="password" size="60" maxlength="128" class="form-text required">
+	      <!-- <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label> -->
+	      <!-- <input type="password" id="edit-pass" name="password" size="60" maxlength="128" class="form-text required"> -->
 	      <span><?php echo form_error('password'); ?></span>
 	    </div>
 	    <div class="form-actions">
-	    	<input type="submit" id="edit-submit" name="op" value="Log in" class="btn_1 submit">
-	    	<a href="<?php echo base_url() ?>frontend/user/forgot_password" class="btn_1">Forgot Password</a>
+	    	<input type="submit" id="edit-submit" name="op" value="Submit" class="btn_1 submit">
+	    	<!-- <a href="<?php echo base_url() ?>frontend/user/forgot_password" class="btn_1">Forgot Password</a> -->
 	    </div>
 	   </form>
 	  </div>
