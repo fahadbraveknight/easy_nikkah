@@ -660,6 +660,7 @@
 			marital_status = $(this).val();
 			if(marital_status == "unmarried"){	
 				$('.user-children').addClass('hidden');
+				$('select[name="user_children"]').val('');
 			}
 			else
 			{
