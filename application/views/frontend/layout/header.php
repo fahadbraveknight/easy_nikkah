@@ -77,10 +77,6 @@ $(document).ready(function(){
 		    <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
 		        <ul class="nav navbar-nav nav_1">
 		            <li><a href="<?php echo base_url('frontend/user') ?>">Home</a></li>
-		            <?php if(!$this->session->userdata('userid')){ ?>
-							<li><a href="<?php echo base_url('frontend/user/login') ?>">Login</a></li>
-						    <li><a href="<?php echo base_url('frontend/user/register') ?>">Register</a></li>
-			        <?php } ?>
 		            <li><a href="<?php echo base_url('frontend/about') ?>">About Us</a></li>
 		    		<?php /*?><li class="dropdown">
 		              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Matches<span class="caret"></span></a>
@@ -104,6 +100,10 @@ $(document).ready(function(){
 		              </ul>
 		            </li>*/?>
 		            <li class="last"><a href="<?php echo base_url('frontend/contact') ?>">Contact Us</a></li>
+		             <?php if(!$this->session->userdata('userid')){ ?>
+							<li><a href="<?php echo base_url('frontend/user/login') ?>">Login</a></li>
+						    <li><a href="<?php echo base_url('frontend/user/register') ?>">Register</a></li>
+			        <?php } ?>
 		           	<?php if($this->session->userdata('userid')){ ?>
 			            <li class="dropdown">
 			              <a href="<?php echo base_url('frontend/user/search') ?>" >Search&nbsp;<span class="fa fa-search fa-1"></span></a>
