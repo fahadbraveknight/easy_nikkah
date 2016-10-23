@@ -16,7 +16,7 @@ class Groom extends CI_Controller {
 
 	public function edit_profile($id=0)
 	{
-		$groom = $this->Groom_model->get_groom_by_id($id);
+		$groom = $this->Groom_model->get_groom($id);
 		$india = $this->Location_model->get_country_by_name('india');
 		if($this->session->userdata('userid') == $id )
 		{
@@ -41,10 +41,14 @@ class Groom extends CI_Controller {
 				if(!empty($_POST['contact_person']))
 				{
 					foreach ($_POST['contact_person'] as $key => $contact) {
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_name]', 'Contact Person Name' , 'required|trim|xss_clean');
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_email]', 'Contact Person Email' , 'required|valid_email|trim|xss_clean');
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_phone_no]', 'Contact Person Phone Number' , 'required|trim|xss_clean');
-						$this->form_validation->set_rules('contact_person['.$key.'][contact_person_relation]', 'Contact Person Relation' , 'required|trim|xss_clean');
+						$required = '';
+						if($key == 0){$required = 'required|';}
+						if($key ==  0 || !empty($contact)){
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_name]', 'Contact Person Name' , $required .'trim|xss_clean');
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_email]', 'Contact Person Email' , $required .'valid_email|trim|xss_clean');
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_phone_no]', 'Contact Person Phone Number' , $required .'trim|xss_clean');
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_relation]', 'Contact Person Relation' , $required .'trim|xss_clean');
+						}
 					}
 				}
 
@@ -66,8 +70,8 @@ class Groom extends CI_Controller {
 				{
 					// if($_POST)
 					// echo '<pre>';print_r($_POST);exit;
-					$user_work_location = $_POST['user_work_location_city'].' '.$_POST['user_work_location_state'].' '.$_POST['user_work_location_country'];
-					$user_native_location = $_POST['user_native_location_city'].' '.$_POST['user_native_location_state'].' '.$_POST['user_native_location_country'];
+					$user_work_location = $_POST['user_work_location_city'].'~'.$_POST['user_work_location_state'].'~'.$_POST['user_work_location_country'];
+					$user_native_location = $_POST['user_native_location_city'].'~'.$_POST['user_native_location_state'].'~'.$_POST['user_native_location_country'];
 					$age = strtotime($_POST['age-date'].'-'.$_POST['age-month'].'-'.$_POST['age-year']);
 			
 					$params = array('full_name' => $_POST['full_name'],
@@ -187,16 +191,18 @@ class Groom extends CI_Controller {
 	public function view_profile($id=0)
 	{
 		$groom = $this->Groom_model->get_groom($id);
-		if(!empty($groom))
+		if($this->session->userdata('userid'))
 		{
-			$data['groom'] = $groom;
-			$data['groom_family'] = $this->User_model->get_user_family($groom['id']);
-			$data['groom_contact_persons'] = $this->User_model->get_user_contact_person($groom['id']);
-			// echo '<pre>'; print_r($groom);exit;
-			$data['view'] = 'frontend/view_profile';
-			$this->load->view('frontend/layout/base_layout',$data);
+			if(!empty($groom))
+			{
+				$data['groom'] = $groom;
+				$data['groom_family'] = $this->User_model->get_user_family($groom['id']);
+				$data['groom_contact_persons'] = $this->User_model->get_user_contact_person($groom['id']);
+				// echo '<pre>'; print_r($groom);exit;
+				$data['view'] = 'frontend/view_profile';
+				$this->load->view('frontend/layout/base_layout',$data);
+			}
 		}
-
 	}
 
 }

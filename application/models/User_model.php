@@ -203,6 +203,37 @@ class User_model extends CI_Model {
             );
         return $this->db->where('verification_id',$id)->update('users',$data);
     }
+
+    //checking email id is exist or not.
+    public function check_email_exist($email)
+    {
+        return $this->db->where('email',$email)->get('users')->row();
+    }
+
+    //insert password_change_id into users table with status 0.
+    public function forgot_password_request($email, $password_reset_id)
+    {
+        $data = array(
+            'password_change_id' => $password_reset_id
+            );
+        return $this->db->where('email',$email)->update('users',$data);
+    }
+
+    //geting the information of user according to given password_change_id.
+    public function check_password_change_id($id)
+    {
+        return $this->db->where('password_change_id',$id)->get('users')->row();
+    }
+
+    //update the new password inserted by user.
+    public function reset_password($token_id, $password)
+    {
+        $data = array(
+            'password' => md5($password),
+            'password_change_status' => 1
+            );
+        return $this->db->where('password_change_id', $token_id)->update('users',$data);
+    }
 }
 
 ?>

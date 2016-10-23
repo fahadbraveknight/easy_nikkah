@@ -75,11 +75,11 @@
 								</tr>
 								<tr class="opened_1">
 									<td class="day_label">Work Locatiom :</td>
-									<td class="day_value"><?php echo $bride['user_work_location']; ?> </td>
+									<td class="day_value"><?php echo str_replace("~", " ", $bride['user_work_location']); ?> </td>
 								</tr>
 								<tr class="opened_1">
 									<td class="day_label">Native Locatiom :</td>
-									<td class="day_value"><?php echo $bride['user_native_location']; ?> </td>
+									<td class="day_value"><?php echo str_replace("~", " ", $bride['user_native_location']); ?> </td>
 								</tr>
 						    </tbody>
 				          </table>
@@ -181,6 +181,7 @@
 				         <div class="clearfix"> </div>
 				       </div>
 				    </div>
+				    <?php if($this->session->userdata('userid')==$bride['id']){ ?>
 				    <div class="basic_3">
 				    	<h4>Contact Person Details</h4>
 				    	<div class="basic_1 basic_2">
@@ -206,6 +207,7 @@
 				         </div>
 				       </div>
 				    </div>
+				     <?php } ?>
 				 </div>
 				 <div role="tabpanel" class="tab-pane fade" id="profile1" aria-labelledby="profile-tab1">
 				    <div class="basic_1 basic_2">

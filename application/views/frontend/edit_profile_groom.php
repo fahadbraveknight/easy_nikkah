@@ -13,7 +13,7 @@
 	  		<div class="col-sm-6 login_left">
 		  	    <div class="form-group">
 			      <label for="edit-name">Full Name <span class="form-required" title="This field is required.">*</span></label>
-			      <input type="text" id="edit-name" name="full_name" value="<?php echo $groom['full_name'] ?>" size="60" maxlength="60" class="form-text required">
+			      <input type="text" id="edit-name" name="full_name" value="<?php echo isset($_POST['full_name'])? $_POST['full_name'] : $groom['full_name']; ?>" size="60" maxlength="60" class="form-text required">
 			      <span><?php echo form_error('full_name'); ?></span>
 			    </div>
 			    <div class="form-group">
@@ -107,7 +107,7 @@
 			                  	<div class="select-block1">
 				                    <select name="user_children">
 				                    	<?php 
-				                    		for ($i=1; $i <= 10; $i++) { 
+				                    		for ($i=0; $i <= 10; $i++) { 
 				                    		$selected="";
 				                    		if($groom['user_children']==$i) { $selected = "selected";}else{ $selected =  "";}
 				                    		echo "<option ".$selected." value=".$i.">".$i."</option>";
@@ -121,14 +121,19 @@
 			    </div>
 			    <div class="form-group">
 				    <div class="country-select">
-				      <label for="edit-location">Location <span class="form-required" title="This field is required.">*</span></label>
+				      <label for="edit-location">Location <span class="form-required" title="This field is required.">*</span>
+				      	<?php  echo $groom['city_name'] .' '.$groom['state_name'] .' '.$groom['country_name']; ?> </label>
 				        <div class="age_grid">
 				         <div class="col-sm-4 country form_box">
 		                  <div class="select-block1">
 		                    <select name="user_location_country" class="countries-list">
 			                    <option value="">Country</option>
 			                    <?php foreach ($countries as $key => $country) {
-						                echo '<option value="'.$country['country_id'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
+			                    	echo '<option '.$selected.' value="'.$country['country_id'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
+
+			                    	}
+			                    	if(!empty($groom['country_name']) && !empty($groom['user_location_country'])){
+			                    		echo '<option value="'.$groom['user_location_country'].'"  selected style="display:none;">'.$groom['country_name'].'</option>';
 			                    	}
 			                    ?>
 			         
@@ -139,6 +144,9 @@
 		                   <div class="select-block1">
 			                    <select name="user_location_state" class="states-list">
 			                    	<option value="">State</option>
+			                    	<?php if(!empty($groom['state_name']) && !empty($groom['user_location_state'])){
+			                    		echo '<option value="'.$groom['user_location_state'].'" selected style="display:none;">'.$groom['state_name'].'</option>';
+			                    		} ?>
 			                    </select>
 		                  	</div>
 		                </div>
@@ -146,7 +154,9 @@
 		                   <div class="select-block1">
 		                    <select name="user_location_city">
 			                    <option value="">City</option>
-			               
+			               		<?php if(!empty($groom['city_name']) && !empty($groom['user_location_city'])){
+			                    		echo '<option value="'.$groom['user_location_city'].'" selected style="display:none;">'.$groom['city_name'].'</option>';
+			                    		} ?>
 		                    </select>
 		                   </div>
 		                  </div>
@@ -158,7 +168,7 @@
 	              </div>
 	              <div class="age_select">
 			    	<?php 
-			   			$age = date('d-m-Y',$groom['age']);
+			   			$age = date('d-m-Y',$groom['user_birthday']);
 			   			$user_age = explode('-', $age);
 			   			 ?>
 			      <label for="edit-pass">Date of Birth <span class="form-required" title="This field is required.">*</span></label>
@@ -251,7 +261,9 @@
 						
 	              		<div class="form-group">
 							<div class="country-select">
-							    <label for="edit-location">Work Location <span class="form-required" title="This field is required.">*</span></label>
+							    <label for="edit-location">Work Location <span class="form-required" title="This field is required.">*</span>
+							    <?php echo str_replace("~", " ", $groom['user_work_location']);
+							    			$work_location = explode("~" , $groom['user_work_location']);  ?></label>
 						        <div class="age_grid">
 						         	<div class="col-sm-4 country form_box">
 				                  		<div class="select-block1">
@@ -260,6 +272,9 @@
 						                    <?php foreach ($countries as $key => $country) {
 						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
 						                    }
+						                     if(!empty($work_location[2]) ){
+						                    		echo '<option value="'.$work_location[2].'" selected style="display:none;">'.$work_location[2].'</option>';
+						                    	} 
 						                    ?>
 				                    		</select>
 				                  		</div>
@@ -268,6 +283,11 @@
 				                   		<div class="select-block1">
 					                    	<select name="user_work_location_state" class="states-list">
 					                    		<option value="">State</option>
+					                    		<?php 
+					                    		 if(!empty($work_location[1]) ){
+						                    		echo '<option value="'.$work_location[1].'"  selected style="display:none;">'.$work_location[1].'</option>';
+						                    	}  ?>
+
 					                    	</select>
 				                  		</div>
 				                	</div>
@@ -275,6 +295,11 @@
 				                   		<div class="select-block1">
 				                    		<select name="user_work_location_city">
 					                    		<option value="">City</option>
+					                    		<?php 
+					                    		 if(!empty($work_location[0]) ){
+						                    		echo '<option value="'.$work_location[0].'" selected style="display:none;">'.$work_location[0].'</option>';
+						                    	} 
+						                    	 ?>
 					               			</select>
 				                   		</div>
 				                  	</div>
@@ -288,7 +313,10 @@
 
 	              		<div class="form-group">
 						    <div class="country-select">
-							    <label for="edit-location">Native Place <span class="form-required" title="This field is required.">*</span></label>
+							    <label for="edit-location">Native Place <span class="form-required" title="This field is required.">*</span>
+							    	<?php echo str_replace("~", " ", $groom['user_native_location']);
+							    			$native_location = explode("~" , $groom['user_native_location']);  ?>
+							    </label>
 						        <div class="age_grid">
 						         	<div class="col-sm-4 country form_box">
 				                  		<div class="select-block1">
@@ -297,6 +325,9 @@
 						                    <?php foreach ($countries as $key => $country) {
 						                    	echo '<option value="'.$country['country_name'].'" data-id="'.$country['country_id'].'">'.$country['country_name'].'</option>';
 						                    }
+						                     if(!empty($native_location[2]) ){
+						                    		echo '<option value="'.$native_location[2].'" selected style="display:none;">'.$native_location[2].'</option>';
+						                    	} 
 						                    ?>
 				                    		</select>
 				                  		</div>
@@ -305,6 +336,11 @@
 				                   		<div class="select-block1">
 					                    	<select name="user_native_location_state" class="states-list">
 					                    		<option value="">State</option>
+					                    		<?php 
+					                    		 if(!empty($native_location[1]) ){
+						                    		echo '<option value="'.$native_location[1].'" selected style="display:none;">'.$native_location[1].'</option>';
+						                    	} 
+						                    	 ?>
 					                    	</select>
 				                  		</div>
 				                	</div>
@@ -312,6 +348,11 @@
 				                   		<div class="select-block1">
 				                    		<select name="user_native_location_city">
 					                    		<option value="">City</option>
+					                    		<?php 
+					                    		 if(!empty($native_location[0]) ){
+						                    		echo '<option value="'.$native_location[0].'" selected style="display:none;">'.$native_location[0].'</option>';
+						                    	} 
+						                    	 ?>
 					               			</select>
 				                   		</div>
 				                  	</div>
@@ -539,6 +580,7 @@
 				  <div class="clearfix"> </div>
 				  <div class="form-actions">
 				    <input type="submit" id="edit-submit" name="op" value="Submit" class="btn_1 submit">
+				    <a href="<?php echo base_url('frontend/user/') ?>" class="btn_1 submit"> Cancel </a>
 				  </div>
 			</div>  
 		 </form>
@@ -570,10 +612,10 @@
 					type:"POST",
 					success:function(response){
 						if(response.rc){
-							contact_person.hide();
+							// contact_person.hide();
 							contact_person.find('input').val('');
 							contact_person.find('select').val('');
-							$('.contact-person-view').last().removeClass('hidden');
+							// $('.contact-person-view').last().removeClass('hidden');
 						}	
 						else
 						{
@@ -598,10 +640,10 @@
 					type:"POST",
 					success:function(response){
 						if(response.rc){
-							family.hide();
+							// family.hide();
 							family.find('input').val('');
 							family.find('select').val('');
-							$('.family-member-view').last().removeClass('hidden');
+							// $('.family-member-view').last().removeClass('hidden');
 						}	
 						else
 						{
@@ -618,6 +660,7 @@
 			marital_status = $(this).val();
 			if(marital_status == "unmarried"){	
 				$('.user-children').addClass('hidden');
+				$('select[name="user_children"]').val('');
 			}
 			else
 			{
