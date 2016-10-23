@@ -607,10 +607,10 @@
 					type:"POST",
 					success:function(response){
 						if(response.rc){
-							contact_person.hide();
+							// contact_person.hide();
 							contact_person.find('input').val('');
 							contact_person.find('select').val('');
-							$('.contact-person-view').last().removeClass('hidden');
+							// $('.contact-person-view').last().removeClass('hidden');
 						}	
 						else
 						{
@@ -635,10 +635,10 @@
 					type:"POST",
 					success:function(response){
 						if(response.rc){
-							family.hide();
+							// family.hide();
 							family.find('input').val('');
 							family.find('select').val('');
-							$('.family-member-view').last().removeClass('hidden');
+							// $('.family-member-view').last().removeClass('hidden');
 						}	
 						else
 						{
