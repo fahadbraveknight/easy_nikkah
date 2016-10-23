@@ -3,7 +3,7 @@
   <div class="container">
    <div class="breadcrumb1">
      <ul>
-        <a href="index.html"><i class="fa fa-home home_1"></i></a>
+        <a href="<?php echo base_url();?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
         <li class="current-page">Register</li>
         <?php echo $this->session->flashdata('message'); ?>
