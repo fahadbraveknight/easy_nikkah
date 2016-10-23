@@ -181,7 +181,7 @@
 				         <div class="clearfix"> </div>
 				       </div>
 				    </div>
-				    <?php if($this->session->userdata('userid')==$groom['id']){ ?>
+				    <?php if($this->session->userdata('userid')==$bride['id']){ ?>
 				    <div class="basic_3">
 				    	<h4>Contact Person Details</h4>
 				    	<div class="basic_1 basic_2">

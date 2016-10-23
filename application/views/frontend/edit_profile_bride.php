@@ -163,7 +163,7 @@
 						<span><?php echo form_error('user_location_city'); ?></span>
 	              </div>  <div class="age_select">
 			    	<?php 
-			   			$age = date('d-m-Y',$bride['age']);
+			   			$age = date('d-m-Y',$bride['user_birthday']);
 			   			$user_age = explode('-', $age);
 			   			 ?>
 			      <label for="edit-pass">Date of Birth <span class="form-required" title="This field is required.">*</span></label>

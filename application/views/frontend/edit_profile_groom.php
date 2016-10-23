@@ -168,7 +168,7 @@
 	              </div>
 	              <div class="age_select">
 			    	<?php 
-			   			$age = date('d-m-Y',$groom['age']);
+			   			$age = date('d-m-Y',$groom['user_birthday']);
 			   			$user_age = explode('-', $age);
 			   			 ?>
 			      <label for="edit-pass">Date of Birth <span class="form-required" title="This field is required.">*</span></label>

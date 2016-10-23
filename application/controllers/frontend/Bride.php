@@ -35,11 +35,13 @@ class Bride extends CI_Controller {
 				if(!empty($_POST['contact_person']))
 				{
 					foreach ($_POST['contact_person'] as $key => $contact) {
-						if(!$contact){
-							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_name]', 'Contact Person Name' , 'required|trim|xss_clean');
-							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_email]', 'Contact Person Email' , 'required|valid_email|trim|xss_clean');
-							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_phone_no]', 'Contact Person Phone Number' , 'required|trim|xss_clean');
-							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_relation]', 'Contact Person Relation' , 'required|trim|xss_clean');
+						$required = '';
+						if($key == 0){$required = 'required|';}
+						if($key ==  0 || !empty($contact)){
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_name]', 'Contact Person Name' , $required .'trim|xss_clean');
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_email]', 'Contact Person Email' , $required .'valid_email|trim|xss_clean');
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_phone_no]', 'Contact Person Phone Number' , $required .'trim|xss_clean');
+							$this->form_validation->set_rules('contact_person['.$key.'][contact_person_relation]', 'Contact Person Relation' , $required .'trim|xss_clean');
 						}
 					}
 				}
