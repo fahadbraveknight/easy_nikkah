@@ -96,7 +96,7 @@
              </div>
              <div class="form-group">
              	<label for="accept-terms" class="">
-					By clicking on Submit you Agree to the <a href="#">Privacy</a> and <a href="#">Terms</a> of Easy Nikah.
+					By clicking on Submit you Agree to the <a href="<?php echo base_url('frontend/privacy') ?>" onclick="window.open('<?php echo base_url('frontend/privacy') ?>', 'newwindow', 'width=1000, height=600'); return false;">Privacy</a> and <a href="<?php echo base_url('frontend/terms') ?>" onclick="window.open('<?php echo base_url('frontend/terms') ?>', 'newwindow', 'width=1000, height=600'); return false;">Terms</a> of Easy Nikah.
 				</label>
              </div>
 			  <div class="form-actions">

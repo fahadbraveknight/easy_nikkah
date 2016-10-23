@@ -131,5 +131,5 @@ $(document).ready(function(){
 
 <div class="banner">
 	<div class="comingsoon">
-		<marquee>"SubhanAllah Matrimony is now Easy Nikah"</marquee>
+		<marquee scrollamount="4">"SubhanAllah Matrimony is now Easy Nikah"</marquee>
 	</div>
