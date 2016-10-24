@@ -32,6 +32,18 @@
     .slick-next:before {
         color: black;
     }
+@media (max-width:768px){
+	.salam img {
+width: 100%;
+}
+
+.second_para {
+padding: 10px 20px;
+}
+.nav_bottom {
+    background: rgba(191, 53, 53, 0.52);
+}
+}
 
 </style>
 
