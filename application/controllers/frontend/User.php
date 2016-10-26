@@ -106,7 +106,7 @@ class User extends CI_Controller {
 			    $config['protocol']     = 'smtp';
 			    $config['smtp_host']    = 'bh-33.webhostbox.net';
 			    $config['smtp_port']    = '587';
-			    $config['smtp_user']    = 'contact@easynikah.in';
+			    $config['smtp_user']    = 'info@easynikah.in';
 			    $config['smtp_pass']    = 'Tech!1234';
 			    $config['charset']     = 'utf-8';
 			    $config['newline']     = "\r\n";
@@ -121,7 +121,7 @@ class User extends CI_Controller {
 
 
 
-				$this->email->from('contact@easynikah.in','Admin - Easy Nikah');
+				$this->email->from('info@easynikah.in','Admin - Easy Nikah');
 				$this->email->to($params['email']);
 				$this->email->subject('Easy Nikah Profile Verification');
 				$this->email->message($message);
@@ -242,45 +242,45 @@ class User extends CI_Controller {
 
 	function email_verification($id)
 	{
-		$email_verification_status = $this->User_model->change_email_status($id);
+		// $email_verification_status = $this->User_model->change_email_status($id);
 
-		$user = $this->User_model->get_user_details($id);
-		$email = $user->email;
-		$name = $user->full_name;
+		// $user = $this->User_model->get_user_details($id);
+		// $email = $user->email;
+		// $name = $user->full_name;
 
-		$this->load->library('email');
-	    $config['protocol']     = 'smtp';
-	    $config['smtp_host']    = 'bh-33.webhostbox.net';
-	    $config['smtp_port']    = '587';
-	    $config['smtp_user']    = 'contact@easynikah.in';
-	    $config['smtp_pass']    = 'Tech!1234';
-	    $config['charset']     = 'utf-8';
-	    $config['newline']     = "\r\n";
-	    $config['mailtype']  = 'html'; // or html
-	    $config['validation']  = TRUE; // bool whether to validate email or not
+		// $this->load->library('email');
+	 //    $config['protocol']     = 'smtp';
+	 //    $config['smtp_host']    = 'bh-33.webhostbox.net';
+	 //    $config['smtp_port']    = '587';
+	 //    $config['smtp_user']    = 'contact@easynikah.in';
+	 //    $config['smtp_pass']    = 'Tech!1234';
+	 //    $config['charset']     = 'utf-8';
+	 //    $config['newline']     = "\r\n";
+	 //    $config['mailtype']  = 'html'; // or html
+	 //    $config['validation']  = TRUE; // bool whether to validate email or not
 
-	    $this->email->initialize($config);
-		$this->email->set_newline("\n\r");
-
-
-		$message = $name."<br><br>Alhamdulillah!!! Your profile has been verified successfully. Please login and complete your detailed profile.<br><br>All the services at Easy Nikah are absolutely FREE  and will always be In sha Allah with no charges during registration, search or after you find your match In sha Allah.<br><br>We sincerely hope you find your desired match at Easy Nikah and your search here is fruitful. <br><br>All the very best!!! <br><br> Best Regards<br>Admin - Easy Nikah";
+	 //    $this->email->initialize($config);
+		// $this->email->set_newline("\n\r");
 
 
+		// $message = $name."<br><br>Alhamdulillah!!! Your profile has been verified successfully. Please login and complete your detailed profile.<br><br>All the services at Easy Nikah are absolutely FREE  and will always be In sha Allah with no charges during registration, search or after you find your match In sha Allah.<br><br>We sincerely hope you find your desired match at Easy Nikah and your search here is fruitful. <br><br>All the very best!!! <br><br> Best Regards<br>Admin - Easy Nikah";
 
-		$this->email->from('contact@easynikah.in','Admin - Easy Nikah');
-		$this->email->to($email);
-		$this->email->subject('Easy Nikah Profile successfully verified');
-		$this->email->message($message);
 
-		if($this->email->send())
-		{
+
+		// $this->email->from('contact@easynikah.in','Admin - Easy Nikah');
+		// $this->email->to($email);
+		// $this->email->subject('Easy Nikah Profile successfully verified');
+		// $this->email->message($message);
+
+		// if($this->email->send())
+		// {
 			$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Your email has been verified. Please login and complete your profile by filling up the detailed form.</div>');
-			redirect('frontend/user');	
-		}
-		else
-		{
-			show_error($this->email->print_debugger());
-		}
+			redirect('frontend/user/login');	
+		// }
+		// else
+		// {
+		// 	show_error($this->email->print_debugger());
+		// }
 
 		// $gender = $user->gender;
 
@@ -322,7 +322,7 @@ class User extends CI_Controller {
 			    $config['protocol']     = 'smtp';
 			    $config['smtp_host']    = 'bh-33.webhostbox.net';
 			    $config['smtp_port']    = '587';
-			    $config['smtp_user']    = 'contact@easynikah.in';
+			    $config['smtp_user']    = 'info@easynikah.in';
 			    $config['smtp_pass']    = 'Tech!1234';
 			    $config['charset']     = 'utf-8';
 			    $config['newline']     = "\r\n";
@@ -337,7 +337,7 @@ class User extends CI_Controller {
 
 
 
-				$this->email->from('contact@easynikah.in','Admin - Easy Nikah');
+				$this->email->from('info@easynikah.in','Admin - Easy Nikah');
 				$this->email->to($email);
 				$this->email->subject('Easy Nikah Forgot Password');
 				$this->email->message($message);
