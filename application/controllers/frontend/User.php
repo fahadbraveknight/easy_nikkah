@@ -136,7 +136,9 @@ class User extends CI_Controller {
 				}
 				else
 				{
-					show_error($this->email->print_debugger());
+					$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have encountered an issue. Please come back tomorrow to register.</div>');
+					redirect('frontend/user/register');
+					// show_error($this->email->print_debugger());
 				}
 
 			}
@@ -349,7 +351,9 @@ class User extends CI_Controller {
 				}
 				else
 				{
-					show_error($this->email->print_debugger());
+					$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have encountered an issue. Please try again.</div>');
+					redirect('frontend/user/forgot_password');
+					// show_error($this->email->print_debugger());
 				}
 
 			}
