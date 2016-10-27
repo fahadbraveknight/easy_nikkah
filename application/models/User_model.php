@@ -44,6 +44,11 @@ class User_model extends CI_Model {
         return $response;
     }
 
+    function check_email_verification_status($email)
+    {
+        return $user = $this->db->get_where('users',array('email'=>$email))->row_array();
+    }
+
     function add_user($params)
     {
     	$add_data = array(	'full_name' => $params['full_name'],
