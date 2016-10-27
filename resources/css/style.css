@@ -3579,3 +3579,34 @@ ul.feature_list.feature_list1 {
     	font-size: 20px;
     	color: #f90404;
     }
+    @media (max-width:768px){
+  .salam img {
+width: 100%;
+}
+
+.second_para {
+padding: 10px 20px;
+}
+.nav_bottom {
+    background: rgba(191, 53, 53, 0.52);
+}
+}
+.proposal{
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff6565;
+
+}
+.proposal > .btn_1{
+  font-weight: 500;
+}
+.contact-person > div {
+  display: inline-block;
+  padding-top: 10px;
+}
+.contact-person > .day_value {
+  padding-right: 10px;
+}
+.contact-person > .day_label {
+  color: #777;
+}

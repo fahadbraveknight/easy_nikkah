@@ -172,7 +172,7 @@
 
 	<div class="clearfix"> </div>
 		<div class="submit inline-block" style="padding-top: 32px;text-align: right; width: 100%;">
-		   <input id="submit-btn" class="hvr-wobble-vertical" type="button" value="Find Matches">
+		   <input id="submit-btn" class="hvr-wobble-vertical btn_1" type="button" value="Find Matches">
 		</div>
 	<div class="clearfix"> </div>
 	</div>
@@ -195,8 +195,8 @@
 							   		<h4><?php echo $value['profile_id'] ?></h4>
 							   	  <p><?php echo $value['full_name']; ?></p>
 							   	  <p><?php echo $value['age'] ?> Yrs, <?php echo $value['user_height'] ?></p>
-							   	  <p><?php echo $value['qualification_name'] ?></p>
-							   	  <p><?php echo $value['city_name']." ".$value['state_name']." ".$value['country_name'] ?></p>
+							   	  <p><?php echo !empty($value['qualification_name']) ? $value['qualification_name'] : '-'; ?></p>
+							   	  <p><?php echo !empty($value['country_name']) ? $value['city_name']." ".$value['state_name']." ".$value['country_name']  : '-'; ?></p>
 							   	  <h5><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>">View Full Profile</a></h5>
 							   </li>
 							   <div class="clearfix"> </div>

@@ -5,12 +5,16 @@ class User extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-        $this->load->model(array('User_model','Location_model','Qualification_model',));
+        $this->load->model(array('User_model','Location_model','Qualification_model','Proposal_model'));
     	$this->load->helper('string');
     }
 
 	public function index()
 	{	
+		if($this->session->userdata('userid')){
+			$data['proposal_accepted'] = $this->Proposal_model->get_status_notification($this->session->userdata('userid'),'accepted');
+			$data['proposal_request'] = $this->Proposal_model->get_status_notification($this->session->userdata('userid'),'awaiting_response');
+		}
 		$data['view'] = 'frontend/index';
 		$this->load->view('frontend/layout/base_layout',$data);
 		
@@ -172,10 +176,23 @@ class User extends CI_Controller {
 		exit;
 	}
 
+	public function script()
+	{
+		$unverified = $this->db->get_where('users',array('email_verification_status'=>0))->result_array();
+		$fp = fopen(FCPATH.'resources/contact.csv', 'w');
+		echo FCPATH.'resources/contact.csv';
+		// if(file_exists(FCPATH.'resources/contact.csv')){echo's';exit;}
+		foreach ($unverified as $key => $value) {
+			fputcsv($fp, array($value['email'],$value['full_name']));
+			// pr($value);
+		}
+		$fo = fclose($fp);
+	}
+	
 	public function register()
 	{
 		$this->form_validation->set_rules('full_name', 'Full Name' , 'required|xss_clean');
-		$this->form_validation->set_rules('email', 'Email' , 'required|is_unique[users.email]|xss_clean');
+		$this->form_validation->set_rules('email', 'Email' , 'required|is_unique[users.email]|valid_email|xss_clean');
 
 		$this->form_validation->set_rules('age-month', 'Month' , 'required|xss_clean');
 		$this->form_validation->set_rules('age-date', 'Date' , 'required|xss_clean');

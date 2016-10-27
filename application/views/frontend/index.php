@@ -32,18 +32,7 @@
     .slick-next:before {
         color: black;
     }
-@media (max-width:768px){
-	.salam img {
-width: 100%;
-}
 
-.second_para {
-padding: 10px 20px;
-}
-.nav_bottom {
-    background: rgba(191, 53, 53, 0.52);
-}
-}
 
 </style>
 
@@ -54,6 +43,20 @@ padding: 10px 20px;
 			echo "<br>";
 			echo $this->session->flashdata('message');
 		}
+
+		if( $this->session->userdata('userid')){
+			echo '<div class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>';
+			if($proposal_accepted!=0)
+			{
+				echo "".$proposal_accepted." users accepted your Proposal";
+			}
+			if($proposal_request!=0)
+			{
+				echo "You have ".$proposal_request." Proposal Requests";
+			}	
+			echo "</div>";
+		}	
+		
 	?>
 	</div>
 	<?php /*?><div id="owl-example" class="owl-carousel">

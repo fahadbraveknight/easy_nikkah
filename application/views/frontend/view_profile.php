@@ -36,6 +36,69 @@
 			      <li>Already a member? <a href="login.html">Login Now</a></li>
 			      <li>If not a member? <a href="register.html">Register Now</a></li>
 			    </ul> -->
+			    <div class="profile-parent">
+			    <?php if($this->session->userdata('userid') != $groom['id']){ ?>
+			    	
+				    <?php 
+				    	$data_status = '';
+				    	$data_value = '';
+				    	$data_message ='';
+				    	$button = '';
+			    		if(!empty($relationship)){
+					    	switch ($relationship['status']) {
+					    	case 'awaiting_response':
+					    	 	if($this->session->userdata('userid') == $relationship['from_id']){
+					    			$data_message = 'Awaiting Response';
+					    		}
+					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
+									$data_status = 'accepted';
+					    			$data_value = 'Accept';
+					    			$button = '<input  class="rel-button btn_1" data-status="need_more_time" data-id="'.$groom['id'].'" type="button" value="Need More Time">
+					    				<input  class="rel-button btn_1" data-status="declined" data-id="'.$groom['id'].'" type="button" value="Decline Proposal">';
+					    		}
+					    		break;
+					    	case 'need_more_time':
+					    	 	if($this->session->userdata('userid') == $relationship['from_id']){
+					    			$data_message = 'Need More Time';
+					    		}
+					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
+									$data_status = 'accepted';
+					    			$data_value = 'Accept';
+					    			$button = '<input  class="rel-button btn_1" data-status="declined" data-id="'.$groom['id'].'" type="button" value="Decline Proposal">';
+					    		}
+					    		break;
+					    	case 'accepted':
+								$data_message = 'Can View Contact Details.';
+					    		break;
+					    	case 'declined':
+								if($this->session->userdata('userid') == $relationship['from_id']){
+					    			$data_message = 'Proposal Declined';
+					    		}
+					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
+									$data_status = 'remove_relationship';
+					    			$data_value = 'Changed Mind';
+					    		}
+
+					    		break;
+					    	default:
+					    		# code...
+					    		break;
+					    	}
+					    }else{
+							$data_status = 'awaiting_response';
+				    		$data_value = 'Send Proposal';
+				    	}
+				     ?>
+
+					<div class="submit inline-block proposal" style="padding-top: 32px; width: 100%;">
+				    <div><?php echo $data_message ?></div>
+				    <?php if(!empty($data_status)){ ?>
+						   <input  class="<?php echo $data_status=='awaiting_response'? 'hvr-wobble-vertical' : ''; ?> rel-button btn_1" data-status="<?php echo $data_status ?>" data-id="<?php echo $groom['id'] ?>" type="button" value="<?php echo $data_value ?>">
+						   <?php echo $button ?>
+					<?php } ?>
+					</div>
+				<?php } ?>
+				</div>
 			</div>
 			<div class="clearfix"> </div>
 		</div>
@@ -181,33 +244,30 @@
 				         <div class="clearfix"> </div>
 				       </div>
 				    </div>
-				    <?php if($this->session->userdata('userid')==$groom['id']){ ?>
-				    <div class="basic_3">
+				    
+				    <div class="basic_3 contact">
 				    	<h4>Contact Person Details</h4>
 				    	<div class="basic_1 basic_2">
-				    	<h3>Basics</h3>
 				    	<div class="col-md-12 basic_1-left">
-				    	  <table class="table_working_hours">
-				        	<tbody>
-				        		<?php 
-				        			foreach ($groom_contact_persons as $key => $value) { ?>
-				        			<tr class="opened">
-										<td class="day_label">Relation :</td>
-										<td class="day_value"><?php echo $value['contact_person_relation'] ?></td>
-										<td class="day_label">Name :</td>
-										<td class="day_value"><?php echo $value['contact_person_name'] ?> </td>
-										<td class="day_label">Email :</td>
-										<td class="day_value"><?php echo $value['contact_person_email'] ?></td>
-										<td class="day_label">Phone Number :</td>
-										<td class="day_value"><?php echo $value['contact_person_phone_no'] ?> </td>
-									</tr>
-				        		<?php } ?>
-							 </tbody>
-				          </table>
+				    	<?php if($this->session->userdata('userid')==$groom['id'] ||(!empty($relationship) && $relationship['status']=='accepted')){ ?>
+			        		<?php 
+			        			foreach ($groom_contact_persons as $key => $value) { ?>
+			        			<div class="opened contact-person">
+									<div class="day_label">Relation :</div>
+									<div class="day_value"><?php echo $value['contact_person_relation'] ?></div>
+									<div class="day_label">Name :</div>
+									<div class="day_value"><?php echo $value['contact_person_name'] ?> </div>
+									<br clear="all">
+									<div class="day_label">Email :</div>
+									<div class="day_value"><?php echo $value['contact_person_email'] ?></div>
+									<div class="day_label">Phone Number :</div>
+									<div class="day_value"><?php echo $value['contact_person_phone_no'] ?> </div>
+								</div>
+			        		<?php } ?>
+			        	 <?php } ?>
 				         </div>
 				       </div>
 				    </div>
-				    <?php } ?>
 				 </div>
 				 <div role="tabpanel" class="tab-pane fade" id="profile1" aria-labelledby="profile-tab1">
 				    <div class="basic_1 basic_2">
@@ -342,3 +402,37 @@
     </div>-->
   </div> 
 </div>
+
+<script type="text/javascript">
+
+	$( document ).ready(function() {
+		$(document).on('click',".rel-button",function(){
+			var status = $(this).attr('data-status');
+			var relationship_id = $(this).attr('data-id');
+			if(status == 'remove_relationship')
+			{
+				var action = 'ajax_delete_proposal';
+			}
+			else
+			{
+				var action = 'ajax_send_proposal';
+			}
+			$.ajax({
+				url:BASE_URL+"frontend/proposal/"+action,
+				dataType: "JSON",
+				type:"POST",
+				data:{"status":status,"relationship_id":relationship_id},
+				success:function(response){
+					if(response.rc)
+					{
+						$('.profile-parent').html(response.html);
+						if(response.contact_html.length > 0)
+						{
+							$('.contact > .basic_2 >.basic_1-left').html(response.contact_html);
+						}
+					}
+				}
+			});
+		})
+	});
+</script>

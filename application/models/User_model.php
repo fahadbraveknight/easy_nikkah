@@ -189,6 +189,8 @@ class User_model extends CI_Model {
                 $qualification_condition
                 $location_condition
 
+                AND u.email_verification_status = 1
+
                 GROUP BY u.id
                 ";
         return $this->db->query($sql)->result_array();

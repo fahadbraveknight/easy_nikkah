@@ -39,6 +39,7 @@ class Location_model extends CI_Model {
                 From 
                     countries 
                 JOIN users on countries.country_id= users.user_location_country
+                GROUP BY countries.country_id
             ";
         return $this->db->query($sql)->result_array();
     }
@@ -50,7 +51,7 @@ class Location_model extends CI_Model {
                     states 
                 JOIN users on states.state_id= users.user_location_state
                 WHERE 
-                    states.country_id=".$country_id;
+                    states.country_id=".$country_id." GROUP BY  states.state_id";
         return $this->db->query($sql)->result_array();
     }
 
@@ -61,7 +62,7 @@ class Location_model extends CI_Model {
                     cities 
                 JOIN users on cities.city_id= users.user_location_city
                 WHERE 
-                    cities.state_id=".$state_id;
+                    cities.state_id=".$state_id." GROUP BY  cities.city_id";
         return $this->db->query($sql)->result_array();
     }
 

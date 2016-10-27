@@ -5,7 +5,7 @@ class Groom extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-        $this->load->model(array('User_model','Groom_model','Location_model','Profession_model','Qualification_model',));
+        $this->load->model(array('User_model','Groom_model','Location_model','Profession_model','Qualification_model','Proposal_model'));
     }
 
 	public function index()
@@ -190,11 +190,15 @@ class Groom extends CI_Controller {
 
 	public function view_profile($id=0)
 	{
-		$groom = $this->Groom_model->get_groom($id);
 		if($this->session->userdata('userid'))
 		{
+			$groom = $this->Groom_model->get_groom($id);
 			if(!empty($groom))
 			{
+				if($groom['id'] != $this->session->userdata('userid'))
+				{
+					$data['relationship'] = $this->Proposal_model->get_relationship($this->session->userdata('userid'),$groom['id']);
+				}
 				$data['groom'] = $groom;
 				$data['groom_family'] = $this->User_model->get_user_family($groom['id']);
 				$data['groom_contact_persons'] = $this->User_model->get_user_contact_person($groom['id']);
