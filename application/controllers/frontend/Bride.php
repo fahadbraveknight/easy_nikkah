@@ -191,7 +191,7 @@ class Bride extends CI_Controller {
 			{
 				if($bride['id'] != $this->session->userdata('userid'))
 				{
-					$data['relationship'] = $this->Proposal_model->get_relationship($this->session->userdata('userid'),$groom['id']);
+					$data['relationship'] = $this->Proposal_model->get_relationship($this->session->userdata('userid'),$bride['id']);
 				}
 				$data['bride'] = $bride;
 				$data['bride_family'] = $this->User_model->get_user_family($bride['id']);

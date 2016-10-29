@@ -248,9 +248,9 @@
 				    	<h4>Contact Person Details</h4>
 				    	<div class="basic_1 basic_2">
 				    	<div class="col-md-12 basic_1-left">
-				    	<?php if($this->session->userdata('userid')==$groom['id'] ||(!empty($relationship) && $relationship['status']=='accepted')){ ?>
+				    	<?php if($this->session->userdata('userid')==$bride['id'] ||(!empty($relationship) && $relationship['status']=='accepted')){ ?>
 			        		<?php 
-			        			foreach ($groom_contact_persons as $key => $value) { ?>
+			        			foreach ($bride_contact_persons as $key => $value) { ?>
 			        			<div class="opened contact-person">
 									<div class="day_label">Relation :</div>
 									<div class="day_value"><?php echo $value['contact_person_relation'] ?></div>
