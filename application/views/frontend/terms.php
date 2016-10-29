@@ -8,6 +8,7 @@ p {
     margin-bottom: 15px;
     padding: 0 125px 0 0;
 }
+
 </style>
 <div style="width:1060px;" class="container">
 	<h3 class="about_header"><strong>Terms of Use / Service Agreement:</strong></h3>
@@ -27,7 +28,7 @@ p {
 	from time to time.</p>
 	
 	<ol>
-		<li><strong>Eligibility</strong></li>
+		<li><strong>Eligibility</strong>
 		To register at EasyNikah.in or use this website, you must be of legal marriageable age as per the laws of India 
 		(currently, 18 years or over for females and 21 years or over for males). EasyNikah.in website shall only facilitate 
 		personal advertisement for lawful marriage alliance between persons who are legally competent to enter into 
@@ -38,22 +39,22 @@ p {
 		You also agree to abide by all of the terms and conditions of this Agreement. If at any time EasyNikah.in is of the 
 		opinion (in its sole discretion) or has any reason to believe that you are not eligible to become a member or that 
 		you have made any misrepresentation about your eligibility, EasyNikah.in reserves the right to forthwith terminate 
-		your membership and / or your right to use the Service without any refund to you of any of your unutilized subscription fee.
+		your membership and / or your right to use the Service without any refund to you of any of your unutilized subscription fee.</li>
 		
-		<li><strong>Term</strong></li>
+		<li><strong>Term</strong>
 		You may terminate your membership at any time, for any reason by writing to EasyNikah.in. EasyNikah.in may terminate your 
 		access to the Site and/or your membership for any reason effective upon sending notice to you at the email address as provided 
-		you in your application for membership or such other email address as you may later provided to EasyNikah.in.
-		<li><strong>Non-Commercial Use by Members</strong></li>
+		you in your application for membership or such other email address as you may later provided to EasyNikah.in.</li>
+		<li><strong>Non-Commercial Use by Members</strong>
 		EasyNikah.in website is for the personal use of individual members to register and share their profiles for the purpose 
 		of finding a suitable match. Acceptance from relevant matches and cannot be used in connection with any commercial 
 		endeavors. This includes providing links to other web sites, whether deemed competitive to EasyNikah.in or otherwise. 
 		Organizations, companies, and/or businesses cannot become Members of EasyNikah.in and should not use the EasyNikah.in 
 		Service or website for any purpose. Illegal and/or unauthorized uses of the Site, including unauthorized framing of or 
 		linking to the Site will be investigated, and appropriate legal action will be taken, including without limitation, civil, 
-		criminal, and injunctive redress.
+		criminal, and injunctive redress.</li>
 		
-		<li><strong>Other Terms of Use by Members</strong></li>
+		<li><strong>Other Terms of Use by Members</strong>
 			<ol type="i">
 				<li>EasyNikah.in reserves the right in it's sole discretion to review the activity & status of each account & 
 				block the account of a member based on such review.</li>
@@ -91,8 +92,8 @@ p {
 				<li>EasyNikah.in Members hereby, unconditionally and irrevocably confirm that you have read terms and conditions 
 				and agree to abide by them.</li>
 			</ol>
-			
-		<li><strong>Content Posted on the Site</strong></li>
+			</li>
+		<li><strong>Content Posted on the Site</strong>
 			<ol type="i">
 				<li>You understand and agree that EasyNikah.in may delete any listing, content, communication, profiles 
 				(collectively, "Content") that in the sole judgment of EasyNikah.in violate this Agreement or which might be 
@@ -159,7 +160,7 @@ p {
 				
 				<li>engages in commercial activities and/or sales without our prior written consent such as contests, 
 				sweepstakes, barter, advertising, and pyramid schemes</li>
-			</ol>
+			</ol></li>
 	</ol>
 	<ul style="list-style-type: square;">
 		<li>You must use the EasyNikah.in Service in a manner consistent with any and all applicable local, state, and federal 

@@ -56,6 +56,9 @@ class Proposal extends CI_Controller {
 			}
 			elseif(!empty($relationship))
 			{
+				if($_POST['status']=='awaiting_response'){
+					$_POST['status'] = 'accepted';
+				}
 				$result = $this->Proposal_model->edit_relationship($this->session->userdata('userid'), $_POST['relationship_id'],$_POST['status']);
 				if($result)
 				{

@@ -60,7 +60,7 @@ $(document).ready(function(){
 			   </ul>
              </nav>
            </div>
-           <a class="brand" href="<?php echo base_url('frontend/user') ?>" ><h2 style="display: inline-block; margin-top:6px;margin-bottom:3px;color:#1e008c;">Easy Nikah</h2></a>
+           <a class="brand" href="<?php echo base_url('frontend/user') ?>" ><h2 style="display: inline-block; margin-top:6px;margin-bottom:3px;color:#fff;font-weight: 500;font-family: cursive;">Easy Nikah</h2></a>
            <div class="pull-right">
           	<nav class="navbar nav_bottom" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->

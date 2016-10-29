@@ -48,11 +48,11 @@
 			echo '<div class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>';
 			if($proposal_accepted!=0)
 			{
-				echo "".$proposal_accepted." users accepted your Proposal";
+				echo "<a href='".base_url('frontend/proposal')."'>".$proposal_accepted." users accepted your Proposal </a> <br>";
 			}
 			if($proposal_request!=0)
 			{
-				echo "You have ".$proposal_request." Proposal Requests";
+				echo "<a href='".base_url('frontend/proposal')."'>You have ".$proposal_request." Proposal Requests </a>";
 			}	
 			echo "</div>";
 		}	

@@ -3638,3 +3638,12 @@ padding: 10px 20px;
 .jobs_right .profile-parent{
   padding-left: 1%;
 }
+
+@media (max-width:768px){
+.container {
+  width: 100% !important;
+  }
+  .container p{
+    padding: 0;
+  }
+}

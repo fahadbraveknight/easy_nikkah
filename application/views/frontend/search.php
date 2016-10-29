@@ -77,6 +77,7 @@
 	</div>
 	
 	<div class="form_but1 state">
+		<span class="bg-danger location-error"></span>
 		<label class="col-sm-5 control-lable1" for="sex">State : </label>
 		<div class="col-sm-7 form_radios">
 			<div class="select-block1">
@@ -392,34 +393,67 @@
     </style>
 <script>
 $( document ).ready(function() {
-	$(document).on('change','.countries-list',function(){
-		var country_id = $(this).find(':selected').attr('data-id');
-		var next = $(this).parents('.country').siblings('.state').find('select');
-		var this_name = $(this).attr('name');
-		$.ajax({
-			url:BASE_URL+"frontend/user/ajax_get_all_states/"+country_id,
-			dataType: "JSON",
-			type:"POST",
-			data:{"valid":true},
-			success:function(response){
-				if(response.rc)
-				{
-					if( this_name =="location_country")
+
+		$(document).on('change','.countries-list',function(){
+			var country_id = $(this).find(':selected').attr('data-id');
+			var next = $(this).parents('.country').siblings('.state').find('select');
+			var next_city = $(this).parents('.country').siblings('.city').find('select');
+			var this_name = $(this).attr('name');
+			$.ajax({
+				url:BASE_URL+"frontend/user/ajax_get_all_states/"+country_id,
+				dataType: "JSON",
+				type:"POST",
+				success:function(response){
+					next.html('<option value="">Select</option>');
+					next_city.html('<option value="">Select</option>');
+					if(response.rc)
 					{
-						$.each(response.states,function(index,data){
-							next.append( '<option data-id="'+data.state_id+'" value="'+data.state_id+'">'+data.state_name+'</option>');
-						})
-					}
-					else
-					{						
-						$.each(response.states,function(index,data){
-							next.append( '<option data-id="'+data.state_id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
-						})
+						if( this_name =="user_location_country")
+						{
+							$.each(response.states,function(index,data){
+								next.append( '<option data-id="'+data.state_id+'" value="'+data.state_id+'">'+data.state_name+'</option>');
+							})
+						}
+						else
+						{						
+							$.each(response.states,function(index,data){
+								next.append( '<option data-id="'+data.state_id+'" value="'+data.state_name+'">'+data.state_name+'</option>');
+							})
+						}
 					}
 				}
-			}
-		});
-	})
+			});
+		})
+
+		$(document).on('change','.states-list',function(){
+			var state_id = $(this).find(':selected').attr('data-id');
+			var next = $(this).parents('.state').siblings('.city').find('select');
+			var this_name = $(this).attr('name');
+			$.ajax({
+				url:BASE_URL+"frontend/user/ajax_get_all_cities/"+state_id,
+				dataType: "JSON",
+				type:"POST",
+				success:function(response){
+					next.html('<option value="">Select</option>');
+
+					if(response.rc)
+					{
+						if( this_name =='user_location_state')
+						{
+							$.each(response.cities,function(index,data){
+								next.append( '<option data-id="'+data.city_id+'" value="'+data.city_id+'">'+data.city_name+'</option>');
+							})
+						}
+						else
+						{						
+							$.each(response.cities,function(index,data){
+								next.append( '<option data-id="'+data.city_id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
+							})
+						}
+					}
+				}
+			});
+		})	
 
 	$(document).on('click',"#submit-btn",function(){
 		var has_error=false;
@@ -443,34 +477,7 @@ $( document ).ready(function() {
 		}
 	});
 
-	$(document).on('change','.states-list',function(){
-		var state_id = $(this).find(':selected').attr('data-id');
-		var next = $(this).parents('.state').siblings('.city').find('select');
-		var this_name = $(this).attr('name');
-		$.ajax({
-			url:BASE_URL+"frontend/user/ajax_get_all_cities/"+state_id,
-			dataType: "JSON",
-			type:"POST",
-			data:{"valid":true},
-			success:function(response){
-				if(response.rc)
-				{
-					if( this_name =='location_state')
-					{
-						$.each(response.cities,function(index,data){
-							next.append( '<option data-id="'+data.city_id+'" value="'+data.city_id+'">'+data.city_name+'</option>');
-						})
-					}
-					else
-					{						
-						$.each(response.cities,function(index,data){
-							next.append( '<option data-id="'+data.city_id+'" value="'+data.city_name+'">'+data.city_name+'</option>');
-						})
-					}
-				}
-			}
-		});
-	})	
+
 });
 $(".dropdown dt a").on('click', function() {
   $(".dropdown dd ul").slideToggle('fast');

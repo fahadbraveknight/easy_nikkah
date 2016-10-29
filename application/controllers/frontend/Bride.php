@@ -85,11 +85,11 @@ class Bride extends CI_Controller {
 		    						'user_brothers' => $_POST['user_brothers'],
 		    						'user_married_brothers' => $_POST['user_married_brothers'],
 		    						'user_sisters' => $_POST['user_sisters'],
-		    						'user_married_sisters' => $_POST['user_married_sisters']
+		    						'user_married_sisters' => $_POST['user_married_sisters'],
+		    						'user_location_country' => $_POST['user_location_country'],
+		    						'user_location_state' => $_POST['user_location_state'],
+		    						'user_location_city' => $_POST['user_location_city']
 		    						);
-					if(!empty($_POST['user_location_country'])){$params['user_location_country'] = $_POST['user_location_country']; }
-					if(!empty($_POST['user_location_state'])){$params['user_location_state'] = $_POST['user_location_state']; }
-					if(!empty($_POST['user_location_city'])){$params['user_location_city'] = $_POST['user_location_city']; }
 					if($user_work_location != "  "){$params['user_work_location'] = $user_work_location; }
 					if($user_native_location != "  "){$params['user_native_location'] = $user_native_location; }
 					$this->Bride_model->edit_bride($id,$params);

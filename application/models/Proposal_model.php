@@ -66,7 +66,9 @@ class Proposal_model extends CI_Model {
         $edit_data = array(
                             'status' => $new_status
                         );
-
+        if($new_status == 'accepted'){
+            $edit_data['has_seen'] = 0; 
+        }
         $this->db->group_start()->where(array('from_id' =>  $from_id , 'to_id' => $to_id ))->group_end();
         $this->db->or_group_start()->where(array('to_id' =>  $from_id , 'from_id' => $to_id ))->group_end();
         
@@ -96,9 +98,9 @@ class Proposal_model extends CI_Model {
 
     function get_update_seen($id)
     {
-        $this->db->where(array('from_id' => $id, 'status'=> 'acceped' ));
+        $this->db->where(array('from_id' => $id, 'status'=> 'accepted' ));
         $this->db->update('user_relationships',array('has_seen'=>1));
-
+       
         $this->db->where(array('to_id' => $id, 'status'=> 'awaiting_response' ));
         $this->db->update('user_relationships',array('has_seen'=>1));
         
