@@ -38,6 +38,8 @@ class Proposal extends CI_Controller {
 			}else{
 				$data['user']['id'] = $relationship['to_id'];
 			}
+			$data['user']['full_name'] = $this->User_model->get_user_name($data['user']['id']);
+			// pr($data['user']['full_name']);
 			if(empty($relationship) && $_POST['status']='awaiting_response')
 			{
 				$result = $this->Proposal_model->add_relationship($this->session->userdata('userid'), $_POST['relationship_id']);
@@ -96,6 +98,7 @@ class Proposal extends CI_Controller {
 				}else{
 					$data['user']['id'] = $relationship['to_id'];
 				}
+				$data['user']['full_name'] = $this->User_model->get_user_name($data['user']['id']);
 				$result = $this->Proposal_model->delete_relationship($this->session->userdata('userid'), $_POST['relationship_id']);
 				if($result)
 				{

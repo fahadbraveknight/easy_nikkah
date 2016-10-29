@@ -14,6 +14,7 @@ class User extends CI_Controller {
 		if($this->session->userdata('userid')){
 			$data['proposal_accepted'] = $this->Proposal_model->get_status_notification($this->session->userdata('userid'),'accepted');
 			$data['proposal_request'] = $this->Proposal_model->get_status_notification($this->session->userdata('userid'),'awaiting_response');
+			$data['proposal_declined'] = $this->Proposal_model->get_status_notification($this->session->userdata('userid'),'declined');
 		}
 		$data['view'] = 'frontend/index';
 		$this->load->view('frontend/layout/base_layout',$data);

@@ -241,6 +241,14 @@ class User_model extends CI_Model {
             );
         return $this->db->where('password_change_id', $token_id)->update('users',$data);
     }
+
+    function get_user_name($id)
+    {
+        $this->db->select('full_name');
+        $this->db->where('id',$id);
+        $query = $this->db->get('users')->row_array();
+        return $query['full_name'];
+    }
 }
 
 ?>

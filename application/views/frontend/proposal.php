@@ -9,15 +9,45 @@
      </ul>
    </div> -->
 
+<style type="text/css">
+	.proposal-text{
+		 padding: 10px 0px;
+	    font-size: 14px;
+	    line-height: 1.5;
+	    word-spacing: 2px;
+	}
+	.proposal-text strong{
+		color: grey;
+	}
+	.proposal-text .note{
+		color: red;
+		font-weight: 500;
+	}
+	.proposal-text .note > strong{
+		color: red;
+	}
+</style>
    <div class="col-md-12 members_box2">
    	   <h3>Proposals</h3>
+   	   <div  class="proposal-text">
+	   	   	<div> <strong>Proposal Received </strong>: has all the new proposal which you have received and not responded yet.</div> 
+			<div> <strong>Proposal Sent </strong> : has all the proposals which you have sent and the status of the proposal is beside the Profile id </div>
+			<div> <strong> Proposal Accepted</strong> : has all the proposals which you have accepted and you can see their contact details in the Profile's Family Details tab</div>
+			<div> <strong>Proposal Needs time</strong> : has all the proposal on which you need time to think and respond them. They wont be able to see your contact details unless you Accept them.</div>
+			<div> <strong>Proposal Declined</strong> : has all proposals which were declined by you. </div>
+			<div class="note"> <strong>Note</strong> : 
+
+			Your contact details will be visible only to those proposals whom you have accepted or to the ones who have accepted your proposal. 
+			Your contact details wont be visible to the ones whom you have declined or they have declined or you have selected Need More time or they have selected Need more time.
+			</div>
+   	   </div>
        <div class="col_4">
 		    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 			   <ul id="myTab" class="nav nav-tabs nav-tabs1" role="tablist">
-				  <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Proposal Requests</a></li>
+				  <li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Proposal Recieved</a></li>
 				  <li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Proposal Sent</a></li>
 				  <li role="presentation"><a href="#profile1" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Proposal Accepted</a></li>
-				  <li role="presentation"><a href="#profile2" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Proposal Needed Time</a></li>
+				  <li role="presentation"><a href="#profile2" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Proposal Needs time</a></li>
 				  <li role="presentation"><a href="#profile3" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Proposal Declined</a></li>
 			   </ul>
 			   <div id="myTabContent" class="tab-content">
@@ -52,7 +82,8 @@
 											   </div>
 											 </div>
 										</h6>
-										<p class="description"><?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
+										<p class="description">
+										<span class="m_1">Name</span> : <?php echo $value['full_name']; ?> | <span class="m_1">Age</span> : <?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
 									</div>
 								<div class="clearfix"> </div>
 							   </div>
@@ -74,13 +105,13 @@
 											   		<?php 
 													switch ($value['status']) {
 														case 'awaiting_response':
-															echo 'Awaiting Response.';
+															echo $value['full_name'].' has not yet responded to your proposal.';
 															break;
 														case 'need_more_time':
-															echo 'Needs More Time.';
+															echo $value['full_name'].' needs more time to think about the Proposal.';
 															break;
 														case 'declined':
-															echo 'Proposal Declined.';
+															echo $value['full_name'].' has declined your proposal.';
 															break;
 														
 														default:
@@ -92,7 +123,7 @@
 											   </div>
 											 </div>
 										</h6>
-										<p class="description"><?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
+										<p class="description"><span class="m_1">Name</span> : <?php echo $value['full_name']; ?> | <span class="m_1">Age</span> :<?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
 									</div>
 								<div class="clearfix"> </div>
 							   </div>
@@ -111,12 +142,12 @@
 											<a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>"><?php echo $value['profile_id']; ?></a>
 			    							<div class="profile-parent inline-block">
 												<div class="submit  proposal">
-											   		Can View Contact Details.
+											   		Contact Details is now visible to each other.
 											   	  <div class="clearfix"> </div>
 											   </div>
 											 </div>
 										</h6>
-										<p class="description"><?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
+										<p class="description"><span class="m_1">Name</span> : <?php echo $value['full_name']; ?> | <span class="m_1">Age</span> :<?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
 									</div>
 								<div class="clearfix"> </div>
 							   </div>
@@ -144,7 +175,7 @@
 											   </div>
 											 </div>
 										</h6>
-										<p class="description"><?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
+										<p class="description"><span class="m_1">Name</span> : <?php echo $value['full_name']; ?> | <span class="m_1">Age</span> :<?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
 									</div>
 								<div class="clearfix"> </div>
 							   </div>
@@ -171,7 +202,7 @@
 											   </div>
 											 </div>
 										</h6>
-										<p class="description"><?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
+										<p class="description"><span class="m_1">Name</span> : <?php echo $value['full_name']; ?> | <span class="m_1">Age</span> :<?php echo $value['age']; ?> years, <?php echo $value['user_height']; ?>  | <span class="m_1">Marital Status</span> : <?php echo $value['user_marital_status']; ?> | <span class="m_1">Education</span> : <?php echo $value['qualification_name']; ?>  | <span class="m_1">Occupation</span> : <?php echo $value['profession_name']; ?><br><a href="<?php echo base_url('frontend/'.$_controller.'/view_profile/'.$value['id']) ?>" class="read-more">view full profile</a></p>
 									</div>
 								<div class="clearfix"> </div>
 							   </div>

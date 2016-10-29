@@ -44,17 +44,23 @@
 			echo $this->session->flashdata('message');
 		}
 
-		if( $this->session->userdata('userid') && ($proposal_accepted!=0||$proposal_request!=0)){
-			echo '<div class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>';
-			if($proposal_accepted!=0)
-			{
-				echo "<a href='".base_url('frontend/proposal')."'>".$proposal_accepted." users accepted your Proposal </a> <br>";
-			}
-			if($proposal_request!=0)
-			{
-				echo "<a href='".base_url('frontend/proposal')."'>You have ".$proposal_request." Proposal Requests </a>";
+		if( $this->session->userdata('userid')  ){
+			if($proposal_accepted!=0||$proposal_request!=0){
+				echo '<div class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>';
+				if($proposal_accepted!=0)
+				{
+					echo "<a href='".base_url('frontend/proposal')."'>".$proposal_accepted." users accepted your Proposal. </a> <br>";
+				}
+				if($proposal_request!=0)
+				{
+					echo "<a href='".base_url('frontend/proposal')."'>You have Recieved ".$proposal_request." Proposals.  </a>";
+				}
+				echo "</div><br>";
 			}	
-			echo "</div>";
+			if($proposal_declined!=0)
+			{
+				echo '<div class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><a href="'.base_url("frontend/proposal").'">You have '.$proposal_declined.' Declined Proposals.  </a></div> ';
+			}
 		}	
 		
 	?>

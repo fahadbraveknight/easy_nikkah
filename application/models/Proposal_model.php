@@ -66,7 +66,7 @@ class Proposal_model extends CI_Model {
         $edit_data = array(
                             'status' => $new_status
                         );
-        if($new_status == 'accepted'){
+        if($new_status == 'accepted' || $new_status == 'declined'){
             $edit_data['has_seen'] = 0; 
         }
         $this->db->group_start()->where(array('from_id' =>  $from_id , 'to_id' => $to_id ))->group_end();
@@ -85,7 +85,7 @@ class Proposal_model extends CI_Model {
 
     function get_status_notification($id,$status)
     {
-        if($status =='accepted'){
+        if($status =='accepted' || $status =='declined'){
             $data_id = 'from_id';
         }
         else{
@@ -98,7 +98,8 @@ class Proposal_model extends CI_Model {
 
     function get_update_seen($id)
     {
-        $this->db->where(array('from_id' => $id, 'status'=> 'accepted' ));
+        $this->db->where('from_id' , $id);
+        $this->db->where_in('status', array('accepted','declined'));
         $this->db->update('user_relationships',array('has_seen'=>1));
        
         $this->db->where(array('to_id' => $id, 'status'=> 'awaiting_response' ));

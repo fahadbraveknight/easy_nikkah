@@ -48,7 +48,7 @@
 					    	switch ($relationship['status']) {
 					    	case 'awaiting_response':
 					    	 	if($this->session->userdata('userid') == $relationship['from_id']){
-					    			$data_message = 'Awaiting Response';
+					    			$data_message = $bride['full_name'].' has not yet responded to your proposal.';
 					    		}
 					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
 									$data_status = 'accepted';
@@ -59,7 +59,7 @@
 					    		break;
 					    	case 'need_more_time':
 					    	 	if($this->session->userdata('userid') == $relationship['from_id']){
-					    			$data_message = 'Need More Time';
+					    			$data_message = $bride['full_name'].' needs more time to think about the Proposal.';
 					    		}
 					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
 									$data_status = 'accepted';
@@ -68,11 +68,11 @@
 					    		}
 					    		break;
 					    	case 'accepted':
-								$data_message = 'Can View Contact Details.';
+								$data_message = 'Contact Details is now visible to each other.';
 					    		break;
 					    	case 'declined':
 								if($this->session->userdata('userid') == $relationship['from_id']){
-					    			$data_message = 'Proposal Declined';
+					    			$data_message = $bride['full_name'].' has declined your proposal.';
 					    		}
 					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
 									$data_status = 'remove_relationship';
