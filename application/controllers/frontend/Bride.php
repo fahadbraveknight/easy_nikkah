@@ -5,7 +5,7 @@ class Bride extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-        $this->load->model(array('User_model','Bride_model','Location_model','Profession_model','Qualification_model'));
+        $this->load->model(array('User_model','Bride_model','Location_model','Profession_model','Qualification_model','Proposal_model'));
     }
 
 	public function edit_profile($id=0)
@@ -189,6 +189,10 @@ class Bride extends CI_Controller {
 		{
 			if(!empty($bride))
 			{
+				if($bride['id'] != $this->session->userdata('userid'))
+				{
+					$data['relationship'] = $this->Proposal_model->get_relationship($this->session->userdata('userid'),$groom['id']);
+				}
 				$data['bride'] = $bride;
 				$data['bride_family'] = $this->User_model->get_user_family($bride['id']);
 				$data['bride_contact_persons'] = $this->User_model->get_user_contact_person($bride['id']);
