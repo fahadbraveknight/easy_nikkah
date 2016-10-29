@@ -44,7 +44,7 @@
 			echo $this->session->flashdata('message');
 		}
 
-		if( $this->session->userdata('userid')){
+		if( $this->session->userdata('userid') && ($proposal_accepted!=0||$proposal_request!=0)){
 			echo '<div class="alert alert-info"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>';
 			if($proposal_accepted!=0)
 			{

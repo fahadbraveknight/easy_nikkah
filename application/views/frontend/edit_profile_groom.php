@@ -389,7 +389,7 @@
 	              		<div class="form-group">
 					         <div class="col-sm-6 form_box">
 						         <label for="edit-mother-name">Mother's Name <span class="form-required" title="This field is required.">*</span></label>
-				                 <input type="text" id="edit-name" name="user_mother_name" value="<?php echo $groom['user_mother_profession'] ?>" size="60" maxlength="60" class="form-text required">
+				                 <input type="text" id="edit-name" name="user_mother_name" value="<?php echo $groom['user_mother_name'] ?>" size="60" maxlength="60" class="form-text required">
 			     				 <span><?php echo form_error('user_mother_name'); ?></span>
 			            	</div>
 				            	
@@ -673,15 +673,17 @@
 		$(document).on('change','.countries-list',function(){
 			var country_id = $(this).find(':selected').attr('data-id');
 			var next = $(this).parents('.country').siblings('.state').find('select');
+			var next_city = $(this).parents('.country').siblings('.city').find('select');
 			var this_name = $(this).attr('name');
 			$.ajax({
 				url:BASE_URL+"frontend/user/ajax_get_all_states/"+country_id,
 				dataType: "JSON",
 				type:"POST",
 				success:function(response){
+					next.html('<option value="">Select</option>');
+					next_city.html('<option value="">Select</option>');
 					if(response.rc)
 					{
-						next.html('<option value="">Select</option>');
 						if( this_name =="user_location_country")
 						{
 							$.each(response.states,function(index,data){
@@ -708,9 +710,10 @@
 				dataType: "JSON",
 				type:"POST",
 				success:function(response){
+					next.html('<option value="">Select</option>');
+
 					if(response.rc)
 					{
-						next.html('<option value="">Select</option>');
 						if( this_name =='user_location_state')
 						{
 							$.each(response.cities,function(index,data){

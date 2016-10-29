@@ -52,7 +52,7 @@
   }
  ?>
 
-<div class="submit inline-block proposal" style="padding-top: 32px; width: 100%;">
+<div class="submit proposal" style="padding-top: 32px; width: 100%;">
 <div><?php echo $data_message ?></div>
 <?php if(!empty($data_status)){ ?>
    <input  class="<?php echo $data_status=='awaiting_response'? 'hvr-wobble-vertical' : ''; ?> rel-button btn_1" data-status="<?php echo $data_status ?>" data-id="<?php echo $user['id'] ?>" type="button" value="<?php echo $data_value ?>">

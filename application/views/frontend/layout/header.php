@@ -117,6 +117,7 @@ $(document).ready(function(){
 			                <li><a href="#">Shortcodes</a></li>
 			              </ul>*/?>
 			            </li>
+						<li><a href="<?php echo base_url('frontend/proposal') ?>">Proposals</a></li>
 			            <li><a href="<?php echo base_url('frontend/user/logout') ?>">Logout</a></li>
 		            <?php } ?>
 		        </ul>

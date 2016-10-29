@@ -8,23 +8,23 @@ class Proposal_model extends CI_Model {
             parent::__construct();
     }
 
-    function get_user_relationships($id,$having_status,$switch = 0){
+    function get_user_relationships($id,$having_status=array(),$switch = 0){
         
         $status_condition= '';
         $switch_condition= '';
         if(!empty($having_status))
         {
-            $status_condition= ' AND ur.status="'.$having_status.'"';
+            $status_condition= ' AND ur.status IN ("'.implode('", "',$having_status).'")';
         }
-        if($switch = 1)
+        if($switch == 1)
         {
-            $switch_condition = 'AND ur.from_id !='.$id;
+            $switch_condition = ' AND ur.to_id ='.$id;
         }
-        elseif($switch = 2){
+        elseif($switch == 2){
 
-            $switch_condition = 'AND ur.to_id !='.$id;
+            $switch_condition = ' AND ur.from_id ='.$id;
         }
-        $sql = "SELECT u.id, u.profile_id ,u.full_name,q.qualification_name,p.profession_name,TIMESTAMPDIFF(YEAR, FROM_UNIXTIME(u.age), NOW()) as age,u.user_height,u.user_marital_status,u.gender
+        $sql = "SELECT u.id, u.profile_id ,u.full_name,q.qualification_name,p.profession_name,TIMESTAMPDIFF(YEAR, FROM_UNIXTIME(u.age), NOW()) as age,u.user_height,u.user_marital_status,u.gender,ur.status
                 FROM 
                     users u 
                 LEFT JOIN 
@@ -34,11 +34,12 @@ class Proposal_model extends CI_Model {
                 WHERE
                     1=1
                 AND
-                    (ur.from_id = u.id || ur.to_id = u.id)
+                    (ur.from_id = ".$id." || ur.to_id = ".$id.")
                     $status_condition
                     $switch_condition
                 AND
-                    u.id !=".$id;
+                    u.id !=".$id."
+                GROUP BY u.id ";
          return $this->db->query($sql)->result_array();
         // echo $this->db->last_query();exit;
     }
@@ -90,6 +91,16 @@ class Proposal_model extends CI_Model {
         }
         $this->db->where(array($data_id => $id,'has_seen' => 0, 'status'=> $status ));
         return $this->db->get('user_relationships')->num_rows();
+        
+    }
+
+    function get_update_seen($id)
+    {
+        $this->db->where(array('from_id' => $id, 'status'=> 'acceped' ));
+        $this->db->update('user_relationships',array('has_seen'=>1));
+
+        $this->db->where(array('to_id' => $id, 'status'=> 'awaiting_response' ));
+        $this->db->update('user_relationships',array('has_seen'=>1));
         
     }
 }

@@ -36,7 +36,7 @@
 			      <li>Already a member? <a href="login.html">Login Now</a></li>
 			      <li>If not a member? <a href="register.html">Register Now</a></li>
 			    </ul> -->
-			    <div class="profile-parent">
+			    <div class="profile-parent inline-block">
 			    <?php if($this->session->userdata('userid') != $groom['id']){ ?>
 			    	
 				    <?php 
@@ -90,7 +90,7 @@
 				    	}
 				     ?>
 
-					<div class="submit inline-block proposal" style="padding-top: 32px; width: 100%;">
+					<div class="submit proposal" style="padding-top: 32px; width: 100%;">
 				    <div><?php echo $data_message ?></div>
 				    <?php if(!empty($data_status)){ ?>
 						   <input  class="<?php echo $data_status=='awaiting_response'? 'hvr-wobble-vertical' : ''; ?> rel-button btn_1" data-status="<?php echo $data_status ?>" data-id="<?php echo $groom['id'] ?>" type="button" value="<?php echo $data_value ?>">

@@ -12,15 +12,19 @@ class Proposal extends CI_Controller {
 	{
 		if($this->session->userdata('userid'))
 		{
-			$data['proposal_sent'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),'awaiting_response',2);
-			$data['proposal_requests'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),'awaiting_response',1);
-
-			$data['need_more_time'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),'need_more_time',1);
-			$data['proposal_accepted'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),'accepted');
-			$data['proposal_declined'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),'declined');
-			$data['view'] = 'frontend/inbox';
-			// pr($data);exit;
+			$data['proposal_sent'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),array('awaiting_response','need_more_time','declined'),2);
+			$data['proposal_requests'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),array('awaiting_response'),1);
+			$data['proposal_accepted'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),array('accepted'));
+			$data['proposal_needed_time'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),array('need_more_time'),1);
+			$data['proposal_declined'] = $this->Proposal_model->get_user_relationships($this->session->userdata('userid'),array('declined'),1);
+			$this->Proposal_model->get_update_seen($this->session->userdata('userid'));
+			$data['view'] = 'frontend/proposal';
 			$this->load->view('frontend/layout/base_layout',$data);
+		}
+		else
+		{
+			redirect('frontend/user/login');
+			exit;
 		}
 	}
 

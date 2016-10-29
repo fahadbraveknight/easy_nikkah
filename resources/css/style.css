@@ -415,7 +415,7 @@ label.gender_1{
 	margin-bottom:2em;
 }
 input#submit-btn {
-    background-color: rgba(255, 0, 0, 0);
+    /*background-color: rgba(255, 0, 0, 0);*/
     border: none;
     outline: none;
     color: #fff;
@@ -1597,7 +1597,7 @@ ul.pagination_1>li >a {
 }
 .jobs-item {
     position: relative;
-    margin-bottom: 3em;
+    margin-bottom: 1.5em;
 }
 .jobs-item .thumb {
     float: left;
@@ -2281,7 +2281,7 @@ i.icon_4{
     margin: 1em 0 0 0;
     font-size: 0.85em;
 }
-.btn_1:hover{
+.btn_1:hover,.btn_en:hover{
 	background:#ffa417;
 }
 .sharing li {
@@ -3609,4 +3609,32 @@ padding: 10px 20px;
 }
 .contact-person > .day_label {
   color: #777;
+}
+.jobs_right  .submit{
+  padding-top: 0px !important;
+}
+.jobs_right  .btn_1{
+  background: #c32143;
+  margin: 0px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    padding: 4px 9px;
+    display: inline-block;
+    color: #fff;
+    text-transform: uppercase;
+    outline: none;
+    border: none;
+    font-size: 0.70em;
+}
+.jobs_right > .title >a{
+  display: inline-block;
+  width: 6%;
+}
+.thumb_top p.description{
+  margin-bottom: 0px;
+}
+.jobs_right .profile-parent{
+  padding-left: 1%;
 }
