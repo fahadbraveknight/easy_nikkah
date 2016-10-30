@@ -5,7 +5,7 @@ class Proposal extends CI_Controller {
 
 	function __construct() {
         parent::__construct();
-        $this->load->model(array('User_model','Groom_model','Location_model','Profession_model','Qualification_model','Proposal_model'));
+        $this->load->model(array('User_model','Groom_model','Bride_model','Location_model','Profession_model','Qualification_model','Proposal_model'));
     }
 
 	public function index()
@@ -33,31 +33,46 @@ class Proposal extends CI_Controller {
 		if($this->session->userdata('userid'))
 		{
 			$relationship = $this->Proposal_model->get_relationship($this->session->userdata('userid') , $_POST['relationship_id']);
-			if($this->session->userdata('userid') != $relationship['from_id']){
-				$data['user']['id'] = $relationship['from_id'];
-			}else{
-				$data['user']['id'] = $relationship['to_id'];
-			}
-			$data['user']['full_name'] = $this->User_model->get_user_name($data['user']['id']);
-			// pr($data['user']['full_name']);
+			
 			if(empty($relationship) && $_POST['status']='awaiting_response')
 			{
-				$result = $this->Proposal_model->add_relationship($this->session->userdata('userid'), $_POST['relationship_id']);
-				// pr($result);
-				if($result)
-				{
-					$data['relationship'] = $this->Proposal_model->get_relationship($this->session->userdata('userid') , $_POST['relationship_id']);
-					$response['html'] = $this->load->view('frontend/partial_view/_proposal_view.php',$data,true);
-					$response['rc'] = TRUE;
+				$proposal_limit = $this->User_model->get_proposal_limit($this->session->userdata('userid'));
+				if($proposal_limit < MAX_PROPOSAL_LIMIT){
+					$result = $this->Proposal_model->add_relationship($this->session->userdata('userid'), $_POST['relationship_id']);
+
+					if($result)
+					{
+						$new_proposal_data = array('user_proposal_limit' => $proposal_limit+1 );
+						if($this->session->userdata('user_detail')=='bride'){
+							$this->Bride_model->edit_bride($this->session->userdata('userid'),$new_proposal_data);
+						}
+						else{
+							$this->Groom_model->edit_groom($this->session->userdata('userid'),$new_proposal_data);
+						}
+						$data['relationship'] = $this->Proposal_model->get_relationship($this->session->userdata('userid') , $_POST['relationship_id']);
+						$data['user']['id'] = $_POST['relationship_id'];
+						$data['user']['full_name'] = $this->User_model->get_user_name($_POST['relationship_id']); 
+						$response['html'] = $this->load->view('frontend/partial_view/_proposal_view.php',$data,true);
+						$response['rc'] = TRUE;
+					}
+					else{	
+						$response['rc'] = FALSE;
+						$response['error'] = "Proposal Failed.";
+					}
 				}
-				else{	
+				else{
 					$response['rc'] = FALSE;
-					$response['error'] = "Proposal Failed.";
+					$response['max_proposal_reached'] = TRUE;
 				}
-				
 			}
 			elseif(!empty($relationship))
-			{
+			{		
+				if($this->session->userdata('userid') != $relationship['from_id']){
+					$data['user']['id'] = $relationship['from_id'];
+				}else{
+					$data['user']['id'] = $relationship['to_id'];
+				}
+				$data['user']['full_name'] = $this->User_model->get_user_name($data['user']['id']);
 				if($_POST['status']=='awaiting_response'){
 					$_POST['status'] = 'accepted';
 				}

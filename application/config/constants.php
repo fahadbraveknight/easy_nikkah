@@ -89,3 +89,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('CHILDREN_NOT_APPLICAPLE','0');
 define('CHILDREN_YES','1');
 define('CHILDREN_NO','2');
+
+define('MAX_PROPOSAL_LIMIT',10);

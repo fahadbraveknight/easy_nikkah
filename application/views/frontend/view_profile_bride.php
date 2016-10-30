@@ -2,7 +2,7 @@
   <div class="container">
    <div class="breadcrumb1">
      <ul>
-        <a href="index.html"><i class="fa fa-home home_1"></i></a>
+        <a href="<?php echo base_url('frontend/user') ?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
         <li class="current-page">View Profile</li>
      </ul>
@@ -53,8 +53,8 @@
 					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
 									$data_status = 'accepted';
 					    			$data_value = 'Accept';
-					    			$button = '<input  class="rel-button btn_1" data-status="need_more_time" data-id="'.$groom['id'].'" type="button" value="Need More Time">
-					    				<input  class="rel-button btn_1" data-status="declined" data-id="'.$groom['id'].'" type="button" value="Decline Proposal">';
+					    			$button = '<input  class="rel-button btn_1" data-status="need_more_time" data-id="'.$bride['id'].'" type="button" value="Need More Time">
+					    				<input  class="rel-button btn_1" data-status="declined" data-id="'.$bride['id'].'" type="button" value="Decline Proposal">';
 					    		}
 					    		break;
 					    	case 'need_more_time':
@@ -64,7 +64,7 @@
 					    		elseif($this->session->userdata('userid') == $relationship['to_id']){
 									$data_status = 'accepted';
 					    			$data_value = 'Accept';
-					    			$button = '<input  class="rel-button btn_1" data-status="declined" data-id="'.$groom['id'].'" type="button" value="Decline Proposal">';
+					    			$button = '<input  class="rel-button btn_1" data-status="declined" data-id="'.$bride['id'].'" type="button" value="Decline Proposal">';
 					    		}
 					    		break;
 					    	case 'accepted':
@@ -428,6 +428,12 @@
 						if(response.contact_html.length > 0)
 						{
 							$('.contact > .basic_2 >.basic_1-left').html(response.contact_html);
+						}
+					}
+					else{
+						if(response.max_proposal_reached)
+						{
+							alert('Only 10 proposal can be sent in 24 hrs. Please come back tomorrow.');
 						}
 					}
 				}

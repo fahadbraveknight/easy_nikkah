@@ -249,6 +249,19 @@ class User_model extends CI_Model {
         $query = $this->db->get('users')->row_array();
         return $query['full_name'];
     }
+
+    function get_proposal_limit($id)
+    {
+        $this->db->select('user_proposal_limit');
+        $this->db->where('id',$id);
+        $query = $this->db->get('users')->row_array();
+        return $query['user_proposal_limit'];
+    }
+
+    function edit_all_user($params)
+    {
+        return $this->db->update('users',$params);   
+    }
 }
 
 ?>

@@ -243,6 +243,12 @@
 					{
 						profile_parent.html(response.html);
 					}
+					else{
+						if(response.max_proposal_reached)
+						{
+							alert('Only 10 proposal can be sent in 24 hrs. Please come back tomorrow.');
+						}
+					}
 				}
 			});
 		})

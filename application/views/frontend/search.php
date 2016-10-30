@@ -408,7 +408,7 @@ $( document ).ready(function() {
 					next_city.html('<option value="">Select</option>');
 					if(response.rc)
 					{
-						if( this_name =="user_location_country")
+						if( this_name =="location_country")
 						{
 							$.each(response.states,function(index,data){
 								next.append( '<option data-id="'+data.state_id+'" value="'+data.state_id+'">'+data.state_name+'</option>');
@@ -438,7 +438,7 @@ $( document ).ready(function() {
 
 					if(response.rc)
 					{
-						if( this_name =='user_location_state')
+						if( this_name =='location_state')
 						{
 							$.each(response.cities,function(index,data){
 								next.append( '<option data-id="'+data.city_id+'" value="'+data.city_id+'">'+data.city_name+'</option>');

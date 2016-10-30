@@ -2,7 +2,7 @@
   <div class="container">
    <div class="breadcrumb1">
      <ul>
-        <a href="index.html"><i class="fa fa-home home_1"></i></a>
+        <a href="<?php echo base_url('frontend/user') ?>"><i class="fa fa-home home_1"></i></a>
         <span class="divider">&nbsp;|&nbsp;</span>
         <li class="current-page">View Profile</li>
      </ul>
@@ -429,6 +429,12 @@
 						if(response.contact_html.length > 0)
 						{
 							$('.contact > .basic_2 >.basic_1-left').html(response.contact_html);
+						}
+					}
+					else{
+						if(response.max_proposal_reached)
+						{
+							alert('Only 10 proposal can be sent in 24 hrs. Please come back tomorrow.');
 						}
 					}
 				}

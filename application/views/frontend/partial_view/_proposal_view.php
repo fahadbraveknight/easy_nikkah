@@ -11,8 +11,7 @@
     switch ($relationship['status']) {
     case 'awaiting_response':
       if($this->session->userdata('userid') == $relationship['from_id']){
-            // pr($user);
-        $data_message = $user['full_name'].' User has not yet responded to your proposal.';
+        $data_message = $user['full_name'].' has not yet responded to your proposal.';
       }
       elseif($this->session->userdata('userid') == $relationship['to_id']){
       $data_status = 'accepted';
@@ -23,7 +22,7 @@
       break;
     case 'need_more_time':
       if($this->session->userdata('userid') == $relationship['from_id']){
-        $data_message = ''.$user['full_name'].' User needs more time to think about the Proposal.';
+        $data_message = ''.$user['full_name'].' needs more time to think about the Proposal.';
       }
       elseif($this->session->userdata('userid') == $relationship['to_id']){
       $data_status = 'accepted';
@@ -36,7 +35,7 @@
       break;
     case 'declined':
     if($this->session->userdata('userid') == $relationship['from_id']){
-        $data_message = $user['full_name'].' User has declined your proposal.';
+        $data_message = $user['full_name'].' has declined your proposal.';
       }
       elseif($this->session->userdata('userid') == $relationship['to_id']){
       $data_status = 'remove_relationship';
@@ -52,7 +51,6 @@
   $data_status = 'awaiting_response';
     $data_value = 'Send Proposal';
   }
-  // pr($user['full_name']);
  ?>
 
 <div class="submit proposal" style="padding-top: 32px; width: 100%;">
