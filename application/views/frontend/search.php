@@ -48,7 +48,7 @@
 		<input type="checkbox" class="radio_1" value="Cheese" /> Any -->
 		<div class="select-block1">
 			<select name="marital_status">
-				<option value="">* Select Status</option>
+				<option value="">Select Status</option>
 				 <option <?php echo isset($_GET['marital_status']) && $_GET['marital_status']=='unmarried' ? 'selected' : ""; ?>  value="unmarried">Unmarried</option>
 	            <option  <?php echo isset($_GET['marital_status']) && $_GET['marital_status']=='divorced' ? 'selected' : ""; ?> value="divorced">Divorced</option>
 	            <option <?php echo isset($_GET['marital_status']) && $_GET['marital_status']=='widowed' ? 'selected' : ""; ?> value="widowed">Widowed</option>
@@ -106,7 +106,7 @@
 		<div class="col-sm-7 form_radios">
 			<div class="select-block1">
 				<select name="qualification">
-					<option value="">* Select Qualification</option>
+					<option value="">Select Qualification</option>
 					<?php foreach ($qualifications as $key => $value) {
 						$selected = "";
 						if (isset($_GET['qualification']) && $_GET['qualification']==$value['qualification_id']) {$selected ='selected';}  
