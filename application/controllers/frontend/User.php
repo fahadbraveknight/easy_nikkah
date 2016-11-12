@@ -353,7 +353,13 @@ class User extends CI_Controller {
 			return 'EN_1';
 		}
 		else{
-			$profile_id= $profile['id']+1;
+			
+			$id = explode('_',$profile['profile_id']);
+			// echo $id['1'];
+			
+			$profile_id = $id['1']+1;
+
+			// $profile_id= $profile['id']+1;
 			return 'EN_'.$profile_id;
 		}
 	}
