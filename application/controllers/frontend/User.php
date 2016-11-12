@@ -202,14 +202,14 @@ class User extends CI_Controller {
 
 		if($this->form_validation->run())
 		{
-			$profile_id = $this->create_profile_id();
+			// $profile_id = $this->create_profile_id();
 			$age = strtotime($_POST['age-date'].'-'.$_POST['age-month'].'-'.$_POST['age-year']);
 
 			$params = array('full_name' => $_POST['full_name'],
     						'email' => $_POST['email'],
     						'password' => $_POST['password'],
     						'age' => $age,
-    						'profile_id' => $profile_id,
+    						// 'profile_id' => $profile_id,
     						'gender' => $_POST['gender'],
     						'verification_id'=> random_string('alnum', 50) );
 			$verification_id = $params['verification_id'];
@@ -346,14 +346,14 @@ class User extends CI_Controller {
 
 	function create_profile_id()
 	{
-		$profile = $this->db->query('SELECT id,profile_id FROM users ORDER BY id DESC LIMIT 1')->row_array();
+		$profile = $this->db->query('SELECT id,profile_id FROM users ORDER BY id DESC LIMIT 1,1')->row_array();
 
 		if(empty($profile))
 		{
 			return 'EN_1';
 		}
 		else{
-			
+
 			$id = explode('_',$profile['profile_id']);
 			// echo $id['1'];
 			
@@ -366,7 +366,13 @@ class User extends CI_Controller {
 
 	function email_verification($id)
 	{
-		$email_verification_status = $this->User_model->change_email_status($id);
+		$profile_id = $this->create_profile_id();
+		$email_verification_status = $this->User_model->change_email_status($id, $profile_id);
+
+		if($email_verification_status)
+		{
+
+
 
 		// $user = $this->User_model->get_user_details($id);
 		// $email = $user->email;
@@ -400,6 +406,12 @@ class User extends CI_Controller {
 		// {
 			$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Your email has been verified. Please login and complete your profile by filling up the detailed form.</div>');
 			redirect('frontend/user/login');	
+
+			}
+			else
+			{
+				echo "some error are occured";
+			}
 		// }
 		// else
 		// {

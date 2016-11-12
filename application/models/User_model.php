@@ -51,18 +51,18 @@ class User_model extends CI_Model {
 
     function add_user($params)
     {
-    	$add_data = array(	'full_name' => $params['full_name'],
-    						'email' => $params['email'],
-    						'password' => md5($params['password']),
-    						'age' => $params['age'],
-    						'gender' => $params['gender'],
-                            'profile_id' => $params['profile_id'],
+        $add_data = array(  'full_name' => $params['full_name'],
+                            'email' => $params['email'],
+                            'password' => md5($params['password']),
+                            'age' => $params['age'],
+                            'gender' => $params['gender'],
+                            // 'profile_id' => $params['profile_id'],
                             'verification_id' => $params['verification_id']
-    					);
+                        );
 
-    	$this->db->insert('users',$add_data);
+        $this->db->insert('users',$add_data);
 
-    	return $this->db->insert_id();
+        return $this->db->insert_id();
     }
 
     function get_user_by_id($id)
@@ -203,9 +203,10 @@ class User_model extends CI_Model {
     }
 
     //for email_verification_status changing.
-    function change_email_status($id)
+    function change_email_status($id, $profile_id)
     {
         $data = array(
+            'profile_id' => $profile_id,
             'email_verification_status' => 1
             );
         return $this->db->where('verification_id',$id)->update('users',$data);
