@@ -202,7 +202,9 @@ class User extends CI_Controller {
 
 		if($this->form_validation->run())
 		{
+
 			// $profile_id = $this->create_profile_id();
+			// exit();
 			$age = strtotime($_POST['age-date'].'-'.$_POST['age-month'].'-'.$_POST['age-year']);
 
 			$params = array('full_name' => $_POST['full_name'],
@@ -214,6 +216,9 @@ class User extends CI_Controller {
     						'verification_id'=> random_string('alnum', 50) );
 			$verification_id = $params['verification_id'];
 			$user_id = $this->User_model->add_user($params);
+			$profile = $this->db->select('profile_id')->from('users')->get()->result();
+			$profile_id =  'EN_'.count($profile);
+			// exit();
 
 			//email verification
 			if($user_id)
@@ -233,7 +238,7 @@ class User extends CI_Controller {
 				$this->email->set_newline("\n\r");
 
 
-				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$_POST['full_name']."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/email_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah";
+				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$_POST['full_name']."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/email_verification/".$verification_id."/".$profile_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah";
 
 
 
@@ -346,8 +351,12 @@ class User extends CI_Controller {
 
 	function create_profile_id()
 	{
-		$profile = $this->db->query('SELECT id,profile_id FROM users ORDER BY id DESC LIMIT 1,1')->row_array();
+		// $profile = $this->db->query('SELECT id,profile_id FROM users ORDER BY id DESC LIMIT 1,1')->row_array();
+		$profile = $this->db->select('profile_id')->from('users')->get()->result();
 
+		// echo "<pre>";
+		// echo count($profile);
+		// exit();
 		if(empty($profile))
 		{
 			return 'EN_1';
@@ -362,11 +371,14 @@ class User extends CI_Controller {
 			// $profile_id= $profile['id']+1;
 			return 'EN_'.$profile_id;
 		}
+		echo count($profile);
+		exit();
 	}
 
-	function email_verification($id)
+	function email_verification($id,$profile_id)
 	{
-		$profile_id = $this->create_profile_id();
+		// $profile_id = $this->create_profile_id();
+		
 		$email_verification_status = $this->User_model->change_email_status($id, $profile_id);
 
 		if($email_verification_status)
