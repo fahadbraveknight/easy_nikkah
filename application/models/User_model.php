@@ -11,7 +11,7 @@ class User_model extends CI_Model {
 
     function login($email,$password)
     {
-        $user = $this->db->get_where('users',array('email'=>$email , 'password' =>md5($password)))->row_array();
+        $user = $this->db->get_where('users',array('email'=>$email , 'password' =>md5($password) , 'user_status'=>'active'))->row_array();
 
         if(!empty($user))
         {
@@ -34,6 +34,11 @@ class User_model extends CI_Model {
                 $response['rc'] = FALSE;
                 $response['error'] = "Not a Verified User.";
             }
+        }
+        elseif($this->db->get_where('users',array('email'=>$email , 'password' =>md5($password) , 'user_status'=>'inactive'))->row_array())
+        {
+            $response['rc'] = FALSE;
+            $response['error'] = "your profile is deleted.";
         }
         else
         {
@@ -262,6 +267,30 @@ class User_model extends CI_Model {
     function edit_all_user($params)
     {
         return $this->db->update('users',$params);   
+    }
+
+    public function delete_reason($id, $delete_reason)
+    {
+        $data = array(
+            'delete_reason' => $delete_reason
+            );
+        return $this->db->where('id',$id)->update('users',$data);
+    }
+
+    public function delete_confirmation($id)
+    {
+        $data = array(
+            'user_status' => 'inactive'
+            );
+        return $this->db->where('verification_id',$id)->update('users',$data);
+    }
+
+    public function reactivate_account($id)
+    {
+        $data = array(
+            'user_status' => 'active'
+            );
+        return $this->db->where('verification_id',$id)->update('users',$data);
     }
 }
 

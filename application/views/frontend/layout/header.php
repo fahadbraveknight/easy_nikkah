@@ -53,6 +53,7 @@ $(document).ready(function(){
 			           	<ul>
 						    <li><a href="<?php echo base_url('frontend/'.$this->session->userdata('user_detail').'/view_profile/'.$this->session->userdata('userid'));?>">View Profile</a></li>
 						    <li><a href="<?php echo base_url('frontend/'.$this->session->userdata('user_detail').'/edit_profile/'.$this->session->userdata('userid'));?>">Edit Profile</a></li>
+						    <li><a href="<?php echo base_url('frontend/'.$this->session->userdata('user_detail').'/delete_profile_view/'.$this->session->userdata('userid'));?>">Delete Profile</a></li>
 						    <li><a href="<?php echo base_url('frontend/user/logout');?>">Logout</a></li>
 						</ul>
 					<?php } ?>	

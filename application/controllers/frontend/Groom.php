@@ -209,4 +209,88 @@ class Groom extends CI_Controller {
 		}
 	}
 
+
+	public function delete_profile_view($id=0)
+	{
+		$data['view'] = 'frontend/delete_profile';
+		$this->load->view('frontend/layout/base_layout',$data);
+	}
+
+	public function delete_profile($id=0)
+	{
+		$delete_reason = $this->input->post('delete_profile');
+
+		$delete_profile_reason = $this->User_model->delete_reason($id, $delete_reason);
+
+		$user_details = $this->User_model->get_user_by_id($id);
+		$full_name = $user_details['full_name'];
+		$email = $user_details['email'];
+		$verification_id = $user_details['verification_id'];
+
+		if($delete_profile_reason)
+		{
+
+			$this->load->library('email');
+			    $config['protocol']     = 'smtp';
+			    $config['smtp_host']    = 'bh-33.webhostbox.net';
+			    $config['smtp_port']    = '587';
+			    $config['smtp_user']    = 'info@easynikah.in';
+			    $config['smtp_pass']    = 'Tech!1234';
+			    $config['charset']     = 'utf-8';
+			    $config['newline']     = "\r\n";
+			    $config['mailtype']  = 'html'; // or html
+			    $config['validation']  = TRUE; // bool whether to validate email or not
+
+			    $this->email->initialize($config);
+				$this->email->set_newline("\n\r");
+
+
+				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$full_name."<br><br>JazakAllahu khairan for providing us a chance to assist you with partner search at Easy Nikah<br><br>Please <a href='".base_url()."frontend/Groom/delete_verification/".$verification_id."'>click</a> on this link to complete your profile deletion.<br><br><br> Note: Without clicking on confirmation link your profile wont be deleted. <br><br> Best Regards<br>Admin - Easy Nikah";
+
+
+
+				$this->email->from('info@easynikah.in','Admin - Easy Nikah');
+				$this->email->to($email);
+				$this->email->subject('Easy Nikah Profile Deletion');
+				$this->email->message($message);
+
+				if($this->email->send())
+				{
+					$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have sent a confirmation link on your email for profile deletion. Please click on the link to delete your Easy Nikah profile. </div>');
+					redirect('home');
+				}
+				// else
+				// {
+				// 	$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have encountered an issue. Please come back tomorrow to register.</div>');
+				// 	$data['view'] = 'frontend/delete_profile';
+				// 	$this->load->view('frontend/layout/base_layout',$data);
+				// 	// show_error($this->email->print_debugger());
+				// }
+
+
+
+
+			// $this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have sent a confirmation link on your email for profile deletion. Please click on the link to delete your Easy Nikah profile.</div>');
+			// 		redirect('home');
+
+
+		}
+		// else
+		// {
+
+		// }
+	}
+
+	public function delete_verification($id)
+	{
+		$delete_confirmation = $this->User_model->delete_confirmation($id);
+		
+		if($delete_confirmation)
+		{
+			
+			$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Your profile has been successfully deleted. We thank you for using our services at Easy Nikah for your partner search. Please feel to share your valuable feedbacks or suggestions at easynikaah@gmail.com </div>');
+			redirect('home');
+		}
+	}
+
 }

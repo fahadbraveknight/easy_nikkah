@@ -59,7 +59,7 @@ class User extends CI_Controller {
 					$this->load->view('frontend/layout/base_layout',$data);
 				}
 
-				else if($check_email_verification_status['email_verification_status'] == 1)
+				else if($check_email_verification_status['email_verification_status'] == 1 && $check_email_verification_status['user_status'] == 'active')
 				{
 					$result = $this->User_model->login($_POST['email'],$_POST['password']);
 					// pr($result);
@@ -79,6 +79,16 @@ class User extends CI_Controller {
 						redirect('frontend/user/login');
 						exit;
 					}
+				}
+
+				else if($check_email_verification_status['email_verification_status'] == 1 && $check_email_verification_status['user_status'] == 'inactive')
+				{
+					$data['verification_id'] = $check_email_verification_status['verification_id'];
+					$data['email'] = $check_email_verification_status['email'];
+					$data['full_name'] = $check_email_verification_status['full_name'];
+					$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Please click on Reactivate Account.</div>');
+					$data['view'] = 'frontend/reactivate_account';
+        			$this->load->view('frontend/layout/base_layout',$data);
 				}
 			}
 			else
@@ -120,6 +130,66 @@ class User extends CI_Controller {
 
 	}
 
+	public function send_email_to_reactivate_account()
+	{
+		$verification_id = $this->input->post('verification_id');
+		$email = $this->input->post('email');
+		$full_name = $this->input->post('full_name');
+
+
+		$this->load->library('email');
+	    $config['protocol']     = 'smtp';
+	    $config['smtp_host']    = 'bh-33.webhostbox.net';
+	    $config['smtp_port']    = '587';
+	    $config['smtp_user']    = 'info@easynikah.in';
+	    $config['smtp_pass']    = 'Tech!1234';
+	    $config['charset']     = 'utf-8';
+	    $config['newline']     = "\r\n";
+	    $config['mailtype']  = 'html'; // or html
+	    $config['validation']  = TRUE; // bool whether to validate email or not
+
+	    $this->email->initialize($config);
+		$this->email->set_newline("\n\r");
+
+
+		$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$full_name."<br><br>Please <a href='".base_url()."frontend/user/reactivate_account/".$verification_id."'>click</a> on  the link to reactivate your account and start using Easy Nikah services again.<br><br> Best Regards<br>Admin - Easy Nikah";
+
+
+
+		$this->email->from('info@easynikah.in','Admin - Easy Nikah');
+		$this->email->to($email);
+		$this->email->subject('Easy Nikah Profile Reactivation');
+		$this->email->message($message);
+
+		if($this->email->send())
+		{
+			// echo "you email was sent";
+			// $data['view'] = 'frontend/verification';
+			// $this->load->view('frontend/layout/base_layout',$data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Please click on the verification link in your email to reactivate your account.</div>');
+			redirect('frontend/user/login');
+		}
+		else
+		{
+			$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have encountered an issue. Please come back tomorrow to register.</div>');
+			$data['view'] = 'frontend/resend_verification';
+			$this->load->view('frontend/layout/base_layout',$data);
+			// show_error($this->email->print_debugger());
+		}
+	}
+
+	public function reactivate_account($id)
+	{
+		$reactivate_account = $this->User_model->reactivate_account($id);
+		
+		if($reactivate_account)
+		{
+			
+			$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> Your account has been reactivated. Please click on login to start using Easy Nikah. We hope you find your life partner sson In sha Allah </div>');
+			redirect('frontend/user/login');
+		}
+	}
+
 	public function resend_email_verification_link()
 	{
 		$verification_id = $this->input->post('verification_id');
@@ -128,46 +198,44 @@ class User extends CI_Controller {
 
 
 		$this->load->library('email');
-			    $config['protocol']     = 'smtp';
-			    $config['smtp_host']    = 'bh-33.webhostbox.net';
-			    $config['smtp_port']    = '587';
-			    $config['smtp_user']    = 'info@easynikah.in';
-			    $config['smtp_pass']    = 'Tech!1234';
-			    $config['charset']     = 'utf-8';
-			    $config['newline']     = "\r\n";
-			    $config['mailtype']  = 'html'; // or html
-			    $config['validation']  = TRUE; // bool whether to validate email or not
+	    $config['protocol']     = 'smtp';
+	    $config['smtp_host']    = 'bh-33.webhostbox.net';
+	    $config['smtp_port']    = '587';
+	    $config['smtp_user']    = 'info@easynikah.in';
+	    $config['smtp_pass']    = 'Tech!1234';
+	    $config['charset']     = 'utf-8';
+	    $config['newline']     = "\r\n";
+	    $config['mailtype']  = 'html'; // or html
+	    $config['validation']  = TRUE; // bool whether to validate email or not
 
-			    $this->email->initialize($config);
-				$this->email->set_newline("\n\r");
-
-
-				$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$full_name."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/email_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah";
+	    $this->email->initialize($config);
+		$this->email->set_newline("\n\r");
 
 
-
-				$this->email->from('info@easynikah.in','Admin - Easy Nikah');
-				$this->email->to($email);
-				$this->email->subject('Easy Nikah Profile Verification');
-				$this->email->message($message);
-
-				if($this->email->send())
-				{
-					// echo "you email was sent";
-					// $data['view'] = 'frontend/verification';
-					// $this->load->view('frontend/layout/base_layout',$data);
-					$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>An Email has been sent to your mail id for your account registration. Kindly click on verification link to confirm the same.</div>');
-					redirect('frontend/user/login');
-				}
-				else
-				{
-					$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have encountered an issue. Please come back tomorrow to register.</div>');
-					$data['view'] = 'frontend/resend_verification';
-					$this->load->view('frontend/layout/base_layout',$data);
-					// show_error($this->email->print_debugger());
-				}
+		$message = "As salaamu alaikum wa rehmatullahe wa barakatuhu ".$full_name."<br><br>JazakAllahu khairan for registering on EasyNikah.in<br><br>Please <a href='".base_url()."frontend/user/email_verification/".$verification_id."'>click</a> on this link to complete your registration.<br><br><br> Note: Without email verification you wont be able to login in your account to proceed <br><br> Best Regards<br>Admin - Easy Nikah";
 
 
+
+		$this->email->from('info@easynikah.in','Admin - Easy Nikah');
+		$this->email->to($email);
+		$this->email->subject('Easy Nikah Profile Verification');
+		$this->email->message($message);
+
+		if($this->email->send())
+		{
+			// echo "you email was sent";
+			// $data['view'] = 'frontend/verification';
+			// $this->load->view('frontend/layout/base_layout',$data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>An Email has been sent to your mail id for your account registration. Kindly click on verification link to confirm the same.</div>');
+			redirect('frontend/user/login');
+		}
+		else
+		{
+			$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>We have encountered an issue. Please come back tomorrow to register.</div>');
+			$data['view'] = 'frontend/resend_verification';
+			$this->load->view('frontend/layout/base_layout',$data);
+			// show_error($this->email->print_debugger());
+		}
 	}
 
 	public function logout()
