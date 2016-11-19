@@ -83,7 +83,7 @@ class User extends CI_Controller {
 			}
 			else
 			{
-				$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>Invalid email id.</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>The email id entered is not registered. Please click on Register tab to register the profile.</div>');
 				$data['view'] = 'frontend/login';
 				$this->load->view('frontend/layout/base_layout',$data);
 			}
